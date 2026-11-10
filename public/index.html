@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>NEWS CONNECT — One World. Every Perspective.</title>
+  <meta name="description" content="Professional international news aggregator connecting verified RSS feeds and live broadcasts from Newsmax, Fox News, LoveWorld Networks, Sky News Australia, and ANI.">
+  <meta name="theme-color" content="#0B1325">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1325'/><circle cx='50' cy='50' r='30' fill='%23D4AF37'/><path d='M50 20 L50 80 M20 50 L80 50' stroke='%230B1325' stroke-width='6'/></svg>">
+</head>
+<body>
+  <!-- Top Viewport Switcher Toolbar (Allows testing Desktop, Tablet and Mobile views on any screen) -->
+  <aside class="device-switcher-toolbar" aria-label="Device Viewport Switcher">
+    <div class="toolbar-inner">
+      <div class="toolbar-label">
+        <span class="toolbar-dot"></span>
+        <span>NEWS CONNECT PREVIEW:</span>
+      </div>
+      <div class="toolbar-buttons">
+        <button class="device-btn active" id="btn-view-desktop" data-mode="desktop">
+          <span class="btn-icon">🖥️</span> Full Web View
+        </button>
+        <button class="device-btn" id="btn-view-tablet" data-mode="tablet">
+          <span class="btn-icon">📟</span> Tablet (768px)
+        </button>
+        <button class="device-btn" id="btn-view-mobile" data-mode="mobile">
+          <span class="btn-icon">📱</span> Mobile Simulator (390px)
+        </button>
+      </div>
+      <div class="toolbar-hint">
+        <span>Responsive iOS / Android / Web</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- App Viewport Container (Adapts from Full-width Desktop to Mobile Phone Frame) -->
+  <div class="app-viewport mode-desktop" id="app-viewport">
+    <!-- Phone Bezel Details (Visible only in Mobile Simulator Mode) -->
+    <div class="phone-frame-notch" id="phone-notch">
+      <div class="notch-speaker"></div>
+      <div class="notch-camera"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        <div class="header-top">
+          <div class="brand-wrapper">
+            <div class="brand-icon">✦</div>
+            <div class="brand-text">
+              <h1>NEWS <span>CONNECT</span></h1>
+              <p>One World. Every Perspective.</p>
+            </div>
+          </div>
+
+          <div class="header-actions">
+            <div class="status-badge" id="live-badge">
+              <span class="status-dot"></span>
+              <span id="status-text">8 Sources Connected</span>
+            </div>
+            <button class="refresh-btn" id="refresh-btn" title="Refresh Live Feeds" aria-label="Refresh Feeds">🔄</button>
+            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">☀️</button>
+          </div>
+        </div>
+
+        <nav class="header-nav" aria-label="Main Navigation">
+          <a href="#featured" class="nav-link active" data-tab="all">Featured News</a>
+          <a href="#sources" class="nav-link" data-tab="sources">8 News Networks</a>
+          <a href="#feed" class="nav-link" data-tab="feed">Latest Feed</a>
+          <a href="#broadcasts" class="nav-link" data-tab="broadcasts">Live Broadcasts</a>
+          <a href="#saved" class="nav-link" id="nav-saved" data-tab="saved">★ Bookmarks <span class="saved-pill" id="saved-count">0</span></a>
+          <a href="#about" class="nav-link" data-tab="about">About & Attribution</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Breaking News Editorial Marquee Ticker -->
+    <div class="breaking-ticker-bar">
+      <div class="ticker-badge">
+        <span class="ticker-pulse"></span>
+        <span>BREAKING</span>
+      </div>
+      <div class="ticker-track">
+        <div class="ticker-marquee" id="ticker-marquee">
+          <span>US Senate Deliberates Bipartisan Defense & Border Security Framework</span>
+          <span class="ticker-sep">✦</span>
+          <span>India Advances Semiconductor Manufacturing Hub With Multi-Billion Dollar Fab Approvals</span>
+          <span class="ticker-sep">✦</span>
+          <span>LoveWorld Sat: 24/7 Satellite Broadcast Special Live from Johannesburg</span>
+          <span class="ticker-sep">✦</span>
+          <span>Global Energy Markets Adjust as Export Terminals Expand Liquefied Gas Shipments</span>
+          <span class="ticker-sep">✦</span>
+          <span>Sky News Australia: Canberra Debates Natural Resource Tariffs and Energy Grid</span>
+        </div>
+      </div>
+    </div>
+
+    <main class="container">
+      <!-- Featured Hero Section -->
+      <section class="featured-section" id="featured">
+        <div class="section-label">
+          <h2 class="section-title"><span class="badge-red">FEATURED</span> Global Spotlight</h2>
+          <span class="meta-time" id="last-updated-text">Sync: Active</span>
+        </div>
+
+        <div class="hero-card" id="hero-card">
+          <div class="hero-image-wrap">
+            <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80" alt="Featured News Image" class="hero-image" id="hero-img">
+            <div class="hero-badges">
+              <span class="pill-source" id="hero-source">Newsmax</span>
+              <span class="pill-category" id="hero-category">Politics</span>
+            </div>
+          </div>
+          <div class="hero-content">
+            <div>
+              <div class="meta-time" id="hero-time">⏱ 36m ago • Nov 8, 2026</div>
+              <h3 class="hero-headline" id="hero-title">US Senate Deliberates Bipartisan Defense & Border Security Framework</h3>
+              <p class="hero-summary" id="hero-desc">Lawmakers on Capitol Hill convene for committee hearings addressing comprehensive national security budgets, international trade alliances, and border modernization programs.</p>
+            </div>
+            <a href="https://www.newsmax.com/newsfront/senate-defense-border-security/2026/11/08/id/1188201/" target="_blank" rel="noopener noreferrer" class="btn-primary" id="hero-link">
+              Read Original Article ↗
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 Sources Navigation Grid -->
+      <section class="sources-section" id="sources">
+        <div class="section-label">
+          <div>
+            <h2 class="section-title">Connected International Organisations</h2>
+            <p class="section-subtext">8 verified networks with real-time RSS and live broadcast integration</p>
+          </div>
+          <button class="category-pill" id="reset-sources-btn" style="display:none;">Show All Sources</button>
+        </div>
+        <div class="sources-grid" id="sources-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
+
+      <!-- Filter & Search Controls -->
+      <div class="filter-search-wrap">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" class="search-input" placeholder="Search international headlines, topics, or keywords...">
+          <button id="search-clear" class="search-clear-btn" style="display:none;">✕</button>
+        </div>
+
+        <div class="category-pills" id="category-pills">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Latest News Grid -->
+      <section class="news-grid-section" id="feed">
+        <div class="grid-heading-bar">
+          <div>
+            <h2 class="grid-title" id="feed-title">Latest International Headlines</h2>
+            <span class="grid-count" id="feed-count">13 stories</span>
+          </div>
+          <div class="view-mode-toggle">
+            <button class="view-btn active" id="btn-view-cards" title="Magazine Card Grid">⊞ Cards</button>
+            <button class="view-btn" id="btn-view-list" title="Compact Wire List">☰ List</button>
+          </div>
+        </div>
+
+        <div class="news-cards-grid" id="news-grid">
+          <!-- Rendered by JS -->
+        </div>
+      </section>
+
+      <!-- Broadcast Spotlight (LoveWorld Sat, LoveWorld Europe, Sky News AU) -->
+      <section class="broadcast-section" id="broadcasts">
+        <div class="section-label">
+          <h2 class="section-title"><span class="badge-red" style="background:var(--status-broadcast)">BROADCAST</span> Live TV & Broadcast Portals</h2>
+        </div>
+        <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">
+          Verified broadcast channels integrated through official streaming players and news portals.
+        </p>
+
+        <div class="broadcast-grid">
+          <div class="broadcast-box">
+            <div class="broadcast-top">
+              <span class="source-badge-tag" style="background:#1A365D">LW SAT</span>
+              <span class="source-status-pill" style="color:var(--status-broadcast); border-color:var(--status-broadcast)">Live TV</span>
+            </div>
+            <h3 class="broadcast-title">🇿🇦 LoveWorld Sat</h3>
+            <div class="broadcast-tagline">24/7 Satellite Television & News Hub</div>
+            <p class="broadcast-desc">Broadcasting from Johannesburg across Africa and globally. Segments: News On The Hour, Good Morning World, and Global Business Update.</p>
+            <div class="btn-group">
+              <button class="btn-stream open-player-btn" data-channel="loveworldsat" style="background:#EA580C; border:none; cursor:pointer;">▶ Watch Live Stream</button>
+              <a href="https://www.loveworldsat.org/news" target="_blank" rel="noopener noreferrer" class="btn-portal">News Portal ↗</a>
+            </div>
+          </div>
+
+          <div class="broadcast-box">
+            <div class="broadcast-top">
+              <span class="source-badge-tag" style="background:#1E3A8A">LW EU</span>
+              <span class="source-status-pill" style="color:var(--status-broadcast); border-color:var(--status-broadcast)">Live TV</span>
+            </div>
+            <h3 class="broadcast-title">🇪🇺 LoveWorld Europe</h3>
+            <div class="broadcast-tagline">Continental Multilingual Broadcasts</div>
+            <p class="broadcast-desc">Official broadcasting portal for the UK and Continental Europe, delivering multilingual faith broadcasts and community news.</p>
+            <div class="btn-group">
+              <button class="btn-stream open-player-btn" data-channel="loveworldeurope" style="background:#1E3A8A; border:none; cursor:pointer;">▶ Watch Broadcast</button>
+              <a href="https://loveworlduk.org" target="_blank" rel="noopener noreferrer" class="btn-portal">UK Portal ↗</a>
+            </div>
+          </div>
+
+          <div class="broadcast-box">
+            <div class="broadcast-top">
+              <span class="source-badge-tag" style="background:#990000">SKY AU</span>
+              <span class="source-status-pill" style="color:var(--status-portal); border-color:var(--status-portal)">Digital Video</span>
+            </div>
+            <h3 class="broadcast-title">🇦🇺 Sky News Australia</h3>
+            <div class="broadcast-tagline">Australia's Premier 24/7 News Service</div>
+            <p class="broadcast-desc">Operated by Australian News Channel (News Corp Australia). Delivers national political reporting and digital on-demand video from Canberra.</p>
+            <div class="btn-group">
+              <button class="btn-stream open-player-btn" data-channel="skynews" style="background:#E60000; border:none; cursor:pointer;">▶ Video Reports</button>
+              <a href="https://www.skynews.com.au" target="_blank" rel="noopener noreferrer" class="btn-portal">Official Portal ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section class="sources-section" id="about" style="margin-top:20px;">
+        <div class="broadcast-box">
+          <h3 class="broadcast-title" style="font-size:20px; margin-bottom:8px;">About News Connect</h3>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.7; margin-bottom:12px;">
+            News Connect is an editorial one-page news discovery and aggregation platform. It brings international news headlines from eight major news organisations into one modern dashboard.
+          </p>
+          <p style="font-size:12px; color:var(--text-muted); line-height:1.6;">
+            Content Disclaimer: News Connect does not publish original news content. All articles, headlines, logos, and trademarks belong exclusively to their respective owners: Newsmax, Fox News, LoveWorld Networks (LN24 International, LN247, LoveWorld Sat, LoveWorld Europe), Sky News Australia, and Asian News International (ANI). Articles link directly to canonical publisher URLs.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3>NEWS <span>CONNECT</span></h3>
+            <p>One World. Every Perspective. Unifying verified international headlines and broadcasts across North America, Europe, Africa, Asia, and Oceania.</p>
+          </div>
+          <div class="footer-links">
+            <h4>Connected Networks</h4>
+            <ul>
+              <li><a href="https://www.newsmax.com" target="_blank">Newsmax (USA)</a></li>
+              <li><a href="https://www.foxnews.com" target="_blank">Fox News (USA)</a></li>
+              <li><a href="https://ln24international.com" target="_blank">LN24 International</a></li>
+              <li><a href="https://ln247.news" target="_blank">LN247 Global</a></li>
+              <li><a href="https://www.aninews.in" target="_blank">ANI News (India)</a></li>
+            </ul>
+          </div>
+          <div class="footer-links">
+            <h4>Broadcasts & Portals</h4>
+            <ul>
+              <li><a href="https://www.loveworldsat.org" target="_blank">LoveWorld Sat</a></li>
+              <li><a href="https://loveworldeurope.org" target="_blank">LoveWorld Europe</a></li>
+              <li><a href="https://www.skynews.com.au" target="_blank">Sky News Australia</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>© 2026 News Connect. All Rights Reserved. Built with React Native & Node.js RSS proxy.</span>
+          <span id="footer-sync">Feed Status: Verified & Live</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Native Mobile App Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav-bar" id="mobile-nav">
+      <a href="#featured" class="mobile-nav-btn active" data-nav="featured">
+        <span class="nav-btn-icon">⚡</span>
+        <span class="nav-btn-text">Spotlight</span>
+      </a>
+      <a href="#feed" class="mobile-nav-btn" data-nav="feed">
+        <span class="nav-btn-icon">📰</span>
+        <span class="nav-btn-text">Headlines</span>
+      </a>
+      <a href="#sources" class="mobile-nav-btn" data-nav="sources">
+        <span class="nav-btn-icon">🌐</span>
+        <span class="nav-btn-text">8 Networks</span>
+      </a>
+      <a href="#broadcasts" class="mobile-nav-btn" data-nav="broadcasts">
+        <span class="nav-btn-icon">📺</span>
+        <span class="nav-btn-text">Live TV</span>
+      </a>
+      <a href="#saved" class="mobile-nav-btn" data-nav="saved">
+        <span class="nav-btn-icon">★</span>
+        <span class="nav-btn-text">Saved</span>
+      </a>
+      <a href="#about" class="mobile-nav-btn" data-nav="about">
+        <span class="nav-btn-icon">ℹ️</span>
+        <span class="nav-btn-text">About</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Interactive Live Stream Player Modal -->
+  <div class="stream-modal-backdrop" id="stream-modal" style="display:none;">
+    <div class="stream-modal-box">
+      <div class="stream-modal-header">
+        <div class="stream-channel-info">
+          <span class="stream-live-tag">● LIVE STREAM</span>
+          <h3 id="stream-modal-title">Live Broadcast</h3>
+        </div>
+        <button class="stream-modal-close" id="stream-modal-close" aria-label="Close Player">✕</button>
+      </div>
+      <div class="stream-player-area" id="stream-player-area">
+        <!-- Injected Live Player -->
+      </div>
+      <div class="stream-modal-footer">
+        <p id="stream-modal-desc">Broadcasting 24/7 global coverage and inspirational programming.</p>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-primary" id="stream-external-link">Open Canonical Stream ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/badges.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

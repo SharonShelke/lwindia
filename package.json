@@ -1,0 +1,28 @@
+{
+  "name": "news-connect",
+  "version": "1.0.0",
+  "description": "NEWS CONNECT: International News Aggregator (One World. Every Perspective.) built with React Native & Node.js feed aggregator.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "server": "node server.js",
+    "expo": "npx expo start",
+    "expo:web": "npx expo start --web",
+    "expo:android": "npx expo start --android",
+    "expo:ios": "npx expo start --ios",
+    "install:web": "npx expo install @expo/metro-runtime react-dom react-native-web",
+    "test": "node test/test_feed_parser.js"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "~4.0.1",
+    "expo": "~52.0.0",
+    "expo-status-bar": "~2.0.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-native": "0.76.0",
+    "react-native-web": "~0.19.13"
+  },
+  "devDependencies": {},
+  "private": true
+}
