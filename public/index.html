@@ -11,71 +11,734 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1325'/><circle cx='50' cy='50' r='30' fill='%23D4AF37'/><path d='M50 20 L50 80 M20 50 L80 50' stroke='%230B1325' stroke-width='6'/></svg>">
+  <link rel="stylesheet" href="styles.css?v=20261110_golden6">
+  <style>
+    /* Critical Inline Layout - Guarantees Exact Layout Regardless of Cache */
+    .featured-container-grid {
+      display: grid !important;
+      grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr) !important;
+      gap: 20px !important;
+      align-items: stretch !important;
+    }
+    .featured-main-card {
+      background: var(--bg-surface, #0E162B) !important;
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      border-radius: 16px !important;
+      padding: 22px !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 24px !important;
+      align-items: center !important;
+    }
+    .featured-img-col {
+      height: 100% !important;
+      min-height: 280px !important;
+      border-radius: 12px !important;
+      overflow: hidden !important;
+      background: #000 !important;
+      position: relative !important;
+    }
+    .featured-img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      border-radius: 12px !important;
+      display: block !important;
+    }
+    .featured-info-col {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+    }
+    .featured-cat-tag {
+      font-size: 13px !important;
+      font-weight: 800 !important;
+      color: #F5B041 !important;
+      letter-spacing: 1px !important;
+      text-transform: uppercase !important;
+      margin-bottom: 12px !important;
+      display: inline-block !important;
+    }
+    .featured-headline {
+      font-size: 24px !important;
+      font-weight: 800 !important;
+      line-height: 1.25 !important;
+      color: var(--text-primary, #F8FAFC) !important;
+      margin-bottom: 14px !important;
+    }
+    .featured-summary {
+      font-size: 14px !important;
+      color: var(--text-secondary, #94A3B8) !important;
+      line-height: 1.6 !important;
+      margin-bottom: 22px !important;
+    }
+    .btn-read-more {
+      background: #F5B041 !important;
+      color: #0B1325 !important;
+      font-size: 13.5px !important;
+      font-weight: 800 !important;
+      padding: 10px 24px !important;
+      border-radius: 8px !important;
+      border: none !important;
+      cursor: pointer !important;
+      text-decoration: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: fit-content !important;
+      box-shadow: 0 4px 14px rgba(245, 176, 65, 0.35) !important;
+      transition: all 0.2s ease !important;
+    }
+    .btn-read-more:hover {
+      background: #F39C12 !important;
+      color: #0B1325 !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 6px 18px rgba(245, 176, 65, 0.45) !important;
+    }
+    .trending-now-card {
+      background: var(--bg-surface, #0E162B) !important;
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      border-radius: 16px !important;
+      padding: 22px 20px !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    .trending-title {
+      font-size: 18px !important;
+      font-weight: 800 !important;
+      color: var(--text-primary, #F8FAFC) !important;
+      margin-bottom: 18px !important;
+    }
+    .trending-list {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      flex: 1 !important;
+      justify-content: space-between !important;
+    }
+    .trending-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      text-decoration: none !important;
+      padding: 6px 8px !important;
+      border-radius: 10px !important;
+    }
+    .trending-rank-badge {
+      width: 26px !important;
+      height: 26px !important;
+      min-width: 26px !important;
+      border-radius: 7px !important;
+      background: #F5B041 !important;
+      color: #0B1325 !important;
+      font-size: 12.5px !important;
+      font-weight: 900 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-shrink: 0 !important;
+    }
+    .trending-thumb {
+      width: 48px !important;
+      height: 48px !important;
+      min-width: 48px !important;
+      max-width: 48px !important;
+      border-radius: 8px !important;
+      object-fit: cover !important;
+      flex-shrink: 0 !important;
+    }
+    .trending-text {
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      line-height: 1.35 !important;
+      color: var(--text-primary, #F8FAFC) !important;
+      display: -webkit-box !important;
+      -webkit-line-clamp: 2 !important;
+      -webkit-box-orient: vertical !important;
+      overflow: hidden !important;
+    }
+    .nav-link.active {
+      color: #F5B041 !important;
+      background: rgba(245, 176, 65, 0.12) !important;
+      border: 1px solid rgba(245, 176, 65, 0.45) !important;
+      box-shadow: 0 0 18px rgba(245, 176, 65, 0.25) !important;
+    }
+    .view-mode-toggle {
+      display: inline-flex !important;
+      align-items: center !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      border-radius: 9999px !important;
+      padding: 3px !important;
+      gap: 3px !important;
+    }
+    .view-btn {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      background: transparent !important;
+      border: none !important;
+      color: var(--text-secondary, #94A3B8) !important;
+      padding: 5px 14px !important;
+      border-radius: 9999px !important;
+      font-size: 11.5px !important;
+      font-weight: 700 !important;
+      cursor: pointer !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+    .view-btn.active {
+      background: var(--accent-gold-gradient, linear-gradient(135deg, #FFE885, #F5B041)) !important;
+      color: #070C18 !important;
+      font-weight: 800 !important;
+    }
+    /* 8 Networks Premium Grid & Real Brand Logos */
+    .sources-grid {
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      gap: 16px !important;
+    }
+    @media (max-width: 1100px) {
+      .sources-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    }
+    @media (max-width: 768px) {
+      .sources-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 480px) {
+      .sources-grid { grid-template-columns: 1fr !important; }
+    }
+    .source-card {
+      background: var(--bg-surface, #0E162B) !important;
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      border-radius: 16px !important;
+      padding: 18px 16px 14px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      cursor: pointer !important;
+      transition: all 0.25s ease !important;
+      position: relative !important;
+      overflow: hidden !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+    }
+    .source-card::before {
+      content: '' !important;
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      height: 3.5px !important;
+      background: var(--source-accent, #F5B041) !important;
+    }
+    .source-card:hover {
+      border-color: var(--source-accent, #F5B041) !important;
+      transform: translateY(-4px) !important;
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35) !important;
+    }
+    .source-card.active {
+      border-color: var(--source-accent, #F5B041) !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      box-shadow: 0 0 0 2px rgba(245, 176, 65, 0.3) !important;
+    }
+    .src-card-header {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+    .src-logo-wrap {
+      height: 48px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+    }
+    .source-logo-img {
+      height: 42px !important;
+      width: auto !important;
+      max-width: 125px !important;
+      object-fit: contain !important;
+      border-radius: 8px !important;
+      background: #FFFFFF !important;
+      padding: 3px 8px !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+      transition: transform 0.25s ease !important;
+    }
+    .source-card[data-source="ani"] .source-logo-img {
+      background: #000000 !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    }
+    .source-card[data-source="foxnews"] .source-logo-img {
+      background: #003366 !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    .source-card[data-source="skynews_australia"] .source-logo-img {
+      background: #001A33 !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    .source-card[data-source="ln247"] .source-logo-img {
+      background: #F5B041 !important;
+    }
+    .source-card:hover .source-logo-img {
+      transform: scale(1.06) !important;
+    }
+    .src-status-rss, .src-status-tv, .src-status-portal {
+      font-size: 9.5px !important;
+      font-weight: 800 !important;
+      padding: 3px 8px !important;
+      border-radius: 20px !important;
+      border: 1px solid !important;
+      white-space: nowrap !important;
+      letter-spacing: 0.3px !important;
+    }
+    .src-status-rss {
+      color: #10B981 !important;
+      border-color: rgba(16, 185, 129, 0.4) !important;
+      background: rgba(16, 185, 129, 0.1) !important;
+    }
+    .src-status-tv {
+      color: #F59E0B !important;
+      border-color: rgba(245, 158, 11, 0.4) !important;
+      background: rgba(245, 158, 11, 0.1) !important;
+    }
+    .src-status-portal {
+      color: #818CF8 !important;
+      border-color: rgba(129, 140, 248, 0.4) !important;
+      background: rgba(129, 140, 248, 0.1) !important;
+    }
+    .src-card-body {
+      flex: 1 !important;
+    }
+    .src-network-name {
+      font-size: 14.5px !important;
+      font-weight: 800 !important;
+      color: var(--text-primary, #F8FAFC) !important;
+      margin-bottom: 5px !important;
+      line-height: 1.3 !important;
+    }
+    .src-region-row {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      font-size: 11.5px !important;
+      color: var(--text-secondary, #94A3B8) !important;
+      font-weight: 500 !important;
+    }
+    .src-card-footer {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding-top: 10px !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+      gap: 8px !important;
+    }
+    .src-filter-btn {
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      color: #F5B041 !important;
+      background: rgba(245, 176, 65, 0.1) !important;
+      border: 1px solid rgba(245, 176, 65, 0.25) !important;
+      padding: 4px 10px !important;
+      border-radius: 20px !important;
+      cursor: pointer !important;
+      font-family: inherit !important;
+    }
+    .src-filter-btn:hover, .src-filter-btn.active {
+      background: rgba(245, 176, 65, 0.25) !important;
+      border-color: #F5B041 !important;
+    }
+    .src-portal-link {
+      color: var(--text-muted, #64748B) !important;
+      font-weight: 700 !important;
+      font-size: 11px !important;
+      text-decoration: none !important;
+    }
+    .src-portal-link:hover {
+      color: #F5B041 !important;
+    }
+    /* Search & Category Trigger (Image 1: 🔍 ☰) */
+    .search-bar-row {
+      display: flex !important;
+      gap: 12px !important;
+      align-items: center !important;
+      width: 100% !important;
+    }
+    .search-category-btn {
+      background: var(--bg-surface, #0E162B) !important;
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      color: var(--text-primary, #F8FAFC) !important;
+      border-radius: 12px !important;
+      padding: 10px 18px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      user-select: none !important;
+      font-family: inherit !important;
+      font-size: 13px !important;
+      font-weight: 700 !important;
+      flex-shrink: 0 !important;
+    }
+    .search-category-btn.open {
+      border-color: var(--accent-gold, #F5B041) !important;
+      background: rgba(245, 176, 65, 0.12) !important;
+      color: var(--accent-gold, #F5B041) !important;
+      box-shadow: 0 0 16px rgba(245, 176, 65, 0.25) !important;
+    }
+    .btn-icon-cluster {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 7px !important;
+      color: #F5B041 !important;
+    }
+    .search-svg, .menu-svg {
+      width: 17px !important;
+      height: 17px !important;
+      stroke: #F5B041 !important;
+      filter: drop-shadow(0 0 4px rgba(245, 176, 65, 0.4)) !important;
+    }
+    .search-icon {
+      position: absolute !important;
+      left: 14px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      pointer-events: none !important;
+    }
+    .search-input-svg {
+      width: 17px !important;
+      height: 17px !important;
+      stroke: #F5B041 !important;
+      filter: drop-shadow(0 0 4px rgba(245, 176, 65, 0.4)) !important;
+    }
+    .search-input {
+      background: rgba(255, 255, 255, 0.035) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      color: var(--text-primary, #F8FAFC) !important;
+      border-radius: 12px !important;
+      padding: 12px 42px 12px 42px !important;
+      font-size: 13.5px !important;
+      transition: all 0.25s ease !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+    }
+    .search-input:focus {
+      border-color: #F5B041 !important;
+      box-shadow: 0 0 0 3px rgba(245, 176, 65, 0.18), 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+    }
+    .search-category-btn {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .search-category-btn:hover {
+      border-color: rgba(245, 176, 65, 0.5) !important;
+      background: rgba(245, 176, 65, 0.08) !important;
+      box-shadow: 0 0 16px rgba(245, 176, 65, 0.25) !important;
+      transform: translateY(-1px) !important;
+    }
+    .search-category-btn.open {
+      border-color: #F5B041 !important;
+      background: rgba(245, 176, 65, 0.14) !important;
+      box-shadow: 0 0 20px rgba(245, 176, 65, 0.35) !important;
+    }
+    .search-cat-label {
+      font-weight: 750 !important;
+      letter-spacing: 0.2px !important;
+    }
+    .active-category-pill {
+      background: #F5B041 !important;
+      color: #0B1325 !important;
+      font-size: 11px !important;
+      font-weight: 850 !important;
+      padding: 3px 10px !important;
+      border-radius: 9999px !important;
+      box-shadow: 0 2px 8px rgba(245, 176, 65, 0.35) !important;
+    }
+    .dropdown-chevron {
+      color: #F5B041 !important;
+      font-size: 10px !important;
+      transition: transform 0.2s ease !important;
+    }
+    .view-mode-toggle {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 10px !important;
+      padding: 3px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 2px !important;
+    }
+    .view-btn {
+      border-radius: 8px !important;
+      padding: 6px 12px !important;
+      font-size: 12px !important;
+      font-weight: 700 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      cursor: pointer !important;
+      border: none !important;
+      background: transparent !important;
+      color: var(--text-secondary, #94A3B8) !important;
+      transition: all 0.2s ease !important;
+    }
+    .view-btn svg {
+      stroke: #F5B041 !important;
+      color: #F5B041 !important;
+      filter: drop-shadow(0 0 3px rgba(245, 176, 65, 0.35)) !important;
+    }
+    .view-btn:hover {
+      color: var(--text-primary, #F8FAFC) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+    .view-btn.active {
+      background: #F5B041 !important;
+      color: #0B1325 !important;
+      box-shadow: 0 2px 10px rgba(245, 176, 65, 0.4) !important;
+    }
+    .view-btn.active svg {
+      stroke: #0B1325 !important;
+      color: #0B1325 !important;
+      filter: none !important;
+    }
+    /* Header action buttons & status badge styling */
+    .status-badge {
+      background: rgba(16, 185, 129, 0.08) !important;
+      border: 1px solid rgba(16, 185, 129, 0.3) !important;
+      color: #10B981 !important;
+      border-radius: 9999px !important;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.15) !important;
+    }
+    .refresh-btn, .theme-toggle {
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      color: var(--text-primary, #F8FAFC) !important;
+      border-radius: 12px !important;
+      width: 40px !important;
+      height: 40px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+    }
+    .refresh-btn:hover, .theme-toggle:hover {
+      border-color: #F5B041 !important;
+      color: #F5B041 !important;
+      background: rgba(245, 176, 65, 0.1) !important;
+      box-shadow: 0 0 16px rgba(245, 176, 65, 0.35), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+      transform: translateY(-2px) !important;
+    }
+    .active-category-pill {
+      background: var(--accent-gold-gradient, linear-gradient(135deg, #FFE885, #F5B041)) !important;
+      color: #070C18 !important;
+      font-size: 11px !important;
+      font-weight: 800 !important;
+      padding: 2px 9px !important;
+      border-radius: 9999px !important;
+    }
+    .category-dropdown-panel {
+      background: var(--bg-surface, #0E162B) !important;
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      border-radius: 16px !important;
+      padding: 18px 20px !important;
+      margin-bottom: 12px !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
+      position: relative !important;
+      z-index: 50 !important;
+    }
+    .dropdown-panel-header {
+      display: flex !important;
+      justify-content: space-between !important;
+      align-items: center !important;
+      padding-bottom: 12px !important;
+      border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      margin-bottom: 14px !important;
+    }
+    .dropdown-panel-title {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      font-size: 14px !important;
+      font-weight: 800 !important;
+      color: var(--text-primary, #F8FAFC) !important;
+    }
+    .category-list-container {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)) !important;
+      gap: 10px !important;
+    }
+    .category-dropdown-item {
+      background: rgba(255, 255, 255, 0.035) !important;
+      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+      border-radius: 10px !important;
+      padding: 10px 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      cursor: pointer !important;
+      color: var(--text-secondary, #94A3B8) !important;
+      font-family: inherit !important;
+    }
+    .category-dropdown-item.active {
+      background: rgba(245, 176, 65, 0.12) !important;
+      border-color: var(--accent-gold, #F5B041) !important;
+      color: var(--accent-gold, #F5B041) !important;
+      font-weight: 700 !important;
+    }
+    .feed-logo-wrap {
+      width: 26px !important;
+      height: 26px !important;
+      border-radius: 6px !important;
+      background: #FFFFFF !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      overflow: hidden !important;
+      padding: 2px !important;
+      flex-shrink: 0 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+    }
+    .feed-logo-wrap img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+    }
+    @media (max-width: 980px) {
+      .featured-container-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 680px) {
+      .search-bar-row { flex-direction: column !important; align-items: stretch !important; }
+      .search-category-btn { width: 100% !important; justify-content: space-between !important; }
+    }
+    @media (max-width: 640px) {
+      .featured-main-card { grid-template-columns: 1fr !important; }
+      .featured-img-col { min-height: 220px !important; }
+    }
+      .badge-gold, .badge-blue {
+      background: #F5B041 !important;
+      color: #0B1325 !important;
+      font-size: 10px !important;
+      font-weight: 900 !important;
+      padding: 3px 9px !important;
+      border-radius: 5px !important;
+      letter-spacing: 1px !important;
+      box-shadow: 0 2px 8px rgba(245, 176, 65, 0.35) !important;
+      display: inline-block !important;
+    }
+      .brand-header-logo {
+      height: 48px !important;
+      width: auto !important;
+      aspect-ratio: 2 / 1 !important;
+      border-radius: 8px !important;
+      object-fit: cover !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 12px rgba(245, 176, 65, 0.25) !important;
+      border: 1px solid rgba(245, 176, 65, 0.3) !important;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      flex-shrink: 0 !important;
+    }
+    .brand-wrapper:hover .brand-header-logo {
+      transform: translateY(-1px) scale(1.03) !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 18px rgba(245, 176, 65, 0.5) !important;
+      border-color: #F5B041 !important;
+    }
+    .footer-logo-img {
+      height: 44px !important;
+      width: auto !important;
+      aspect-ratio: 2 / 1 !important;
+      border-radius: 8px !important;
+      object-fit: cover !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      margin-bottom: 8px !important;
+    }
+    @media (max-width: 680px) {
+      .brand-header-logo {
+        height: 38px !important;
+      }
+    }
+  </style>
+  <link rel="icon" type="image/jpeg" href="assets/news_connect_logo.jpg">
 </head>
 <body>
-  <!-- Top Viewport Switcher Toolbar (Allows testing Desktop, Tablet and Mobile views on any screen) -->
-  <aside class="device-switcher-toolbar" aria-label="Device Viewport Switcher">
-    <div class="toolbar-inner">
-      <div class="toolbar-label">
-        <span class="toolbar-dot"></span>
-        <span>NEWS CONNECT PREVIEW:</span>
-      </div>
-      <div class="toolbar-buttons">
-        <button class="device-btn active" id="btn-view-desktop" data-mode="desktop">
-          <span class="btn-icon">🖥️</span> Full Web View
-        </button>
-        <button class="device-btn" id="btn-view-tablet" data-mode="tablet">
-          <span class="btn-icon">📟</span> Tablet (768px)
-        </button>
-        <button class="device-btn" id="btn-view-mobile" data-mode="mobile">
-          <span class="btn-icon">📱</span> Mobile Simulator (390px)
-        </button>
-      </div>
-      <div class="toolbar-hint">
-        <span>Responsive iOS / Android / Web</span>
-      </div>
-    </div>
-  </aside>
-
-  <!-- App Viewport Container (Adapts from Full-width Desktop to Mobile Phone Frame) -->
-  <div class="app-viewport mode-desktop" id="app-viewport">
-    <!-- Phone Bezel Details (Visible only in Mobile Simulator Mode) -->
-    <div class="phone-frame-notch" id="phone-notch">
-      <div class="notch-speaker"></div>
-      <div class="notch-camera"></div>
-    </div>
+  <!-- Main App Layout Container -->
+  <div class="app-viewport" id="app-viewport">
 
     <!-- Header -->
     <header class="site-header">
       <div class="container">
         <div class="header-top">
           <div class="brand-wrapper">
-            <div class="brand-icon">✦</div>
+            <img src="assets/news_connect_logo.jpg" alt="News Connect Logo" class="brand-header-logo" />
             <div class="brand-text">
-              <h1>NEWS <span>CONNECT</span></h1>
-              <p>One World. Every Perspective.</p>
+              <div class="brand-headline-wrap">
+                <h1 class="brand-title">NEWS <span class="brand-highlight">CONNECT</span></h1>
+                <span class="brand-edition-badge">LIVE EDITION</span>
+              </div>
+              <p class="brand-tagline">One World. Every Perspective.</p>
             </div>
           </div>
 
           <div class="header-actions">
-            <div class="status-badge" id="live-badge">
-              <span class="status-dot"></span>
+            <div class="status-badge" id="live-badge" title="Live Feed & Broadcast Status">
+              <span class="status-radar">
+                <span class="radar-ping"></span>
+                <span class="status-dot"></span>
+              </span>
               <span id="status-text">8 Sources Connected</span>
             </div>
-            <button class="refresh-btn" id="refresh-btn" title="Refresh Live Feeds" aria-label="Refresh Feeds">🔄</button>
-            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme">☀️</button>
+            <button class="refresh-btn" id="refresh-btn" title="Refresh Live Feeds" aria-label="Refresh Feeds">
+              <svg class="action-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
+              </svg>
+            </button>
+            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme" title="Toggle Theme">
+              <span class="theme-icon-wrap" id="theme-icon-slot">
+                <svg class="action-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"/>
+                  <line x1="12" y1="1" x2="12" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="3" y2="12"/>
+                  <line x1="21" y1="12" x2="23" y2="12"/>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+              </span>
+            </button>
           </div>
         </div>
 
         <nav class="header-nav" aria-label="Main Navigation">
-          <a href="#featured" class="nav-link active" data-tab="all">Featured News</a>
-          <a href="#sources" class="nav-link" data-tab="sources">8 News Networks</a>
-          <a href="#feed" class="nav-link" data-tab="feed">Latest Feed</a>
-          <a href="#broadcasts" class="nav-link" data-tab="broadcasts">Live Broadcasts</a>
-          <a href="#saved" class="nav-link" id="nav-saved" data-tab="saved">★ Bookmarks <span class="saved-pill" id="saved-count">0</span></a>
-          <a href="#about" class="nav-link" data-tab="about">About & Attribution</a>
+          <a href="#featured" class="nav-link active" data-tab="all">
+            <span class="nav-bullet">✦</span>
+            <span>Featured News</span>
+          </a>
+          <a href="#sources" class="nav-link" data-tab="sources">
+            <span class="nav-bullet">🌐</span>
+            <span>8 News Networks</span>
+          </a>
+          <a href="#feed" class="nav-link" data-tab="feed">
+            <span class="nav-bullet">⚡</span>
+            <span>Latest Feed</span>
+          </a>
+          <a href="#broadcasts" class="nav-link" data-tab="broadcasts">
+            <span class="nav-bullet">📺</span>
+            <span>Live Broadcasts</span>
+          </a>
+          <a href="#saved" class="nav-link" id="nav-saved" data-tab="saved">
+            <span class="nav-bullet">★</span>
+            <span>Bookmarks</span>
+            <span class="saved-pill" id="saved-count">0</span>
+          </a>
+          <a href="#about" class="nav-link" data-tab="about">
+            <span class="nav-bullet">ℹ️</span>
+            <span>About & Attribution</span>
+          </a>
         </nav>
       </div>
     </header>
@@ -83,8 +746,11 @@
     <!-- Breaking News Editorial Marquee Ticker -->
     <div class="breaking-ticker-bar">
       <div class="ticker-badge">
-        <span class="ticker-pulse"></span>
-        <span>BREAKING</span>
+        <span class="ticker-beacon">
+          <span class="beacon-wave"></span>
+          <span class="ticker-pulse"></span>
+        </span>
+        <span class="ticker-label">BREAKING</span>
       </div>
       <div class="ticker-track">
         <div class="ticker-marquee" id="ticker-marquee">
@@ -102,178 +768,521 @@
     </div>
 
     <main class="container">
-      <!-- Featured Hero Section -->
+      <!-- Section 1: Featured News (Image 2 Magazine Spread) -->
       <section class="featured-section" id="featured">
         <div class="section-label">
-          <h2 class="section-title"><span class="badge-red">FEATURED</span> Global Spotlight</h2>
-          <span class="meta-time" id="last-updated-text">Sync: Active</span>
+          <div class="section-title-wrap">
+            <span class="badge-red">FEATURED</span>
+            <h2 class="section-title">Global Spotlight</h2>
+          </div>
+          <span class="meta-time-sync" id="last-updated-text">● Live Synced</span>
         </div>
 
-        <div class="hero-card" id="hero-card">
-          <div class="hero-image-wrap">
-            <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80" alt="Featured News Image" class="hero-image" id="hero-img">
-            <div class="hero-badges">
-              <span class="pill-source" id="hero-source">Newsmax</span>
-              <span class="pill-category" id="hero-category">Politics</span>
+        <div class="featured-container-grid">
+          <!-- Left Hero Card: Main Featured Story -->
+          <article class="featured-main-card" id="hero-card">
+            <div class="featured-img-col">
+              <img src="https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80" alt="Featured News Image" class="featured-img" id="hero-img">
+              <span class="pill-source" id="hero-source" style="display:none;">Newsmax</span>
             </div>
-          </div>
-          <div class="hero-content">
-            <div>
-              <div class="meta-time" id="hero-time">⏱ 36m ago • Nov 8, 2026</div>
-              <h3 class="hero-headline" id="hero-title">US Senate Deliberates Bipartisan Defense & Border Security Framework</h3>
-              <p class="hero-summary" id="hero-desc">Lawmakers on Capitol Hill convene for committee hearings addressing comprehensive national security budgets, international trade alliances, and border modernization programs.</p>
+            <div class="featured-info-col">
+              <span class="featured-cat-tag" id="hero-category">WORLD</span>
+              <h3 class="featured-headline" id="hero-title">A Brighter Future: Global Leaders Meet to Tackle Climate Change</h3>
+              <p class="featured-summary" id="hero-desc">World leaders gather for a historic summit to discuss climate action, clean energy and a sustainable future for the next generation.</p>
+              <div class="featured-btn-wrap">
+                <a href="https://www.newsmax.com/newsfront/senate-defense-border-security/2026/11/08/id/1188201/" target="_blank" rel="noopener noreferrer" class="btn-read-more" id="hero-link">Read More</a>
+                <span class="meta-time" id="hero-time" style="display:none;">⏱ 36m ago</span>
+              </div>
             </div>
-            <a href="https://www.newsmax.com/newsfront/senate-defense-border-security/2026/11/08/id/1188201/" target="_blank" rel="noopener noreferrer" class="btn-primary" id="hero-link">
-              Read Original Article ↗
-            </a>
-          </div>
+          </article>
+
+          <!-- Right Trending Now Card -->
+          <aside class="trending-now-card" aria-label="Trending Now">
+            <h3 class="trending-title">Trending Now</h3>
+            <div class="trending-list" id="trending-list">
+              <a href="#" class="trending-item">
+                <span class="trending-rank-badge">1</span>
+                <img src="https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=200&q=80" alt="Tech giants invest in clean energy" class="trending-thumb">
+                <span class="trending-text">Tech giants invest in clean energy</span>
+              </a>
+              <a href="#" class="trending-item">
+                <span class="trending-rank-badge">2</span>
+                <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=200&q=80" alt="India's economy shows strong growth" class="trending-thumb">
+                <span class="trending-text">India's economy shows strong growth</span>
+              </a>
+              <a href="#" class="trending-item">
+                <span class="trending-rank-badge">3</span>
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80" alt="New AI tool changes the game" class="trending-thumb">
+                <span class="trending-text">New AI tool changes the game</span>
+              </a>
+              <a href="#" class="trending-item">
+                <span class="trending-rank-badge">4</span>
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=200&q=80" alt="Space mission reaches new milestone" class="trending-thumb">
+                <span class="trending-text">Space mission reaches new milestone</span>
+              </a>
+              <a href="#" class="trending-item">
+                <span class="trending-rank-badge">5</span>
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=200&q=80" alt="Health experts share wellness tips" class="trending-thumb">
+                <span class="trending-text">Health experts share wellness tips</span>
+              </a>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <!-- 8 Sources Navigation Grid -->
+      <!-- Section 2: 8 News Networks (Interactive Network Console Deck) -->
       <section class="sources-section" id="sources">
         <div class="section-label">
-          <div>
-            <h2 class="section-title">Connected International Organisations</h2>
-            <p class="section-subtext">8 verified networks with real-time RSS and live broadcast integration</p>
+          <div class="section-title-wrap">
+            <span class="badge-gold">CONSORTIUM</span>
+            <h2 class="section-title">8 Connected News Networks</h2>
           </div>
-          <button class="category-pill" id="reset-sources-btn" style="display:none;">Show All Sources</button>
+          <button class="category-pill reset-sources-pill" id="reset-sources-btn" style="display:none;">✕ Show All Networks</button>
         </div>
+        <p class="section-subtext">Verified international organisations connected via real-time RSS feeds and authenticated broadcast portals.</p>
+
         <div class="sources-grid" id="sources-grid">
-          <!-- Rendered by JS -->
+          <!-- Card 1: Newsmax -->
+          <div class="source-card" data-source="newsmax" style="--source-accent: #002B49;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/newsmax.png" class="source-logo-img" alt="Newsmax Logo" />
+              </div>
+              <span class="src-status-rss">● Live RSS</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">Newsmax</div>
+              <div class="src-region-row">
+                <span class="src-flag">🇺🇸</span>
+                <span class="src-region">United States</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://www.newsmax.com" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 2: Fox News -->
+          <div class="source-card" data-source="foxnews" style="--source-accent: #003366;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/foxnews.png" class="source-logo-img" alt="Fox News Logo" />
+              </div>
+              <span class="src-status-rss">● Live RSS</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">Fox News</div>
+              <div class="src-region-row">
+                <span class="src-flag">🇺🇸</span>
+                <span class="src-region">United States</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://www.foxnews.com" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 3: LoveWorld LN24 International -->
+          <div class="source-card" data-source="ln24international" style="--source-accent: #0C2340;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/ln24international.png" class="source-logo-img" alt="LoveWorld LN24 International Logo" onerror="this.src='assets/logos/ln24international.jpg'" />
+              </div>
+              <span class="src-status-rss">● Live RSS</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">LoveWorld LN24 International</div>
+              <div class="src-region-row">
+                <span class="src-flag">🌐</span>
+                <span class="src-region">International</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://ln24international.com" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 4: LN247 -->
+          <div class="source-card" data-source="ln247" style="--source-accent: #0A2540;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/ln247.png" class="source-logo-img" alt="LN247 Logo" />
+              </div>
+              <span class="src-status-rss">● Live RSS</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">LN247</div>
+              <div class="src-region-row">
+                <span class="src-flag">🌐</span>
+                <span class="src-region">International</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://ln247.news" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 5: LoveWorld Europe -->
+          <div class="source-card" data-source="loveworldeurope" style="--source-accent: #1E3A8A;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/loveworldeurope.png" class="source-logo-img" alt="LoveWorld Europe Logo" onerror="this.src='assets/logos/loveworldeurope.jpg'" />
+              </div>
+              <span class="src-status-portal">● Portal</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">LoveWorld Europe</div>
+              <div class="src-region-row">
+                <span class="src-flag">🇪🇺</span>
+                <span class="src-region">United Kingdom & Europe</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://loveworldeurope.org" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 6: LoveWorld Sat -->
+          <div class="source-card" data-source="loveworldsat" style="--source-accent: #1A365D;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="LoveWorld Sat Logo" />
+              </div>
+              <span class="src-status-tv">● Live TV</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">LoveWorld Sat</div>
+              <div class="src-region-row">
+                <span class="src-flag">🇿🇦</span>
+                <span class="src-region">South Africa & Africa</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://www.loveworldsat.org" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 7: Sky News Australia -->
+          <div class="source-card" data-source="skynews_australia" style="--source-accent: #990000;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/skynews_australia.png" class="source-logo-img" alt="Sky News Australia Logo" />
+              </div>
+              <span class="src-status-portal">● Portal</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">Sky News Australia</div>
+              <div class="src-region-row">
+                <span class="src-flag">🇦🇺</span>
+                <span class="src-region">Australia</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://www.skynews.com.au" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
+
+          <!-- Card 8: ANI - Asian News International -->
+          <div class="source-card" data-source="ani" style="--source-accent: #8B0000;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap">
+                <img src="assets/logos/ani.png" class="source-logo-img" alt="ANI Asian News International Logo" />
+              </div>
+              <span class="src-status-rss">● Live RSS</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">ANI – Asian News International</div>
+              <div class="src-region-row">
+                <span class="src-flag">🇮🇳</span>
+                <span class="src-region">India & South Asia</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://www.aninews.in" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Filter & Search Controls -->
-      <div class="filter-search-wrap">
-        <div class="search-box">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" class="search-input" placeholder="Search international headlines, topics, or keywords...">
-          <button id="search-clear" class="search-clear-btn" style="display:none;">✕</button>
-        </div>
-
-        <div class="category-pills" id="category-pills">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-
-      <!-- Latest News Grid -->
+      <!-- Section 3: Latest News Feed & Search Wire -->
       <section class="news-grid-section" id="feed">
-        <div class="grid-heading-bar">
-          <div>
-            <h2 class="grid-title" id="feed-title">Latest International Headlines</h2>
-            <span class="grid-count" id="feed-count">13 stories</span>
+        <!-- Filter & Search Controls (Image 1: 🔍 ☰ Button) -->
+        <div class="filter-search-wrap">
+          <div class="search-bar-row">
+            <!-- Search & Categories Toggle Button (Image 1: 🔍 ☰) -->
+            <button class="search-category-btn" id="search-cat-toggle-btn" aria-expanded="false" title="Search & Browse Categories">
+              <span class="btn-icon-cluster">
+                <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <svg class="menu-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="3" y1="6" x2="21" y2="6"/>
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                  <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+              </span>
+              <span class="search-cat-label">Categories</span>
+              <span class="active-category-pill" id="active-category-pill">All</span>
+              <span class="dropdown-chevron" id="dropdown-chevron">▼</span>
+            </button>
+
+            <!-- Search Box -->
+            <div class="search-box">
+              <span class="search-icon">
+                <svg class="search-input-svg" viewBox="0 0 24 24" fill="none" stroke="#F5B041" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </span>
+              <input type="text" id="search-input" class="search-input" placeholder="Search international wire headlines, keywords, topics...">
+              <button id="search-clear" class="search-clear-btn" style="display:none;" aria-label="Clear Search">✕</button>
+            </div>
           </div>
-          <div class="view-mode-toggle">
-            <button class="view-btn active" id="btn-view-cards" title="Magazine Card Grid">⊞ Cards</button>
-            <button class="view-btn" id="btn-view-list" title="Compact Wire List">☰ List</button>
+
+          <!-- Category Dropdown Panel (Image 1 & 2: Opens when clicking 🔍 ☰) -->
+          <div class="category-dropdown-panel" id="category-dropdown-panel" style="display:none;">
+            <div class="dropdown-panel-header">
+              <div class="dropdown-panel-title">
+                <span>📑</span>
+                <span>All Topics & Categories</span>
+              </div>
+              <button class="dropdown-panel-close" id="category-dropdown-close" aria-label="Close">✕</button>
+            </div>
+            <div class="category-list-container" id="category-list-container">
+              <!-- Rendered by JS -->
+            </div>
           </div>
         </div>
 
-        <div class="news-cards-grid" id="news-grid">
+        <div class="grid-heading-bar">
+          <div class="grid-heading-left">
+            <h2 class="grid-title" id="feed-title">Latest International Headlines</h2>
+            <span class="grid-count-badge" id="feed-count">13 stories</span>
+          </div>
+          <div class="view-mode-toggle" role="group" aria-label="Layout toggle">
+            <button class="view-btn active" id="btn-view-cards" title="Magazine Card Grid">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              <span>Cards</span>
+            </button>
+            <button class="view-btn" id="btn-view-list" title="Compact Wire List">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              <span>List</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="news-cards-grid view-mode-cards" id="news-grid">
           <!-- Rendered by JS -->
         </div>
       </section>
 
-      <!-- Broadcast Spotlight (LoveWorld Sat, LoveWorld Europe, Sky News AU) -->
+      <!-- Section 4: Live Broadcasts (Control Room TV Studio Screens) -->
       <section class="broadcast-section" id="broadcasts">
         <div class="section-label">
-          <h2 class="section-title"><span class="badge-red" style="background:var(--status-broadcast)">BROADCAST</span> Live TV & Broadcast Portals</h2>
+          <div class="section-title-wrap">
+            <span class="badge-amber">BROADCAST</span>
+            <h2 class="section-title">Live TV & Broadcast Portals</h2>
+          </div>
+          <span class="broadcast-live-beacon">● 3 CHANNELS ACTIVE</span>
         </div>
-        <p style="font-size:12px; color:var(--text-secondary); margin-bottom:12px;">
-          Verified broadcast channels integrated through official streaming players and news portals.
-        </p>
+        <p class="section-subtext">Continuous satellite feeds and authenticated digital video portals broadcasting directly from Johannesburg, London, and Canberra.</p>
 
         <div class="broadcast-grid">
-          <div class="broadcast-box">
-            <div class="broadcast-top">
-              <span class="source-badge-tag" style="background:#1A365D">LW SAT</span>
-              <span class="source-status-pill" style="color:var(--status-broadcast); border-color:var(--status-broadcast)">Live TV</span>
+          <!-- Screen 1: LoveWorld Sat -->
+          <article class="broadcast-tv-card">
+            <div class="tv-screen-bezel">
+              <div class="tv-screen-glass" style="background-image: url('https://images.unsplash.com/photo-1594909122845-11baa439b7bf?auto=format&fit=crop&w=800&q=80');">
+                <div class="tv-screen-overlay"></div>
+                <div class="tv-screen-top">
+                  <span class="on-air-tag">
+                    <span class="on-air-pulse"></span>
+                    <span>LIVE SATELLITE</span>
+                  </span>
+                  <span class="tv-channel-pill">🇿🇦 JHB</span>
+                </div>
+                <div class="tv-screen-center">
+                  <button class="btn-play-trigger open-player-btn" data-channel="loveworldsat" title="Launch Player">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </button>
+                </div>
+                <div class="tv-screen-bottom">
+                  <span class="tv-frequency">TRANS-AFRICA 24/7 DTH</span>
+                </div>
+              </div>
             </div>
-            <h3 class="broadcast-title">🇿🇦 LoveWorld Sat</h3>
-            <div class="broadcast-tagline">24/7 Satellite Television & News Hub</div>
-            <p class="broadcast-desc">Broadcasting from Johannesburg across Africa and globally. Segments: News On The Hour, Good Morning World, and Global Business Update.</p>
-            <div class="btn-group">
-              <button class="btn-stream open-player-btn" data-channel="loveworldsat" style="background:#EA580C; border:none; cursor:pointer;">▶ Watch Live Stream</button>
-              <a href="https://www.loveworldsat.org/news" target="_blank" rel="noopener noreferrer" class="btn-portal">News Portal ↗</a>
+            <div class="tv-card-content">
+              <div class="tv-brand-row">
+                <h3 class="tv-card-title">LoveWorld Sat</h3>
+                <span class="tv-callsign" style="background:#EA580C">LW SAT</span>
+              </div>
+              <p class="tv-card-tagline">24/7 Satellite Television & Continental News</p>
+              <p class="tv-card-desc">Broadcasting globally from South Africa with segments: News On The Hour, Good Morning World, and Global Business Update.</p>
+              <div class="tv-btn-row">
+                <button class="btn-stream open-player-btn" data-channel="loveworldsat">▶ Watch Live TV</button>
+                <a href="https://www.loveworldsat.org/news" target="_blank" rel="noopener noreferrer" class="btn-portal">Official Portal ↗</a>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <div class="broadcast-box">
-            <div class="broadcast-top">
-              <span class="source-badge-tag" style="background:#1E3A8A">LW EU</span>
-              <span class="source-status-pill" style="color:var(--status-broadcast); border-color:var(--status-broadcast)">Live TV</span>
+          <!-- Screen 2: LoveWorld Europe -->
+          <article class="broadcast-tv-card">
+            <div class="tv-screen-bezel">
+              <div class="tv-screen-glass" style="background-image: url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80');">
+                <div class="tv-screen-overlay"></div>
+                <div class="tv-screen-top">
+                  <span class="on-air-tag">
+                    <span class="on-air-pulse"></span>
+                    <span>LIVE TV FEED</span>
+                  </span>
+                  <span class="tv-channel-pill">🇪🇺 UK/EU</span>
+                </div>
+                <div class="tv-screen-center">
+                  <button class="btn-play-trigger open-player-btn" data-channel="loveworldeurope" title="Launch Player">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </button>
+                </div>
+                <div class="tv-screen-bottom">
+                  <span class="tv-frequency">EUROPEAN MULTILINGUAL BEAM</span>
+                </div>
+              </div>
             </div>
-            <h3 class="broadcast-title">🇪🇺 LoveWorld Europe</h3>
-            <div class="broadcast-tagline">Continental Multilingual Broadcasts</div>
-            <p class="broadcast-desc">Official broadcasting portal for the UK and Continental Europe, delivering multilingual faith broadcasts and community news.</p>
-            <div class="btn-group">
-              <button class="btn-stream open-player-btn" data-channel="loveworldeurope" style="background:#1E3A8A; border:none; cursor:pointer;">▶ Watch Broadcast</button>
-              <a href="https://loveworlduk.org" target="_blank" rel="noopener noreferrer" class="btn-portal">UK Portal ↗</a>
+            <div class="tv-card-content">
+              <div class="tv-brand-row">
+                <h3 class="tv-card-title">LoveWorld Europe</h3>
+                <span class="tv-callsign" style="background:#1E3A8A">LW EU</span>
+              </div>
+              <p class="tv-card-tagline">Continental Multilingual Broadcasts</p>
+              <p class="tv-card-desc">Transmitting inspiring programming, UK community reporting, and international church symposiums across Europe.</p>
+              <div class="tv-btn-row">
+                <button class="btn-stream open-player-btn" data-channel="loveworldeurope">▶ Watch Live TV</button>
+                <a href="https://loveworlduk.org" target="_blank" rel="noopener noreferrer" class="btn-portal">UK Portal ↗</a>
+              </div>
             </div>
-          </div>
+          </article>
 
-          <div class="broadcast-box">
-            <div class="broadcast-top">
-              <span class="source-badge-tag" style="background:#990000">SKY AU</span>
-              <span class="source-status-pill" style="color:var(--status-portal); border-color:var(--status-portal)">Digital Video</span>
+          <!-- Screen 3: Sky News Australia -->
+          <article class="broadcast-tv-card">
+            <div class="tv-screen-bezel">
+              <div class="tv-screen-glass" style="background-image: url('https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80');">
+                <div class="tv-screen-overlay"></div>
+                <div class="tv-screen-top">
+                  <span class="on-air-tag" style="background:#DC2626">
+                    <span class="on-air-pulse"></span>
+                    <span>DIGITAL WIRE</span>
+                  </span>
+                  <span class="tv-channel-pill">🇦🇺 CANBERRA</span>
+                </div>
+                <div class="tv-screen-center">
+                  <button class="btn-play-trigger open-player-btn" data-channel="skynews" title="Launch Video Reports">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </button>
+                </div>
+                <div class="tv-screen-bottom">
+                  <span class="tv-frequency">CANBERRA PARLIAMENTARY STREAM</span>
+                </div>
+              </div>
             </div>
-            <h3 class="broadcast-title">🇦🇺 Sky News Australia</h3>
-            <div class="broadcast-tagline">Australia's Premier 24/7 News Service</div>
-            <p class="broadcast-desc">Operated by Australian News Channel (News Corp Australia). Delivers national political reporting and digital on-demand video from Canberra.</p>
-            <div class="btn-group">
-              <button class="btn-stream open-player-btn" data-channel="skynews" style="background:#E60000; border:none; cursor:pointer;">▶ Video Reports</button>
-              <a href="https://www.skynews.com.au" target="_blank" rel="noopener noreferrer" class="btn-portal">Official Portal ↗</a>
+            <div class="tv-card-content">
+              <div class="tv-brand-row">
+                <h3 class="tv-card-title">Sky News Australia</h3>
+                <span class="tv-callsign" style="background:#990000">SKY AU</span>
+              </div>
+              <p class="tv-card-tagline">Australia's Premier 24/7 Digital Video Service</p>
+              <p class="tv-card-desc">National political reporting from Parliament House, natural resource analysis, and on-demand video commentary.</p>
+              <div class="tv-btn-row">
+                <button class="btn-stream open-player-btn" data-channel="skynews" style="background:#DC2626">▶ Video Reports</button>
+                <a href="https://www.skynews.com.au" target="_blank" rel="noopener noreferrer" class="btn-portal">Official Portal ↗</a>
+              </div>
             </div>
-          </div>
+          </article>
         </div>
       </section>
 
-      <!-- About Section -->
-      <section class="sources-section" id="about" style="margin-top:20px;">
-        <div class="broadcast-box">
-          <h3 class="broadcast-title" style="font-size:20px; margin-bottom:8px;">About News Connect</h3>
-          <p style="font-size:13px; color:var(--text-secondary); line-height:1.7; margin-bottom:12px;">
-            News Connect is an editorial one-page news discovery and aggregation platform. It brings international news headlines from eight major news organisations into one modern dashboard.
-          </p>
-          <p style="font-size:12px; color:var(--text-muted); line-height:1.6;">
-            Content Disclaimer: News Connect does not publish original news content. All articles, headlines, logos, and trademarks belong exclusively to their respective owners: Newsmax, Fox News, LoveWorld Networks (LN24 International, LN247, LoveWorld Sat, LoveWorld Europe), Sky News Australia, and Asian News International (ANI). Articles link directly to canonical publisher URLs.
-          </p>
+      <!-- Section 5: Editorial Dossier & Legal Attribution Charter -->
+      <section class="about-dossier-section" id="about">
+        <div class="dossier-card">
+          <div class="dossier-header">
+            <div class="dossier-crest">✦</div>
+            <div>
+              <h3 class="dossier-title">News Connect Charter & Attribution Protocol</h3>
+              <p class="dossier-subtitle">Real-time international syndication, zero editorial alteration, direct publisher attribution.</p>
+            </div>
+          </div>
+          <div class="dossier-columns-grid">
+            <div class="dossier-col">
+              <div class="dossier-col-icon">📡</div>
+              <h4>Direct RSS Ingestion</h4>
+              <p>News Connect connects directly to authorized public RSS feeds provided by publishers. Headlines, publication dates, and excerpts are preserved with cryptographic integrity.</p>
+            </div>
+            <div class="dossier-col">
+              <div class="dossier-col-icon">📺</div>
+              <h4>Broadcast Integration</h4>
+              <p>Video streams and channels are integrated via official canonical embed players and news portals under publisher-approved distribution terms.</p>
+            </div>
+            <div class="dossier-col">
+              <div class="dossier-col-icon">⚖️</div>
+              <h4>Ownership & Copyright</h4>
+              <p>All trademarks, articles, logos, and images belong exclusively to Newsmax, Fox News, LoveWorld Networks, Sky News Australia, and ANI. Every headline links directly to canonical publisher URLs.</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer: Global Newspaper Masthead & Directory -->
     <footer class="site-footer">
       <div class="container">
-        <div class="footer-grid">
-          <div class="footer-brand">
-            <h3>NEWS <span>CONNECT</span></h3>
-            <p>One World. Every Perspective. Unifying verified international headlines and broadcasts across North America, Europe, Africa, Asia, and Oceania.</p>
+        <div class="footer-top-grid">
+          <div class="footer-brand-pane">
+            <div class="footer-logo">
+              <img src="assets/news_connect_logo.jpg" alt="News Connect Logo" class="footer-logo-img" />
+              <div class="footer-logo-text">
+                <h3>NEWS <span>CONNECT</span></h3>
+              </div>
+            </div>
+            <p class="footer-mission">Unifying verified international headlines and broadcasts across North America, Europe, Africa, Asia, and Oceania into one modern editorial interface.</p>
+            <div class="footer-status-pill">
+              <span class="footer-live-beacon"></span>
+              <span>8 Sources Synced • 24/7 Wire Operational</span>
+            </div>
           </div>
-          <div class="footer-links">
-            <h4>Connected Networks</h4>
+          <div class="footer-dir-col">
+            <h4>North America</h4>
             <ul>
-              <li><a href="https://www.newsmax.com" target="_blank">Newsmax (USA)</a></li>
-              <li><a href="https://www.foxnews.com" target="_blank">Fox News (USA)</a></li>
-              <li><a href="https://ln24international.com" target="_blank">LN24 International</a></li>
-              <li><a href="https://ln247.news" target="_blank">LN247 Global</a></li>
-              <li><a href="https://www.aninews.in" target="_blank">ANI News (India)</a></li>
+              <li><a href="https://www.newsmax.com" target="_blank" rel="noopener noreferrer">Newsmax (Washington & Global)</a></li>
+              <li><a href="https://www.foxnews.com" target="_blank" rel="noopener noreferrer">Fox News (New York Wire)</a></li>
             </ul>
           </div>
-          <div class="footer-links">
-            <h4>Broadcasts & Portals</h4>
+          <div class="footer-dir-col">
+            <h4>Europe & Africa</h4>
             <ul>
-              <li><a href="https://www.loveworldsat.org" target="_blank">LoveWorld Sat</a></li>
-              <li><a href="https://loveworldeurope.org" target="_blank">LoveWorld Europe</a></li>
-              <li><a href="https://www.skynews.com.au" target="_blank">Sky News Australia</a></li>
+              <li><a href="https://ln24international.com" target="_blank" rel="noopener noreferrer">LN24 International</a></li>
+              <li><a href="https://ln247.news" target="_blank" rel="noopener noreferrer">LN247 World News</a></li>
+              <li><a href="https://www.loveworldsat.org" target="_blank" rel="noopener noreferrer">LoveWorld Sat (Johannesburg)</a></li>
+              <li><a href="https://loveworldeurope.org" target="_blank" rel="noopener noreferrer">LoveWorld Europe (London)</a></li>
+            </ul>
+          </div>
+          <div class="footer-dir-col">
+            <h4>Asia & Pacific</h4>
+            <ul>
+              <li><a href="https://www.aninews.in" target="_blank" rel="noopener noreferrer">Asian News International (India)</a></li>
+              <li><a href="https://www.skynews.com.au" target="_blank" rel="noopener noreferrer">Sky News Australia (Canberra)</a></li>
             </ul>
           </div>
         </div>
 
-        <div class="footer-bottom">
-          <span>© 2026 News Connect. All Rights Reserved. Built with React Native & Node.js RSS proxy.</span>
-          <span id="footer-sync">Feed Status: Verified & Live</span>
+        <div class="footer-bottom-bar">
+          <span>© 2026 News Connect. All Rights Reserved. Built with Node.js RSS Proxy & Responsive Architecture.</span>
+          <div class="footer-disclaimer-tag">Content property of respective publishers. Canonical links provided.</div>
         </div>
       </div>
     </footer>
@@ -327,7 +1336,7 @@
     </div>
   </div>
 
-  <script src="assets/badges.js"></script>
-  <script src="app.js"></script>
+  <script src="assets/badges.js?v=20261110_golden6"></script>
+  <script src="app.js?v=20261110_golden6"></script>
 </body>
 </html>

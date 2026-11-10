@@ -9,7 +9,7 @@ import { View, TextInput, TouchableOpacity, Text, StyleSheet } from 'react-nativ
 export const SearchBar = ({ theme, query, onChangeQuery, onClear, totalResults }) => {
   return (
     <View style={[styles.container, { backgroundColor: theme.surfaceHighlight, borderColor: theme.border }]}>
-      <Text style={[styles.searchIcon, { color: theme.textSecondary }]}>🔍</Text>
+      <Text style={[styles.searchIcon, { color: theme.accentGold || '#F5B041' }]}>🔍</Text>
       
       <TextInput
         style={[styles.input, { color: theme.textPrimary }]}

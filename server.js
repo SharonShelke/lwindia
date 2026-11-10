@@ -225,8 +225,12 @@ function unescapeXml(text) {
 
 function stripHtml(html) {
   if (!html) return '';
-  const noTags = html.replace(/<[^>]+>/g, ' ');
-  return unescapeXml(noTags).replace(/\s+/g, ' ').trim();
+  let text = String(html);
+  for (let i = 0; i < 3; i++) {
+    text = unescapeXml(text);
+    text = text.replace(/<\/?[a-z0-9]+[^>]*>/gi, ' ').replace(/<[^>]+>/g, ' ');
+  }
+  return text.replace(/\s+/g, ' ').trim();
 }
 
 function extractImage(itemXml) {
@@ -544,10 +548,11 @@ function serveStaticFile(res, filePath) {
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    const isCodeFile = ext === '.html' || ext === '.css' || ext === '.js';
     res.writeHead(200, {
       'Content-Type': contentType,
       'Content-Length': stats.size,
-      'Cache-Control': 'public, max-age=3600'
+      'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0'
     });
     fs.createReadStream(filePath).pipe(res);
   });
