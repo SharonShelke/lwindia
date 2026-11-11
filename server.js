@@ -195,6 +195,19 @@ const fallbackArticles = [
     imageUrl: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=800&q=80",
     isLive: false,
     isPortal: true
+  },
+  {
+    id: "loveworldindia-broadcast-1",
+    sourceId: "loveworldindia",
+    sourceName: "LoveWorld India (LBN TV)",
+    title: "LoveWorld India Broadcast: Faith, Leadership & Inspiring Programs Transmitted Across South Asia",
+    link: "https://lwindia.org/",
+    summary: "LoveWorld India (LBN TV) streams 24/7 television broadcasts, community outreach, and global prayer sessions led by Pastor Chris Oyakhilome to millions across India and the diaspora (JioTV 4080).",
+    publishedAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+    category: "India",
+    imageUrl: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80",
+    isLive: false,
+    isBroadcast: true
   }
 ];
 

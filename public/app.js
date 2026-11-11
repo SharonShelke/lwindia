@@ -14,7 +14,8 @@
     { id: 'loveworldeurope', name: 'LoveWorld Europe', shortName: 'LW Europe', region: 'UK & Europe', flag: '🇪🇺', website: 'https://loveworldeurope.org', brandColor: '#1E3A8A', hasRss: false, feedStatus: 'portal_only' },
     { id: 'loveworldsat', name: 'LoveWorld Sat', shortName: 'LW Sat', region: 'South Africa', flag: '🇿🇦', website: 'https://www.loveworldsat.org', brandColor: '#1A365D', hasRss: false, feedStatus: 'broadcast_only' },
     { id: 'skynews_australia', name: 'Sky News Australia', shortName: 'Sky News AU', region: 'Australia', flag: '🇦🇺', website: 'https://www.skynews.com.au', brandColor: '#990000', hasRss: false, feedStatus: 'portal_only' },
-    { id: 'ani', name: 'ANI – Asian News International', shortName: 'ANI News', region: 'India', flag: '🇮🇳', website: 'https://www.aninews.in', brandColor: '#8B0000', hasRss: true, feedStatus: 'available' }
+    { id: 'ani', name: 'ANI – Asian News International', shortName: 'ANI News', region: 'India', flag: '🇮🇳', website: 'https://www.aninews.in', brandColor: '#8B0000', hasRss: true, feedStatus: 'available' },
+    { id: 'loveworldindia', name: 'LoveWorld India (LBN TV)', shortName: 'LW India', region: 'India & South Asia', flag: '🇮🇳', website: 'https://lwindia.org/', brandColor: '#08182D', hasRss: false, feedStatus: 'broadcast_only' }
   ];
 
   const FALLBACK_ARTICLES = [
@@ -116,6 +117,17 @@
       publishedAt: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
       category: 'Australia',
       imageUrl: 'https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&w=800&q=80'
+    },
+    {
+      id: 'loveworldindia-broadcast-1',
+      sourceId: 'loveworldindia',
+      sourceName: 'LoveWorld India (LBN TV)',
+      title: 'LoveWorld India Broadcast: Faith, Leadership & Inspiring Programs Transmitted Across South Asia',
+      link: 'https://lwindia.org/',
+      summary: 'LoveWorld India (LBN TV) streams 24/7 television broadcasts, community outreach, and global prayer sessions led by Pastor Chris Oyakhilome to millions across India and the diaspora (JioTV 4080).',
+      publishedAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
+      category: 'India',
+      imageUrl: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80'
     }
   ];
 
@@ -180,7 +192,8 @@
     loveworldeurope: '<img src="assets/logos/loveworldeurope.png" class="source-logo-img" alt="LoveWorld Europe" onerror="this.src=\'assets/logos/loveworldeurope.jpg\'" />',
     loveworldsat: '<img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="LoveWorld Sat" />',
     skynews_australia: '<img src="assets/logos/skynews_australia.png" class="source-logo-img" alt="Sky News Australia" />',
-    ani: '<img src="assets/logos/ani.png" class="source-logo-img" alt="ANI" />'
+    ani: '<img src="assets/logos/ani.png" class="source-logo-img" alt="ANI" />',
+    loveworldindia: '<img src="assets/logos/loveworldindia.svg" class="source-logo-img" alt="LoveWorld India" />'
   };
 
   const CATEGORY_ICONS = {
@@ -664,7 +677,8 @@
         loveworldeurope: 'assets/logos/loveworldeurope.png',
         loveworldsat: 'assets/logos/loveworldsat.png',
         skynews_australia: 'assets/logos/skynews_australia.png',
-        ani: 'assets/logos/ani.png'
+        ani: 'assets/logos/ani.png',
+        loveworldindia: 'assets/logos/loveworldindia.svg'
       };
       const logoSrc = sourceLogos[art.sourceId] || 'assets/logos/newsmax.png';
 
@@ -835,6 +849,12 @@
       desc: 'Canberra Parliament, National Politics, and Global Affairs on-demand video coverage.',
       embedUrl: 'https://www.skynews.com.au',
       externalUrl: 'https://www.skynews.com.au'
+    },
+    loveworldindia: {
+      title: '🇮🇳 LoveWorld India (LBN TV) — Live Stream',
+      desc: '24/7 Satellite & Digital Broadcast Live: Impacting India and South Asia with faith, prayer, and life-changing programs (JioTV 4080).',
+      embedUrl: 'https://lwindia.org/',
+      externalUrl: 'https://lwindia.org/'
     }
   };
 
@@ -872,6 +892,99 @@
       });
     });
   }
+
+  // 4. World Capital Clocks Real-Time Engine
+  function updateWorldClocks() {
+    const now = new Date();
+    const formatTime = (timeZone) => {
+      try {
+        return new Intl.DateTimeFormat('en-US', {
+          timeZone,
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        }).format(now);
+      } catch (e) {
+        return '--:--';
+      }
+    };
+
+    const nycEl = document.getElementById('clock-nyc');
+    const lonEl = document.getElementById('clock-lon');
+    const jnbEl = document.getElementById('clock-jnb');
+    const delEl = document.getElementById('clock-del');
+    const sydEl = document.getElementById('clock-syd');
+
+    if (nycEl) nycEl.textContent = formatTime('America/New_York');
+    if (lonEl) lonEl.textContent = formatTime('Europe/London');
+    if (jnbEl) jnbEl.textContent = formatTime('Africa/Johannesburg');
+    if (delEl) delEl.textContent = formatTime('Asia/Kolkata');
+    if (sydEl) sydEl.textContent = formatTime('Australia/Sydney');
+  }
+  updateWorldClocks();
+  setInterval(updateWorldClocks, 10000);
+
+  // 5. Toast Notification System
+  function showToast(message, duration = 3000) {
+    let toast = document.getElementById('nc-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'nc-toast';
+      toast.className = 'nc-floating-toast';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message;
+    toast.classList.add('visible');
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(() => {
+      toast.classList.remove('visible');
+    }, duration);
+  }
+
+  // 6. Reader Font Size Scaler
+  let fontScale = parseFloat(localStorage.getItem('nc-font-scale') || '1.0');
+  function applyFontScale(scale) {
+    fontScale = Math.min(1.25, Math.max(0.85, scale));
+    document.documentElement.style.setProperty('--user-font-scale', fontScale);
+    localStorage.setItem('nc-font-scale', fontScale.toFixed(2));
+  }
+  applyFontScale(fontScale);
+
+  const fontIncBtn = document.getElementById('font-increase');
+  const fontDecBtn = document.getElementById('font-decrease');
+  if (fontIncBtn) {
+    fontIncBtn.addEventListener('click', () => {
+      applyFontScale(fontScale + 0.05);
+      showToast(`Text size: ${Math.round(fontScale * 100)}%`);
+    });
+  }
+  if (fontDecBtn) {
+    fontDecBtn.addEventListener('click', () => {
+      applyFontScale(fontScale - 0.05);
+      showToast(`Text size: ${Math.round(fontScale * 100)}%`);
+    });
+  }
+
+  // 7. Newsletter / Daily Briefing Form
+  const newsletterForm = document.getElementById('newsletter-form');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById('newsletter-email');
+      const email = emailInput ? emailInput.value.trim() : '';
+      if (email) {
+        showToast('🎉 You are subscribed to The Morning Global Briefing!');
+        if (emailInput) emailInput.value = '';
+      }
+    });
+  }
+
+  // 8. Enhanced Share/Bookmark Toast Hook
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.share-btn')) {
+      showToast('🔗 Canonical article link copied to clipboard!');
+    }
+  });
 
   // 3. Asynchronous Live Feed Sync from Backend Proxy
   syncFromBackend();

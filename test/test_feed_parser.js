@@ -12,11 +12,11 @@ console.log('--- Starting News Connect Automated Verification Tests ---');
 const sourcesPath = path.join(__dirname, '..', 'data', 'sources.json');
 assert(fs.existsSync(sourcesPath), 'sources.json must exist');
 const sources = JSON.parse(fs.readFileSync(sourcesPath, 'utf8'));
-assert.strictEqual(sources.length, 8, 'Must configure exactly 8 news organizations');
+assert.strictEqual(sources.length, 9, 'Must configure exactly 9 news organizations');
 
 const expectedIds = [
   'newsmax', 'foxnews', 'ln24international', 'ln247',
-  'loveworldeurope', 'loveworldsat', 'skynews_australia', 'ani'
+  'loveworldeurope', 'loveworldsat', 'skynews_australia', 'ani', 'loveworldindia'
 ];
 
 expectedIds.forEach(id => {
@@ -32,7 +32,7 @@ expectedIds.forEach(id => {
 const rssSources = sources.filter(s => s.hasRss);
 const nonRssSources = sources.filter(s => !s.hasRss);
 assert.strictEqual(rssSources.length, 5, 'Must have 5 verified RSS sources (Newsmax, Fox News, LN24 Intl, LN247, ANI)');
-assert.strictEqual(nonRssSources.length, 3, 'Must have 3 non-RSS sources (LW Europe, LW Sat, Sky News AU)');
+assert.strictEqual(nonRssSources.length, 4, 'Must have 4 non-RSS sources (LW Europe, LW Sat, Sky News AU, LW India)');
 
 // 3. Test XML parsing logic with sample RSS 2.0 payload
 const sampleRssXml = `<?xml version="1.0" encoding="UTF-8"?>

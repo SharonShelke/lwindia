@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261110_golden6">
+  <link rel="stylesheet" href="styles.css?v=20261111_lwindia_prime">
   <style>
     /* Critical Inline Layout - Guarantees Exact Layout Regardless of Cache */
     .featured-container-grid {
@@ -667,6 +667,34 @@
   <!-- Main App Layout Container -->
   <div class="app-viewport" id="app-viewport">
 
+    <!-- Global Financial & Capital Time Zone Pulse Bar -->
+    <div class="global-pulse-bar">
+      <div class="container global-pulse-inner">
+        <div class="capital-clocks">
+          <span class="pulse-radar-dot"></span>
+          <span class="clock-item"><span class="clock-flag">🇺🇸</span> NYC <b id="clock-nyc">--:--</b></span>
+          <span class="clock-sep">|</span>
+          <span class="clock-item"><span class="clock-flag">🇬🇧</span> LON <b id="clock-lon">--:--</b></span>
+          <span class="clock-sep">|</span>
+          <span class="clock-item"><span class="clock-flag">🇿🇦</span> JNB <b id="clock-jnb">--:--</b></span>
+          <span class="clock-sep">|</span>
+          <span class="clock-item highlight-city"><span class="clock-flag">🇮🇳</span> NEW DELHI <b id="clock-del">--:--</b></span>
+          <span class="clock-sep">|</span>
+          <span class="clock-item"><span class="clock-flag">🇦🇺</span> SYD <b id="clock-syd">--:--</b></span>
+        </div>
+        <div class="market-indicators">
+          <span class="market-pill up">S&amp;P 500 <b>5,983 ▲ +0.4%</b></span>
+          <span class="market-pill up">NIFTY 50 <b>24,148 ▲ +0.6%</b></span>
+          <span class="market-pill down">BRENT <b>$74.20 ▼ -0.8%</b></span>
+          <span class="market-pill up">GOLD <b>$2,684 ▲ +1.1%</b></span>
+        </div>
+        <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="lwindia-pulse-pill" title="LoveWorld India Official Portal & 24/7 Broadcast (lwindia.org)">
+          <span class="lwindia-pulse-radar"></span>
+          <span class="lwindia-pulse-text">🇮🇳 LWINDIA.ORG ↗</span>
+        </a>
+      </div>
+    </div>
+
     <!-- Header -->
     <header class="site-header">
       <div class="container">
@@ -683,12 +711,18 @@
           </div>
 
           <div class="header-actions">
+            <!-- Reader Font Size Adjuster -->
+            <div class="font-scaler-group" title="Adjust Reader Text Size">
+              <button class="font-scaler-btn" id="font-decrease" aria-label="Decrease Font Size">A-</button>
+              <button class="font-scaler-btn" id="font-increase" aria-label="Increase Font Size">A+</button>
+            </div>
+
             <div class="status-badge" id="live-badge" title="Live Feed & Broadcast Status">
               <span class="status-radar">
                 <span class="radar-ping"></span>
                 <span class="status-dot"></span>
               </span>
-              <span id="status-text">8 Sources Connected</span>
+              <span id="status-text">9 Sources Connected</span>
             </div>
             <button class="refresh-btn" id="refresh-btn" title="Refresh Live Feeds" aria-label="Refresh Feeds">
               <svg class="action-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -720,7 +754,7 @@
           </a>
           <a href="#sources" class="nav-link" data-tab="sources">
             <span class="nav-bullet">🌐</span>
-            <span>8 News Networks</span>
+            <span>9 News Networks</span>
           </a>
           <a href="#feed" class="nav-link" data-tab="feed">
             <span class="nav-bullet">⚡</span>
@@ -1204,6 +1238,98 @@
               </div>
             </div>
           </article>
+
+          <!-- Screen 4: LoveWorld India (LBN TV) -->
+          <article class="broadcast-tv-card">
+            <div class="tv-screen-bezel">
+              <div class="tv-screen-glass" style="background-image: url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80');">
+                <div class="tv-screen-overlay"></div>
+                <div class="tv-screen-top">
+                  <span class="on-air-tag" style="background:#F5B041; color:#0B1325; font-weight:800;">
+                    <span class="on-air-pulse" style="background:#0B1325;"></span>
+                    <span>LIVE TV FEED</span>
+                  </span>
+                  <span class="tv-channel-pill">🇮🇳 JIOTV 4080</span>
+                </div>
+                <div class="tv-screen-center">
+                  <button class="btn-play-trigger open-player-btn" data-channel="loveworldindia" title="Launch LoveWorld India Live TV">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </button>
+                </div>
+                <div class="tv-screen-bottom">
+                  <span class="tv-frequency">SOUTH ASIA SATELLITE BEAM • LWINDIA.ORG</span>
+                </div>
+              </div>
+            </div>
+            <div class="tv-card-content">
+              <div class="tv-brand-row">
+                <h3 class="tv-card-title">LoveWorld India (LBN)</h3>
+                <span class="tv-callsign" style="background:#08182D; color:#F5B041; border:1px solid #F5B041;">LW INDIA</span>
+              </div>
+              <p class="tv-card-tagline">Impacting India &amp; South Asia with Faith &amp; Hope</p>
+              <p class="tv-card-desc">Transmitting 24/7 Christian television broadcasts, 'Ignite' youth empowerment, 'Parenting Perspective', and global prayer services (JioTV Channel 4080).</p>
+              <div class="tv-btn-row">
+                <button class="btn-stream open-player-btn" data-channel="loveworldindia" style="background:#F5B041; color:#0B1325; font-weight:800;">▶ Watch Live TV</button>
+                <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="btn-portal" style="border-color:#F5B041; color:#F5B041;">lwindia.org ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- LoveWorld India Official Domain & Ministry Feature Banner -->
+      <section class="lwindia-spotlight-banner">
+        <div class="lwindia-banner-card">
+          <div class="lwindia-banner-left">
+            <div class="lwindia-brand-pill">
+              <span class="pulse-dot-green"></span>
+              <span>OFFICIAL NETWORK PORTAL</span>
+            </div>
+            <h2 class="lwindia-banner-title">LoveWorld India &bull; <span class="gold-gradient-text">lwindia.org</span></h2>
+            <p class="lwindia-banner-subtitle">
+              Impacting India, South Asia, and the global diaspora with faith-filled television media, youth leadership, family values, and 24/7 broadcasts featuring Pastor Chris Oyakhilome. Available online and on JioTV Channel 4080.
+            </p>
+            <div class="lwindia-pills-row">
+              <span class="feat-pill">📺 JioTV Ch 4080</span>
+              <span class="feat-pill">🔥 Ignite Youth Show</span>
+              <span class="feat-pill">👨‍👩‍👧 Parenting Perspective</span>
+              <span class="feat-pill">🙏 Global Day of Prayer</span>
+              <span class="feat-pill">✨ Reflection Time</span>
+            </div>
+          </div>
+          <div class="lwindia-banner-right">
+            <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="btn-lwindia-primary">
+              <span>Visit Official Portal</span>
+              <span class="btn-icon">↗</span>
+            </a>
+            <button class="btn-lwindia-stream open-player-btn" data-channel="loveworldindia">
+              <span>▶ Watch 24/7 Stream</span>
+            </button>
+            <span class="lwindia-domain-slug">https://lwindia.org/</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Daily Morning Briefing / Newsletter Subscription Box -->
+      <section class="newsletter-briefing-section">
+        <div class="briefing-box">
+          <div class="briefing-content">
+            <span class="briefing-tag">📬 THE MORNING GLOBAL BRIEFING</span>
+            <h3 class="briefing-title">Stay Ahead With Perspectives From 9 Global Networks</h3>
+            <p class="briefing-desc">
+              Join thousands of readers across the world. Get verified breaking headlines, geopolitical analysis, and faith broadcasts delivered directly to your inbox every morning at 7:00 AM.
+            </p>
+          </div>
+          <form class="briefing-form" id="newsletter-form">
+            <div class="form-input-group">
+              <input type="email" id="newsletter-email" placeholder="Enter your email address..." required class="briefing-input" />
+              <button type="submit" class="briefing-submit-btn">
+                <span>Subscribe Free</span>
+                <span class="arrow-glyph">→</span>
+              </button>
+            </div>
+            <span class="form-reassurance">🔒 Zero spam. Unsubscribe anytime with 1-click. Verified feeds only.</span>
+          </form>
         </div>
       </section>
 
@@ -1214,7 +1340,7 @@
             <div class="dossier-crest">✦</div>
             <div>
               <h3 class="dossier-title">News Connect Charter & Attribution Protocol</h3>
-              <p class="dossier-subtitle">Real-time international syndication, zero editorial alteration, direct publisher attribution.</p>
+              <p class="dossier-subtitle">Real-time international syndication across 9 verified networks, zero editorial alteration, direct publisher attribution.</p>
             </div>
           </div>
           <div class="dossier-columns-grid">
@@ -1231,7 +1357,7 @@
             <div class="dossier-col">
               <div class="dossier-col-icon">⚖️</div>
               <h4>Ownership & Copyright</h4>
-              <p>All trademarks, articles, logos, and images belong exclusively to Newsmax, Fox News, LoveWorld Networks, Sky News Australia, and ANI. Every headline links directly to canonical publisher URLs.</p>
+              <p>All trademarks, articles, logos, and images belong exclusively to Newsmax, Fox News, LoveWorld Networks (LN24, Sat, Europe, India), Sky News Australia, and ANI. Every headline links directly to canonical publisher URLs.</p>
             </div>
           </div>
         </div>
@@ -1252,7 +1378,7 @@
             <p class="footer-mission">Unifying verified international headlines and broadcasts across North America, Europe, Africa, Asia, and Oceania into one modern editorial interface.</p>
             <div class="footer-status-pill">
               <span class="footer-live-beacon"></span>
-              <span>8 Sources Synced • 24/7 Wire Operational</span>
+              <span>9 Sources Synced • 24/7 Wire Operational</span>
             </div>
           </div>
           <div class="footer-dir-col">
@@ -1274,6 +1400,7 @@
           <div class="footer-dir-col">
             <h4>Asia & Pacific</h4>
             <ul>
+              <li><a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" style="color:#F5B041; font-weight:700;">★ LoveWorld India (lwindia.org)</a></li>
               <li><a href="https://www.aninews.in" target="_blank" rel="noopener noreferrer">Asian News International (India)</a></li>
               <li><a href="https://www.skynews.com.au" target="_blank" rel="noopener noreferrer">Sky News Australia (Canberra)</a></li>
             </ul>
@@ -1282,7 +1409,7 @@
 
         <div class="footer-bottom-bar">
           <span>© 2026 News Connect. All Rights Reserved. Built with Node.js RSS Proxy & Responsive Architecture.</span>
-          <div class="footer-disclaimer-tag">Content property of respective publishers. Canonical links provided.</div>
+          <div class="footer-disclaimer-tag">Content property of respective publishers. Canonical links provided. Official partner domain: <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" style="color:#F5B041; text-decoration:underline;">lwindia.org</a></div>
         </div>
       </div>
     </footer>
@@ -1299,7 +1426,7 @@
       </a>
       <a href="#sources" class="mobile-nav-btn" data-nav="sources">
         <span class="nav-btn-icon">🌐</span>
-        <span class="nav-btn-text">8 Networks</span>
+        <span class="nav-btn-text">9 Networks</span>
       </a>
       <a href="#broadcasts" class="mobile-nav-btn" data-nav="broadcasts">
         <span class="nav-btn-icon">📺</span>
@@ -1336,7 +1463,7 @@
     </div>
   </div>
 
-  <script src="assets/badges.js?v=20261110_golden6"></script>
-  <script src="app.js?v=20261110_golden6"></script>
+  <script src="assets/badges.js?v=20261111_lwindia_prime"></script>
+  <script src="app.js?v=20261111_lwindia_prime"></script>
 </body>
 </html>

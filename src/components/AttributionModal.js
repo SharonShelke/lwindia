@@ -82,7 +82,7 @@ export const AttributionModal = ({ visible, onClose, theme }) => {
             {activeSection === 'sources' && (
               <View style={styles.sectionContainer}>
                 <Text style={[styles.sectionHeading, { color: theme.textPrimary }]}>
-                  Connected News Organisations (8)
+                  Connected News Organisations (9)
                 </Text>
                 {NEWS_SOURCES.map((source) => (
                   <View

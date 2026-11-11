@@ -26,8 +26,9 @@ The platform provides readers with diverse perspectives across North America, Eu
 | 6 | **LoveWorld Sat** | South Africa (Pan-Africa) | [loveworldsat.org](https://www.loveworldsat.org) | 24/7 Satellite TV & News Hub | *Unavailable (No public article RSS)* |
 | 7 | **Sky News Australia** | Australia | [skynews.com.au](https://www.skynews.com.au) | Official Portal & Digital Video | *Unavailable (No native text RSS)* |
 | 8 | **ANI – Asian News International** | India & South Asia | [aninews.in](https://aninews.in) | Official RSS 2.0 | `https://aninews.in/rss/feed/category/national/politics.xml` |
+| 9 | **LoveWorld India (LBN TV)** | India & South Asia | [lwindia.org](https://lwindia.org/) | 24/7 Satellite & Digital Broadcast | *Unavailable (No public article RSS)* |
 
-> ℹ️ **Broadcast Source Investigation:** LoveWorld Sat and LoveWorld Europe are 24-hour Christian television networks without public XML article syndication. Rather than fabricating feeds or scraping, News Connect integrates them transparently through official live streams (`/live-tv`), daily news programs (*News On The Hour*, *Good Morning World*, *Global Business Update*), and canonical portals. Sky News Australia is similarly integrated via its official digital video hub and web portal.
+> ℹ️ **Broadcast Source Investigation:** LoveWorld Sat, LoveWorld Europe, and LoveWorld India (`https://lwindia.org/`) are 24-hour Christian television & media networks without public XML article syndication. Rather than fabricating feeds or scraping, News Connect integrates them transparently through official live streams, program schedules (*Ignite*, *Parenting Perspective*, *Reflection Time*, *News On The Hour*, *Global Business Update*, JioTV 4080), and canonical portals. Sky News Australia is similarly integrated via its official digital video hub and web portal.
 
 ---
 

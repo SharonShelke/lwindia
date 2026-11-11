@@ -75,7 +75,7 @@ export const Header = ({ theme, isDark, onToggleTheme, activeTab, onSelectTab, l
               { color: activeTab === 'sources' ? theme.accentGold : theme.textSecondary }
             ]}
           >
-            8 News Networks
+            9 News Networks
           </Text>
         </TouchableOpacity>
 

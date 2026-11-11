@@ -51,6 +51,21 @@ const BROADCAST_SOURCES = [
     portalUrl: 'https://www.skynews.com.au',
     programs: ['First Edition', 'AM Agenda', 'Kershaw & Credlin', 'The Bolt Report'],
     statusNote: 'Official Web Portal & Digital Video (No Native Text RSS)'
+  },
+  {
+    id: 'loveworldindia',
+    name: 'LoveWorld India (LBN TV)',
+    badge: 'LW INDIA',
+    region: 'India & South Asia',
+    flag: '🇮🇳',
+    tagline: '24/7 Satellite & Digital Television Network',
+    description: 'Premier Christian broadcasting network impacting India and South Asia with faith, prayer, youth empowerment, and family guidance (JioTV Channel 4080).',
+    brandColor: '#08182D',
+    accentColor: '#F5B041',
+    liveUrl: 'https://lwindia.org/',
+    portalUrl: 'https://lwindia.org/',
+    programs: ['Ignite Youth Show', 'Reflection Time', 'Parenting Perspective', 'Your Loveworld Specials'],
+    statusNote: 'Live TV & Web Portal (No Public Article RSS)'
   }
 ];
 

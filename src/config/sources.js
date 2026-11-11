@@ -182,6 +182,27 @@ export const NEWS_SOURCES = [
     description: "South Asia's leading multimedia news agency syndicating news feeds across India and international bureaus.",
     categories: ['India', 'Politics', 'World News', 'Business', 'Technology', 'Health'],
     attributionRule: "ANI syndicated RSS headlines. Display with publisher credit 'ANI' and direct links to aninews.in."
+  },
+  {
+    id: 'loveworldindia',
+    name: 'LoveWorld India (LBN TV)',
+    shortName: 'LW India',
+    region: 'India & South Asia',
+    regionCode: 'IN',
+    flag: '🇮🇳',
+    website: 'https://lwindia.org/',
+    rssUrl: null,
+    alternateFeeds: {},
+    hasRss: false,
+    feedStatus: 'broadcast_only',
+    integrationMethod: '24/7 Satellite Broadcast & Digital Portal',
+    brandColor: '#08182D',
+    accentColor: '#F5B041',
+    description: 'Premier 24/7 Christian television & media network impacting India and South Asia with faith programming, prayer services, and youth leadership (JioTV Channel 4080).',
+    categories: ['India', 'Religion and Faith', 'International Affairs', 'World News'],
+    attributionRule: 'LoveWorld India & LBN Broadcasting Network. Direct access to live television streaming, programs, and news at lwindia.org.',
+    broadcastUrl: 'https://lwindia.org/',
+    portalUrl: 'https://lwindia.org/'
   }
 ];
 

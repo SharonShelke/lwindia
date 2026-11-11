@@ -86,10 +86,10 @@ function dispatchRequest(server, urlPath) {
     // Test GET /api/sources
     const sourcesRes = await dispatchRequest(server, '/api/sources');
     assert.strictEqual(sourcesRes.statusCode, 200, 'GET /api/sources returns 200');
-    assert.strictEqual(sourcesRes.parsed.totalSources, 8, '8 news sources returned');
+    assert.strictEqual(sourcesRes.parsed.totalSources, 9, '9 news sources returned');
     assert.strictEqual(sourcesRes.parsed.connectedFeeds, 5, '5 active RSS feeds');
-    assert.strictEqual(sourcesRes.parsed.broadcastPortals, 3, '3 broadcast/portals');
-    console.log('[PASS] GET /api/sources passed: 8 organizations configured.');
+    assert.strictEqual(sourcesRes.parsed.broadcastPortals, 4, '4 broadcast/portals');
+    console.log('[PASS] GET /api/sources passed: 9 organizations configured.');
 
     // Test GET /api/news
     const newsRes = await dispatchRequest(server, '/api/news');

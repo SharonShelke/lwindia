@@ -11,7 +11,8 @@ const BRAND_ICONS = {
   loveworldeurope: '<img src="assets/logos/loveworldeurope.png" class="source-logo-img" alt="LoveWorld Europe Logo" onerror="this.src=\'assets/logos/loveworldeurope.jpg\'" />',
   loveworldsat: '<img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="LoveWorld Sat Logo" />',
   skynews_australia: '<img src="assets/logos/skynews_australia.png" class="source-logo-img" alt="Sky News Australia Logo" />',
-  ani: '<img src="assets/logos/ani.png" class="source-logo-img" alt="ANI News Logo" />'
+  ani: '<img src="assets/logos/ani.png" class="source-logo-img" alt="ANI News Logo" />',
+  loveworldindia: '<img src="assets/logos/loveworldindia.svg" class="source-logo-img" alt="LoveWorld India Logo" />'
 };
 
 if (typeof window !== 'undefined') {
