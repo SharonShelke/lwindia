@@ -2,710 +2,25 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>NEWS CONNECT — One World. Every Perspective.</title>
-  <meta name="description" content="Professional international news aggregator connecting verified RSS feeds and live broadcasts from Newsmax, Fox News, LoveWorld Networks, Sky News Australia, and ANI.">
-  <meta name="theme-color" content="#0B1325">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>News Connect — International News & Verified Wire Aggregator</title>
+  <meta name="description" content="Verified real-time news aggregator unifying feeds and live broadcast portals across North America, Europe, Africa, India, and Australia.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&display=swap" rel="stylesheet">
-<<<<<<< HEAD
-  <link rel="stylesheet" href="styles.css?v=20261111_lwindia_prime">
-=======
-  <link rel="stylesheet" href="styles.css?v=20261110_golden9">
->>>>>>> 28eab62 (Update LWindia website)
-  <style>
-    /* Critical Inline Layout - Guarantees Exact Layout Regardless of Cache */
-    .featured-container-grid {
-      display: grid !important;
-      grid-template-columns: minmax(0, 2.15fr) minmax(0, 1fr) !important;
-      gap: 20px !important;
-      align-items: stretch !important;
-    }
-    .featured-main-card {
-      background: var(--bg-surface, #0E162B) !important;
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      border-radius: 16px !important;
-      padding: 22px !important;
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
-      gap: 24px !important;
-      align-items: center !important;
-    }
-    .featured-img-col {
-      height: 100% !important;
-      min-height: 280px !important;
-      border-radius: 12px !important;
-      overflow: hidden !important;
-      background: #000 !important;
-      position: relative !important;
-    }
-    .featured-img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      border-radius: 12px !important;
-      display: block !important;
-    }
-    .featured-info-col {
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-    }
-    .featured-cat-tag {
-      font-size: 13px !important;
-      font-weight: 800 !important;
-      color: #F5B041 !important;
-      letter-spacing: 1px !important;
-      text-transform: uppercase !important;
-      margin-bottom: 12px !important;
-      display: inline-block !important;
-    }
-    .featured-headline {
-      font-size: 24px !important;
-      font-weight: 800 !important;
-      line-height: 1.25 !important;
-      color: var(--text-primary, #F8FAFC) !important;
-      margin-bottom: 14px !important;
-    }
-    .featured-summary {
-      font-size: 14px !important;
-      color: var(--text-secondary, #94A3B8) !important;
-      line-height: 1.6 !important;
-      margin-bottom: 22px !important;
-    }
-    .btn-read-more {
-      background: #F5B041 !important;
-      color: #0B1325 !important;
-      font-size: 13.5px !important;
-      font-weight: 800 !important;
-      padding: 10px 24px !important;
-      border-radius: 8px !important;
-      border: none !important;
-      cursor: pointer !important;
-      text-decoration: none !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      width: fit-content !important;
-      box-shadow: 0 4px 14px rgba(245, 176, 65, 0.35) !important;
-      transition: all 0.2s ease !important;
-    }
-    .btn-read-more:hover {
-      background: #F39C12 !important;
-      color: #0B1325 !important;
-      transform: translateY(-1px) !important;
-      box-shadow: 0 6px 18px rgba(245, 176, 65, 0.45) !important;
-    }
-    .trending-now-card {
-      background: var(--bg-surface, #0E162B) !important;
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      border-radius: 16px !important;
-      padding: 22px 20px !important;
-      display: flex !important;
-      flex-direction: column !important;
-    }
-    .trending-title {
-      font-size: 18px !important;
-      font-weight: 800 !important;
-      color: var(--text-primary, #F8FAFC) !important;
-      margin-bottom: 18px !important;
-    }
-    .trending-list {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 14px !important;
-      flex: 1 !important;
-      justify-content: space-between !important;
-    }
-    .trending-item {
-      display: flex !important;
-      align-items: center !important;
-      gap: 12px !important;
-      text-decoration: none !important;
-      padding: 6px 8px !important;
-      border-radius: 10px !important;
-    }
-    .trending-rank-badge {
-      width: 26px !important;
-      height: 26px !important;
-      min-width: 26px !important;
-      border-radius: 7px !important;
-      background: #F5B041 !important;
-      color: #0B1325 !important;
-      font-size: 12.5px !important;
-      font-weight: 900 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      flex-shrink: 0 !important;
-    }
-    .trending-thumb {
-      width: 48px !important;
-      height: 48px !important;
-      min-width: 48px !important;
-      max-width: 48px !important;
-      border-radius: 8px !important;
-      object-fit: cover !important;
-      flex-shrink: 0 !important;
-    }
-    .trending-text {
-      font-size: 13px !important;
-      font-weight: 700 !important;
-      line-height: 1.35 !important;
-      color: var(--text-primary, #F8FAFC) !important;
-      display: -webkit-box !important;
-      -webkit-line-clamp: 2 !important;
-      -webkit-box-orient: vertical !important;
-      overflow: hidden !important;
-    }
-    .nav-link.active {
-      color: #F5B041 !important;
-      background: rgba(245, 176, 65, 0.12) !important;
-      border: 1px solid rgba(245, 176, 65, 0.45) !important;
-      box-shadow: 0 0 18px rgba(245, 176, 65, 0.25) !important;
-    }
-    .view-mode-toggle {
-      display: inline-flex !important;
-      align-items: center !important;
-      background: rgba(255, 255, 255, 0.05) !important;
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      border-radius: 9999px !important;
-      padding: 3px !important;
-      gap: 3px !important;
-    }
-    .view-btn {
-      -webkit-appearance: none !important;
-      appearance: none !important;
-      background: transparent !important;
-      border: none !important;
-      color: var(--text-secondary, #94A3B8) !important;
-      padding: 5px 14px !important;
-      border-radius: 9999px !important;
-      font-size: 11.5px !important;
-      font-weight: 700 !important;
-      cursor: pointer !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 6px !important;
-    }
-    .view-btn.active {
-      background: var(--accent-gold-gradient, linear-gradient(135deg, #FFE885, #F5B041)) !important;
-      color: #070C18 !important;
-      font-weight: 800 !important;
-    }
-    /* 8 Networks Premium Grid & Real Brand Logos */
-    .sources-grid {
-      display: grid !important;
-      grid-template-columns: repeat(4, 1fr) !important;
-      gap: 16px !important;
-    }
-    @media (max-width: 1100px) {
-      .sources-grid { grid-template-columns: repeat(3, 1fr) !important; }
-    }
-    @media (max-width: 768px) {
-      .sources-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    }
-    @media (max-width: 480px) {
-      .sources-grid { grid-template-columns: 1fr !important; }
-    }
-    .source-card {
-      background: var(--bg-surface, #0E162B) !important;
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      border-radius: 16px !important;
-      padding: 18px 16px 14px !important;
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 12px !important;
-      cursor: pointer !important;
-      transition: all 0.25s ease !important;
-      position: relative !important;
-      overflow: hidden !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
-    }
-    .source-card::before {
-      content: '' !important;
-      position: absolute !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      height: 3.5px !important;
-      background: var(--source-accent, #F5B041) !important;
-    }
-    .source-card:hover {
-      border-color: var(--source-accent, #F5B041) !important;
-      transform: translateY(-4px) !important;
-      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35) !important;
-    }
-    .source-card.active {
-      border-color: var(--source-accent, #F5B041) !important;
-      background: rgba(255, 255, 255, 0.04) !important;
-      box-shadow: 0 0 0 2px rgba(245, 176, 65, 0.3) !important;
-    }
-    .src-card-header {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-      gap: 10px !important;
-    }
-    .src-logo-wrap {
-      height: 48px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: flex-start !important;
-    }
-    .source-logo-img {
-      height: 42px !important;
-      width: auto !important;
-      max-width: 125px !important;
-      object-fit: contain !important;
-      border-radius: 8px !important;
-      background: #FFFFFF !important;
-      padding: 3px 8px !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
-      transition: transform 0.25s ease !important;
-    }
-    .source-card[data-source="ani"] .source-logo-img {
-      background: #000000 !important;
-      border: 1px solid rgba(255, 255, 255, 0.25) !important;
-    }
-    .source-card[data-source="foxnews"] .source-logo-img {
-      background: #003366 !important;
-      border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    }
-    .source-card[data-source="skynews_australia"] .source-logo-img {
-      background: #001A33 !important;
-      border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    }
-    .source-card[data-source="ln247"] .source-logo-img {
-      background: #F5B041 !important;
-    }
-    .source-card:hover .source-logo-img {
-      transform: scale(1.06) !important;
-    }
-    .src-status-rss, .src-status-tv, .src-status-portal {
-      font-size: 9.5px !important;
-      font-weight: 800 !important;
-      padding: 3px 8px !important;
-      border-radius: 20px !important;
-      border: 1px solid !important;
-      white-space: nowrap !important;
-      letter-spacing: 0.3px !important;
-    }
-    .src-status-rss {
-      color: #10B981 !important;
-      border-color: rgba(16, 185, 129, 0.4) !important;
-      background: rgba(16, 185, 129, 0.1) !important;
-    }
-    .src-status-tv {
-      color: #F59E0B !important;
-      border-color: rgba(245, 158, 11, 0.4) !important;
-      background: rgba(245, 158, 11, 0.1) !important;
-    }
-    .src-status-portal {
-      color: #818CF8 !important;
-      border-color: rgba(129, 140, 248, 0.4) !important;
-      background: rgba(129, 140, 248, 0.1) !important;
-    }
-    .src-card-body {
-      flex: 1 !important;
-    }
-    .src-network-name {
-      font-size: 14.5px !important;
-      font-weight: 800 !important;
-      color: var(--text-primary, #F8FAFC) !important;
-      margin-bottom: 5px !important;
-      line-height: 1.3 !important;
-    }
-    .src-region-row {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 6px !important;
-      font-size: 11.5px !important;
-      color: var(--text-secondary, #94A3B8) !important;
-      font-weight: 500 !important;
-    }
-    .src-card-footer {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-      padding-top: 10px !important;
-      border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-      gap: 8px !important;
-    }
-    .src-filter-btn {
-      font-size: 11px !important;
-      font-weight: 800 !important;
-      color: #F5B041 !important;
-      background: rgba(245, 176, 65, 0.1) !important;
-      border: 1px solid rgba(245, 176, 65, 0.25) !important;
-      padding: 4px 10px !important;
-      border-radius: 20px !important;
-      cursor: pointer !important;
-      font-family: inherit !important;
-    }
-    .src-filter-btn:hover, .src-filter-btn.active {
-      background: rgba(245, 176, 65, 0.25) !important;
-      border-color: #F5B041 !important;
-    }
-    .src-portal-link {
-      color: var(--text-muted, #64748B) !important;
-      font-weight: 700 !important;
-      font-size: 11px !important;
-      text-decoration: none !important;
-    }
-    .src-portal-link:hover {
-      color: #F5B041 !important;
-    }
-    /* Search & Category Trigger (Image 1: 🔍 ☰) */
-    .search-bar-row {
-      display: flex !important;
-      gap: 12px !important;
-      align-items: center !important;
-      width: 100% !important;
-    }
-    .search-category-btn {
-      background: var(--bg-surface, #0E162B) !important;
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      color: var(--text-primary, #F8FAFC) !important;
-      border-radius: 12px !important;
-      padding: 10px 18px !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 10px !important;
-      cursor: pointer !important;
-      white-space: nowrap !important;
-      user-select: none !important;
-      font-family: inherit !important;
-      font-size: 13px !important;
-      font-weight: 700 !important;
-      flex-shrink: 0 !important;
-    }
-    .search-category-btn.open {
-      border-color: var(--accent-gold, #F5B041) !important;
-      background: rgba(245, 176, 65, 0.12) !important;
-      color: var(--accent-gold, #F5B041) !important;
-      box-shadow: 0 0 16px rgba(245, 176, 65, 0.25) !important;
-    }
-    .btn-icon-cluster {
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 7px !important;
-      color: #FFFFFF !important;
-    }
-    .search-svg, .menu-svg {
-      width: 17px !important;
-      height: 17px !important;
-      stroke: #FFFFFF !important;
-      color: #FFFFFF !important;
-      filter: none !important;
-    }
-    .search-icon {
-      position: absolute !important;
-      left: 14px !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      color: #FFFFFF !important;
-      pointer-events: none !important;
-    }
-    .search-input-svg {
-      width: 17px !important;
-      height: 17px !important;
-      stroke: #FFFFFF !important;
-      color: #FFFFFF !important;
-      filter: none !important;
-    }
-    .search-input {
-      background: rgba(255, 255, 255, 0.035) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      color: var(--text-primary, #F8FAFC) !important;
-      border-radius: 12px !important;
-      padding: 12px 42px 12px 42px !important;
-      font-size: 13.5px !important;
-      transition: all 0.25s ease !important;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
-    }
-    .search-input:focus {
-      border-color: #F5B041 !important;
-      box-shadow: 0 0 0 3px rgba(245, 176, 65, 0.18), 0 8px 24px rgba(0, 0, 0, 0.35) !important;
-    }
-    .search-category-btn {
-      background: rgba(255, 255, 255, 0.04) !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-      border-radius: 12px !important;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
-    .search-category-btn:hover {
-      border-color: rgba(245, 176, 65, 0.5) !important;
-      background: rgba(245, 176, 65, 0.08) !important;
-      box-shadow: 0 0 16px rgba(245, 176, 65, 0.25) !important;
-      transform: translateY(-1px) !important;
-    }
-    .search-category-btn.open {
-      border-color: #F5B041 !important;
-      background: rgba(245, 176, 65, 0.14) !important;
-      box-shadow: 0 0 20px rgba(245, 176, 65, 0.35) !important;
-    }
-    .search-cat-label {
-      font-weight: 750 !important;
-      letter-spacing: 0.2px !important;
-    }
-    .active-category-pill {
-      background: #F5B041 !important;
-      color: #0B1325 !important;
-      font-size: 11px !important;
-      font-weight: 850 !important;
-      padding: 3px 10px !important;
-      border-radius: 9999px !important;
-      box-shadow: 0 2px 8px rgba(245, 176, 65, 0.35) !important;
-    }
-    .dropdown-chevron {
-      color: #FFFFFF !important;
-      font-size: 10px !important;
-      transition: transform 0.2s ease !important;
-    }
-    .view-mode-toggle {
-      background: rgba(255, 255, 255, 0.04) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      border-radius: 10px !important;
-      padding: 3px !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 2px !important;
-    }
-    .view-btn {
-      border-radius: 8px !important;
-      padding: 6px 12px !important;
-      font-size: 12px !important;
-      font-weight: 700 !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      gap: 6px !important;
-      cursor: pointer !important;
-      border: none !important;
-      background: transparent !important;
-      color: var(--text-secondary, #94A3B8) !important;
-      transition: all 0.2s ease !important;
-    }
-    .view-btn svg {
-      stroke: #F5B041 !important;
-      color: #F5B041 !important;
-      filter: drop-shadow(0 0 3px rgba(245, 176, 65, 0.35)) !important;
-    }
-    .view-btn:hover {
-      color: var(--text-primary, #F8FAFC) !important;
-      background: rgba(255, 255, 255, 0.05) !important;
-    }
-    .view-btn.active {
-      background: #F5B041 !important;
-      color: #0B1325 !important;
-      box-shadow: 0 2px 10px rgba(245, 176, 65, 0.4) !important;
-    }
-    .view-btn.active svg {
-      stroke: #0B1325 !important;
-      color: #0B1325 !important;
-      filter: none !important;
-    }
-    /* Header action buttons & status badge styling */
-    .status-badge {
-      background: rgba(16, 185, 129, 0.08) !important;
-      border: 1px solid rgba(16, 185, 129, 0.3) !important;
-      color: #10B981 !important;
-      border-radius: 9999px !important;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.15) !important;
-    }
-    .refresh-btn, .theme-toggle {
-      background: rgba(255, 255, 255, 0.04) !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-      color: var(--text-primary, #F8FAFC) !important;
-      border-radius: 12px !important;
-      width: 40px !important;
-      height: 40px !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      cursor: pointer !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
-    }
-    .refresh-btn:hover, .theme-toggle:hover {
-      border-color: #F5B041 !important;
-      color: #F5B041 !important;
-      background: rgba(245, 176, 65, 0.1) !important;
-      box-shadow: 0 0 16px rgba(245, 176, 65, 0.35), 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-      transform: translateY(-2px) !important;
-    }
-    .active-category-pill {
-      background: var(--accent-gold-gradient, linear-gradient(135deg, #FFE885, #F5B041)) !important;
-      color: #070C18 !important;
-      font-size: 11px !important;
-      font-weight: 800 !important;
-      padding: 2px 9px !important;
-      border-radius: 9999px !important;
-    }
-    .category-dropdown-panel {
-      background: var(--bg-surface, #0E162B) !important;
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      border-radius: 16px !important;
-      padding: 18px 20px !important;
-      margin-bottom: 12px !important;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5) !important;
-      position: relative !important;
-      z-index: 50 !important;
-    }
-    .dropdown-panel-header {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-      padding-bottom: 12px !important;
-      border-bottom: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      margin-bottom: 14px !important;
-    }
-    .dropdown-panel-title {
-      display: flex !important;
-      align-items: center !important;
-      gap: 8px !important;
-      font-size: 14px !important;
-      font-weight: 800 !important;
-      color: var(--text-primary, #F8FAFC) !important;
-    }
-    .category-list-container {
-      display: grid !important;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)) !important;
-      gap: 10px !important;
-    }
-    .category-dropdown-item {
-      background: rgba(255, 255, 255, 0.035) !important;
-      border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
-      border-radius: 10px !important;
-      padding: 10px 14px !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      cursor: pointer !important;
-      color: var(--text-secondary, #94A3B8) !important;
-      font-family: inherit !important;
-    }
-    .category-dropdown-item.active {
-      background: rgba(245, 176, 65, 0.12) !important;
-      border-color: var(--accent-gold, #F5B041) !important;
-      color: var(--accent-gold, #F5B041) !important;
-      font-weight: 700 !important;
-    }
-    .feed-logo-wrap {
-      width: 26px !important;
-      height: 26px !important;
-      border-radius: 6px !important;
-      background: #FFFFFF !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      overflow: hidden !important;
-      padding: 2px !important;
-      flex-shrink: 0 !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
-    }
-    .feed-logo-wrap img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: contain !important;
-    }
-    @media (max-width: 980px) {
-      .featured-container-grid { grid-template-columns: 1fr !important; }
-    }
-    @media (max-width: 680px) {
-      .search-bar-row { flex-direction: column !important; align-items: stretch !important; }
-      .search-category-btn { width: 100% !important; justify-content: space-between !important; }
-    }
-    @media (max-width: 640px) {
-      .featured-main-card { grid-template-columns: 1fr !important; }
-      .featured-img-col { min-height: 220px !important; }
-    }
-      .badge-gold, .badge-blue {
-      background: #F5B041 !important;
-      color: #0B1325 !important;
-      font-size: 10px !important;
-      font-weight: 900 !important;
-      padding: 3px 9px !important;
-      border-radius: 5px !important;
-      letter-spacing: 1px !important;
-      box-shadow: 0 2px 8px rgba(245, 176, 65, 0.35) !important;
-      display: inline-block !important;
-    }
-      .brand-header-logo {
-      height: 48px !important;
-      width: auto !important;
-      aspect-ratio: 2 / 1 !important;
-      border-radius: 8px !important;
-      object-fit: cover !important;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 12px rgba(245, 176, 65, 0.25) !important;
-      border: 1px solid rgba(245, 176, 65, 0.3) !important;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      flex-shrink: 0 !important;
-    }
-    .brand-wrapper:hover .brand-header-logo {
-      transform: translateY(-1px) scale(1.03) !important;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 18px rgba(245, 176, 65, 0.5) !important;
-      border-color: #F5B041 !important;
-    }
-    .footer-logo-img {
-      height: 44px !important;
-      width: auto !important;
-      aspect-ratio: 2 / 1 !important;
-      border-radius: 8px !important;
-      object-fit: cover !important;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-      margin-bottom: 8px !important;
-    }
-    @media (max-width: 680px) {
-      .brand-header-logo {
-        height: 38px !important;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261112_mockup_v1">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1325'/><circle cx='50' cy='50' r='30' fill='%23F5B041'/><path d='M50 20 L50 80 M20 50 L80 50' stroke='%230B1325' stroke-width='6'/></svg>">
 </head>
 <body>
   <!-- Main App Layout Container -->
   <div class="app-viewport" id="app-viewport">
 
-    <!-- Global Financial & Capital Time Zone Pulse Bar -->
-    <div class="global-pulse-bar">
-      <div class="container global-pulse-inner">
-        <div class="capital-clocks">
-          <span class="pulse-radar-dot"></span>
-          <span class="clock-item"><span class="clock-flag">🇺🇸</span> NYC <b id="clock-nyc">--:--</b></span>
-          <span class="clock-sep">|</span>
-          <span class="clock-item"><span class="clock-flag">🇬🇧</span> LON <b id="clock-lon">--:--</b></span>
-          <span class="clock-sep">|</span>
-          <span class="clock-item"><span class="clock-flag">🇿🇦</span> JNB <b id="clock-jnb">--:--</b></span>
-          <span class="clock-sep">|</span>
-          <span class="clock-item highlight-city"><span class="clock-flag">🇮🇳</span> NEW DELHI <b id="clock-del">--:--</b></span>
-          <span class="clock-sep">|</span>
-          <span class="clock-item"><span class="clock-flag">🇦🇺</span> SYD <b id="clock-syd">--:--</b></span>
-        </div>
-        <div class="market-indicators">
-          <span class="market-pill up">S&amp;P 500 <b>5,983 ▲ +0.4%</b></span>
-          <span class="market-pill up">NIFTY 50 <b>24,148 ▲ +0.6%</b></span>
-          <span class="market-pill down">BRENT <b>$74.20 ▼ -0.8%</b></span>
-          <span class="market-pill up">GOLD <b>$2,684 ▲ +1.1%</b></span>
-        </div>
-        <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="lwindia-pulse-pill" title="LoveWorld India Official Portal & 24/7 Broadcast (lwindia.org)">
-          <span class="lwindia-pulse-radar"></span>
-          <span class="lwindia-pulse-text">🇮🇳 LWINDIA.ORG ↗</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Header -->
+    <!-- Header Section (Mockup Reference Layout) -->
     <header class="site-header">
       <div class="container">
+        <!-- Top Row: Logo | Center Search Bar | Right Action Buttons -->
         <div class="header-top">
+          <!-- Reverted Brand Mark -->
           <div class="brand-wrapper">
             <div class="brand-icon" aria-hidden="true">
               <svg class="brand-symbol-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -722,19 +37,14 @@
             </div>
           </div>
 
+          <!-- Header Right Actions: Status Badge, Refresh, Theme Toggle -->
           <div class="header-actions">
-            <!-- Reader Font Size Adjuster -->
-            <div class="font-scaler-group" title="Adjust Reader Text Size">
-              <button class="font-scaler-btn" id="font-decrease" aria-label="Decrease Font Size">A-</button>
-              <button class="font-scaler-btn" id="font-increase" aria-label="Increase Font Size">A+</button>
-            </div>
-
             <div class="status-badge" id="live-badge" title="Live Feed & Broadcast Status">
               <span class="status-radar">
                 <span class="radar-ping"></span>
                 <span class="status-dot"></span>
               </span>
-              <span id="status-text">9 Sources Connected</span>
+              <span id="status-text">8 Sources Connected</span>
             </div>
             <button class="refresh-btn" id="refresh-btn" title="Refresh Live Feeds" aria-label="Refresh Feeds">
               <svg class="action-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -759,6 +69,7 @@
           </div>
         </div>
 
+        <!-- Main Navigation Bar -->
         <nav class="header-nav" aria-label="Main Navigation">
           <a href="#featured" class="nav-link active" data-tab="all">
             <span class="nav-bullet">✦</span>
@@ -766,7 +77,11 @@
           </a>
           <a href="#sources" class="nav-link" data-tab="sources">
             <span class="nav-bullet">🌐</span>
-            <span>9 News Networks</span>
+            <span>8 News Networks</span>
+          </a>
+          <a href="#editorial-focus" class="nav-link" data-tab="focus">
+            <span class="nav-bullet">📈</span>
+            <span>Business & Markets</span>
           </a>
           <a href="#feed" class="nav-link" data-tab="feed">
             <span class="nav-bullet">⚡</span>
@@ -783,7 +98,7 @@
           </a>
           <a href="#about" class="nav-link" data-tab="about">
             <span class="nav-bullet">ℹ️</span>
-            <span>About & Attribution</span>
+            <span>Charter & Legal</span>
           </a>
         </nav>
       </div>
@@ -813,8 +128,10 @@
       </div>
     </div>
 
+    <!-- Main Editorial Content Canvas -->
     <main class="container">
-      <!-- Section 1: Featured News (Image 2 Magazine Spread) -->
+
+      <!-- Section 1: Hero Magazine Spread (Mockup Top Banner) -->
       <section class="featured-section" id="featured">
         <div class="editorial-section-header">
           <div class="esh-title-group">
@@ -877,12 +194,15 @@
         </div>
       </section>
 
-      <!-- Section 2: 8 News Networks (Interactive Network Console Deck) -->
+      <!-- Section 2: 8 Connected News Networks Consortium -->
       <section class="sources-section" id="sources">
         <div class="editorial-section-header">
           <div class="esh-title-group">
             <span class="esh-dot">•</span>
-            <h2 class="esh-title">Connected Networks Consortium</h2>
+            <div class="consortium-title-stack">
+              <span class="consortium-pill">CONSORTIUM</span>
+              <h2 class="esh-title">8 Connected News Networks</h2>
+            </div>
           </div>
           <div class="esh-line"></div>
           <button class="esh-view-all-btn reset-sources-pill" id="reset-sources-btn">Show All 8</button>
@@ -1060,7 +380,7 @@
         </div>
       </section>
 
-      <!-- Section: Editorial Magazine Spread (Reference Mockup 2-Column Focus) -->
+      <!-- Section 3: Editorial Focus Section (Mockup Business Section 2-Column Split) -->
       <section class="editorial-magazine-section" id="editorial-focus">
         <div class="editorial-section-header">
           <div class="esh-title-group">
@@ -1079,7 +399,7 @@
               <span class="editorial-lead-badge" id="ed-lead-badge">BUSINESS</span>
             </div>
             <div class="editorial-lead-body">
-              <h3 class="editorial-lead-headline" id="ed-lead-title">
+              <h3 class="editorial-lead-headline">
                 <a href="#" target="_blank" rel="noopener noreferrer" id="ed-lead-link">Global Energy Markets Adjust as Export Terminals Expand Liquefied Gas Shipments</a>
               </h3>
               <p class="editorial-lead-desc" id="ed-lead-desc">Energy analysts report shifts in European and Asian delivery contracts following upgraded pipeline infrastructure and maritime carrier logistics across the Atlantic corridor.</p>
@@ -1131,19 +451,28 @@
         </div>
       </section>
 
-      <!-- Section 3: Latest News Feed & Search Wire -->
+      <!-- Section 4: Latest News Feed & Filterable Search Wire -->
       <section class="news-grid-section" id="feed">
-        <!-- Filter & Search Controls (Image 1: 🔍 ☰ Button) -->
+        <div class="editorial-section-header">
+          <div class="esh-title-group">
+            <span class="esh-dot">•</span>
+            <h2 class="esh-title">Latest Live Dispatches</h2>
+          </div>
+          <div class="esh-line"></div>
+          <span class="meta-time-sync" id="last-updated-text">● Live Synced</span>
+        </div>
+
+        <!-- Filter & Search Controls -->
         <div class="filter-search-wrap">
           <div class="search-bar-row">
-            <!-- Search & Categories Toggle Button (Image 1: 🔍 ☰) -->
+            <!-- Search & Categories Toggle Button with WHITE icons -->
             <button class="search-category-btn" id="search-cat-toggle-btn" aria-expanded="false" title="Search & Browse Categories">
               <span class="btn-icon-cluster">
-                <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="11" cy="11" r="7"/>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
-                <svg class="menu-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="menu-svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="3" y1="6" x2="21" y2="6"/>
                   <line x1="3" y1="12" x2="21" y2="12"/>
                   <line x1="3" y1="18" x2="21" y2="18"/>
@@ -1154,7 +483,7 @@
               <span class="dropdown-chevron" id="dropdown-chevron">▼</span>
             </button>
 
-            <!-- Search Box -->
+            <!-- Search Box with WHITE icon -->
             <div class="search-box">
               <span class="search-icon">
                 <svg class="search-input-svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -1167,7 +496,7 @@
             </div>
           </div>
 
-          <!-- Category Dropdown Panel (Image 1 & 2: Opens when clicking 🔍 ☰) -->
+          <!-- Category Dropdown Panel -->
           <div class="category-dropdown-panel" id="category-dropdown-panel" style="display:none;">
             <div class="dropdown-panel-header">
               <div class="dropdown-panel-title">
@@ -1184,7 +513,7 @@
 
         <div class="grid-heading-bar">
           <div class="grid-heading-left">
-            <h2 class="grid-title" id="feed-title">Latest International Headlines</h2>
+            <h3 class="grid-title" id="feed-title">Latest International Headlines</h3>
             <span class="grid-count-badge" id="feed-count">13 stories</span>
           </div>
           <div class="view-mode-toggle" role="group" aria-label="Layout toggle">
@@ -1204,13 +533,14 @@
         </div>
       </section>
 
-      <!-- Section 4: Live Broadcasts (Control Room TV Studio Screens) -->
+      <!-- Section 5: Live Broadcasts Control Deck -->
       <section class="broadcast-section" id="broadcasts">
-        <div class="section-label">
-          <div class="section-title-wrap">
-            <span class="badge-amber">BROADCAST</span>
-            <h2 class="section-title">Live TV & Broadcast Portals</h2>
+        <div class="editorial-section-header">
+          <div class="esh-title-group">
+            <span class="esh-dot">•</span>
+            <h2 class="esh-title">Live TV & Broadcast Portals</h2>
           </div>
+          <div class="esh-line"></div>
           <span class="broadcast-live-beacon">● 3 CHANNELS ACTIVE</span>
         </div>
         <p class="section-subtext">Continuous satellite feeds and authenticated digital video portals broadcasting directly from Johannesburg, London, and Canberra.</p>
@@ -1323,109 +653,26 @@
               </div>
             </div>
           </article>
-
-          <!-- Screen 4: LoveWorld India (LBN TV) -->
-          <article class="broadcast-tv-card">
-            <div class="tv-screen-bezel">
-              <div class="tv-screen-glass" style="background-image: url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80');">
-                <div class="tv-screen-overlay"></div>
-                <div class="tv-screen-top">
-                  <span class="on-air-tag" style="background:#F5B041; color:#0B1325; font-weight:800;">
-                    <span class="on-air-pulse" style="background:#0B1325;"></span>
-                    <span>LIVE TV FEED</span>
-                  </span>
-                  <span class="tv-channel-pill">🇮🇳 JIOTV 4080</span>
-                </div>
-                <div class="tv-screen-center">
-                  <button class="btn-play-trigger open-player-btn" data-channel="loveworldindia" title="Launch LoveWorld India Live TV">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                  </button>
-                </div>
-                <div class="tv-screen-bottom">
-                  <span class="tv-frequency">SOUTH ASIA SATELLITE BEAM • LWINDIA.ORG</span>
-                </div>
-              </div>
-            </div>
-            <div class="tv-card-content">
-              <div class="tv-brand-row">
-                <h3 class="tv-card-title">LoveWorld India (LBN)</h3>
-                <span class="tv-callsign" style="background:#08182D; color:#F5B041; border:1px solid #F5B041;">LW INDIA</span>
-              </div>
-              <p class="tv-card-tagline">Impacting India &amp; South Asia with Faith &amp; Hope</p>
-              <p class="tv-card-desc">Transmitting 24/7 Christian television broadcasts, 'Ignite' youth empowerment, 'Parenting Perspective', and global prayer services (JioTV Channel 4080).</p>
-              <div class="tv-btn-row">
-                <button class="btn-stream open-player-btn" data-channel="loveworldindia" style="background:#F5B041; color:#0B1325; font-weight:800;">▶ Watch Live TV</button>
-                <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="btn-portal" style="border-color:#F5B041; color:#F5B041;">lwindia.org ↗</a>
-              </div>
-            </div>
-          </article>
         </div>
       </section>
 
-      <!-- LoveWorld India Official Domain & Ministry Feature Banner -->
-      <section class="lwindia-spotlight-banner">
-        <div class="lwindia-banner-card">
-          <div class="lwindia-banner-left">
-            <div class="lwindia-brand-pill">
-              <span class="pulse-dot-green"></span>
-              <span>OFFICIAL NETWORK PORTAL</span>
-            </div>
-            <h2 class="lwindia-banner-title">LoveWorld India &bull; <span class="gold-gradient-text">lwindia.org</span></h2>
-            <p class="lwindia-banner-subtitle">
-              Impacting India, South Asia, and the global diaspora with faith-filled television media, youth leadership, family values, and 24/7 broadcasts featuring Pastor Chris Oyakhilome. Available online and on JioTV Channel 4080.
-            </p>
-            <div class="lwindia-pills-row">
-              <span class="feat-pill">📺 JioTV Ch 4080</span>
-              <span class="feat-pill">🔥 Ignite Youth Show</span>
-              <span class="feat-pill">👨‍👩‍👧 Parenting Perspective</span>
-              <span class="feat-pill">🙏 Global Day of Prayer</span>
-              <span class="feat-pill">✨ Reflection Time</span>
-            </div>
-          </div>
-          <div class="lwindia-banner-right">
-            <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="btn-lwindia-primary">
-              <span>Visit Official Portal</span>
-              <span class="btn-icon">↗</span>
-            </a>
-            <button class="btn-lwindia-stream open-player-btn" data-channel="loveworldindia">
-              <span>▶ Watch 24/7 Stream</span>
-            </button>
-            <span class="lwindia-domain-slug">https://lwindia.org/</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Daily Morning Briefing / Newsletter Subscription Box -->
-      <section class="newsletter-briefing-section">
-        <div class="briefing-box">
-          <div class="briefing-content">
-            <span class="briefing-tag">📬 THE MORNING GLOBAL BRIEFING</span>
-            <h3 class="briefing-title">Stay Ahead With Perspectives From 9 Global Networks</h3>
-            <p class="briefing-desc">
-              Join thousands of readers across the world. Get verified breaking headlines, geopolitical analysis, and faith broadcasts delivered directly to your inbox every morning at 7:00 AM.
-            </p>
-          </div>
-          <form class="briefing-form" id="newsletter-form">
-            <div class="form-input-group">
-              <input type="email" id="newsletter-email" placeholder="Enter your email address..." required class="briefing-input" />
-              <button type="submit" class="briefing-submit-btn">
-                <span>Subscribe Free</span>
-                <span class="arrow-glyph">→</span>
-              </button>
-            </div>
-            <span class="form-reassurance">🔒 Zero spam. Unsubscribe anytime with 1-click. Verified feeds only.</span>
-          </form>
-        </div>
-      </section>
-
-      <!-- Section 5: Editorial Dossier & Legal Attribution Charter -->
+      <!-- Section 6: Editorial Dossier & Legal Attribution Charter -->
       <section class="about-dossier-section" id="about">
+        <div class="editorial-section-header">
+          <div class="esh-title-group">
+            <span class="esh-dot">•</span>
+            <h2 class="esh-title">Charter & Attribution Protocol</h2>
+          </div>
+          <div class="esh-line"></div>
+          <span class="meta-time-sync">● Verified Consortium</span>
+        </div>
+
         <div class="dossier-card">
           <div class="dossier-header">
             <div class="dossier-crest">✦</div>
             <div>
-              <h3 class="dossier-title">News Connect Charter & Attribution Protocol</h3>
-              <p class="dossier-subtitle">Real-time international syndication across 9 verified networks, zero editorial alteration, direct publisher attribution.</p>
+              <h3 class="dossier-title">Editorial Standards & Provenance</h3>
+              <p class="dossier-subtitle">Real-time international syndication, zero editorial alteration, direct publisher attribution.</p>
             </div>
           </div>
           <div class="dossier-columns-grid">
@@ -1442,28 +689,30 @@
             <div class="dossier-col">
               <div class="dossier-col-icon">⚖️</div>
               <h4>Ownership & Copyright</h4>
-              <p>All trademarks, articles, logos, and images belong exclusively to Newsmax, Fox News, LoveWorld Networks (LN24, Sat, Europe, India), Sky News Australia, and ANI. Every headline links directly to canonical publisher URLs.</p>
+              <p>All trademarks, articles, logos, and images belong exclusively to Newsmax, Fox News, LoveWorld Networks, Sky News Australia, and ANI. Every headline links directly to canonical publisher URLs.</p>
             </div>
           </div>
         </div>
       </section>
-    <!-- Newsletter / Wire Dispatch Subscription (Image Reference Component) -->
+
+      <!-- Section 7: Single Newsletter Subscription Banner (Mockup Bottom Layout) -->
       <section class="newsletter-cta-section">
         <div class="newsletter-cta-card">
           <div class="newsletter-left">
-            <span class="newsletter-kicker">STAY INFORMED</span>
+            <span class="newsletter-kicker">STAY AHEAD</span>
             <h3 class="newsletter-title">Join our news letter</h3>
-            <p class="newsletter-desc">Get the world's top headlines, authenticated broadcasts, and market briefs delivered straight to your inbox daily.</p>
+            <p class="newsletter-desc">Get the world's top verified headlines, live broadcast alerts, and international market briefs delivered straight to your inbox daily.</p>
           </div>
           <form class="newsletter-form" id="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to News Connect Daily Dispatch!');">
-            <input type="email" class="newsletter-input" placeholder="Enter Your Email" required />
+            <input type="email" class="newsletter-input" id="newsletter-email" placeholder="Enter Your Email" required />
             <button type="submit" class="newsletter-btn">Submit</button>
           </form>
         </div>
       </section>
+
     </main>
 
-    <!-- Footer: Global Newspaper Masthead & Directory -->
+    <!-- Footer: Global Newspaper Masthead & Directory (Mockup Bottom Layout) -->
     <footer class="site-footer">
       <div class="container">
         <div class="footer-top-grid">
@@ -1510,34 +759,6 @@
         </div>
       </div>
     </footer>
-
-    <!-- Native Mobile App Bottom Navigation Bar -->
-    <nav class="mobile-bottom-nav-bar" id="mobile-nav">
-      <a href="#featured" class="mobile-nav-btn active" data-nav="featured">
-        <span class="nav-btn-icon">⚡</span>
-        <span class="nav-btn-text">Spotlight</span>
-      </a>
-      <a href="#feed" class="mobile-nav-btn" data-nav="feed">
-        <span class="nav-btn-icon">📰</span>
-        <span class="nav-btn-text">Headlines</span>
-      </a>
-      <a href="#sources" class="mobile-nav-btn" data-nav="sources">
-        <span class="nav-btn-icon">🌐</span>
-        <span class="nav-btn-text">9 Networks</span>
-      </a>
-      <a href="#broadcasts" class="mobile-nav-btn" data-nav="broadcasts">
-        <span class="nav-btn-icon">📺</span>
-        <span class="nav-btn-text">Live TV</span>
-      </a>
-      <a href="#saved" class="mobile-nav-btn" data-nav="saved">
-        <span class="nav-btn-icon">★</span>
-        <span class="nav-btn-text">Saved</span>
-      </a>
-      <a href="#about" class="mobile-nav-btn" data-nav="about">
-        <span class="nav-btn-icon">ℹ️</span>
-        <span class="nav-btn-text">About</span>
-      </a>
-    </nav>
   </div>
 
   <!-- Interactive Live Stream Player Modal -->
@@ -1560,12 +781,7 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-  <script src="assets/badges.js?v=20261111_lwindia_prime"></script>
-  <script src="app.js?v=20261111_lwindia_prime"></script>
-=======
-  <script src="assets/badges.js?v=20261110_golden9"></script>
-  <script src="app.js?v=20261110_golden9"></script>
->>>>>>> 28eab62 (Update LWindia website)
+  <script src="assets/badges.js?v=20261112_mockup_v1"></script>
+  <script src="app.js?v=20261112_mockup_v1"></script>
 </body>
 </html>
