@@ -28,6 +28,11 @@
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
+    },
+    "scheme": "lwindia",
+    "extra": {
+      "domain": "lwindia.org",
+      "canonicalUrl": "https://lwindia.org"
     }
   }
 }

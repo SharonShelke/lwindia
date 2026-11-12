@@ -1,6 +1,7 @@
 {
   "name": "news-connect",
   "version": "1.0.0",
+  "homepage": "https://lwindia.org",
   "description": "NEWS CONNECT: International News Aggregator (One World. Every Perspective.) built with React Native & Node.js feed aggregator.",
   "main": "index.js",
   "scripts": {
