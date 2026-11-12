@@ -602,6 +602,49 @@
     }
   }
 
+  // Render Dynamic Editorial Magazine Section (Reference Mockup Layout)
+  function renderEditorialMagazine(items) {
+    if (!items || items.length === 0) return;
+    const leadArt = items.find(a => (a.category && a.category.toLowerCase().includes('business')) || (a.category && a.category.toLowerCase().includes('world'))) || items[1] || items[0];
+    
+    const edImg = document.getElementById('ed-lead-img');
+    const edBadge = document.getElementById('ed-lead-badge');
+    const edLink = document.getElementById('ed-lead-link');
+    const edDesc = document.getElementById('ed-lead-desc');
+    const edAuthor = document.getElementById('ed-author-name');
+    const edMeta = document.getElementById('ed-author-meta');
+    const edAvatar = document.getElementById('ed-author-avatar');
+
+    if (leadArt && edImg) {
+      edImg.src = leadArt.imageUrl;
+      if (edBadge) edBadge.textContent = cleanHtmlText(leadArt.category || 'BUSINESS').toUpperCase();
+      if (edLink) {
+        edLink.href = leadArt.link;
+        edLink.textContent = cleanHtmlText(leadArt.title);
+      }
+      if (edDesc) edDesc.textContent = cleanHtmlText(leadArt.summary);
+      if (edAuthor) edAuthor.textContent = `${leadArt.sourceName} Editorial Wire`;
+      if (edMeta) edMeta.textContent = `Verified Syndicate • ${formatRelative(leadArt.publishedAt)}`;
+      if (edAvatar) edAvatar.textContent = (leadArt.sourceName || 'NC').substring(0, 2).toUpperCase();
+    }
+
+    const stackList = document.getElementById('editorial-stack-list');
+    if (stackList) {
+      const stackArticles = items.filter(a => a.id !== leadArt?.id).slice(0, 4);
+      if (stackArticles.length > 0) {
+        stackList.innerHTML = stackArticles.map(art => `
+          <a href="${art.link}" target="_blank" rel="noopener noreferrer" class="editorial-stack-item">
+            <img src="${art.imageUrl}" class="editorial-stack-thumb" alt="${cleanHtmlText(art.title)}" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=300&q=80'" />
+            <div class="editorial-stack-content">
+              <span class="editorial-stack-tag">${cleanHtmlText(art.category || 'WORLD').toUpperCase()} • ${formatRelative(art.publishedAt)}</span>
+              <span class="editorial-stack-title">${cleanHtmlText(art.title)}</span>
+            </div>
+          </a>
+        `).join('');
+      }
+    }
+  }
+
   // Filter & Render News (Instant client-side filter)
   function filterAndRenderNews() {
     let filtered = [...articles];
@@ -634,6 +677,9 @@
 
     if (filtered.length > 0 && currentSource === 'all' && currentCategory === 'All' && !searchQuery) {
       updateHero(filtered[0]);
+      renderEditorialMagazine(filtered);
+    } else if (articles.length > 0) {
+      renderEditorialMagazine(articles);
     }
   }
 

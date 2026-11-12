@@ -11,7 +11,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&display=swap" rel="stylesheet">
+<<<<<<< HEAD
   <link rel="stylesheet" href="styles.css?v=20261111_lwindia_prime">
+=======
+  <link rel="stylesheet" href="styles.css?v=20261110_golden9">
+>>>>>>> 28eab62 (Update LWindia website)
   <style>
     /* Critical Inline Layout - Guarantees Exact Layout Regardless of Cache */
     .featured-container-grid {
@@ -389,13 +393,14 @@
       display: inline-flex !important;
       align-items: center !important;
       gap: 7px !important;
-      color: #F5B041 !important;
+      color: #FFFFFF !important;
     }
     .search-svg, .menu-svg {
       width: 17px !important;
       height: 17px !important;
-      stroke: #F5B041 !important;
-      filter: drop-shadow(0 0 4px rgba(245, 176, 65, 0.4)) !important;
+      stroke: #FFFFFF !important;
+      color: #FFFFFF !important;
+      filter: none !important;
     }
     .search-icon {
       position: absolute !important;
@@ -403,13 +408,15 @@
       display: inline-flex !important;
       align-items: center !important;
       justify-content: center !important;
+      color: #FFFFFF !important;
       pointer-events: none !important;
     }
     .search-input-svg {
       width: 17px !important;
       height: 17px !important;
-      stroke: #F5B041 !important;
-      filter: drop-shadow(0 0 4px rgba(245, 176, 65, 0.4)) !important;
+      stroke: #FFFFFF !important;
+      color: #FFFFFF !important;
+      filter: none !important;
     }
     .search-input {
       background: rgba(255, 255, 255, 0.035) !important;
@@ -457,7 +464,7 @@
       box-shadow: 0 2px 8px rgba(245, 176, 65, 0.35) !important;
     }
     .dropdown-chevron {
-      color: #F5B041 !important;
+      color: #FFFFFF !important;
       font-size: 10px !important;
       transition: transform 0.2s ease !important;
     }
@@ -661,7 +668,7 @@
       }
     }
   </style>
-  <link rel="icon" type="image/jpeg" href="assets/news_connect_logo.jpg">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B1325'/><circle cx='50' cy='50' r='30' fill='%23F5B041'/><path d='M50 20 L50 80 M20 50 L80 50' stroke='%230B1325' stroke-width='6'/></svg>">
 </head>
 <body>
   <!-- Main App Layout Container -->
@@ -700,7 +707,12 @@
       <div class="container">
         <div class="header-top">
           <div class="brand-wrapper">
-            <img src="assets/news_connect_logo.jpg" alt="News Connect Logo" class="brand-header-logo" />
+            <div class="brand-icon" aria-hidden="true">
+              <svg class="brand-symbol-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L14.7 9.3L22 12L14.7 14.7L12 22L9.3 14.7L2 12L9.3 9.3L12 2Z" fill="#070C18"/>
+                <circle cx="12" cy="12" r="2.2" fill="#FFE272"/>
+              </svg>
+            </div>
             <div class="brand-text">
               <div class="brand-headline-wrap">
                 <h1 class="brand-title">NEWS <span class="brand-highlight">CONNECT</span></h1>
@@ -804,12 +816,13 @@
     <main class="container">
       <!-- Section 1: Featured News (Image 2 Magazine Spread) -->
       <section class="featured-section" id="featured">
-        <div class="section-label">
-          <div class="section-title-wrap">
-            <span class="badge-red">FEATURED</span>
-            <h2 class="section-title">Global Spotlight</h2>
+        <div class="editorial-section-header">
+          <div class="esh-title-group">
+            <span class="esh-dot">•</span>
+            <h2 class="esh-title">Global Spotlight</h2>
           </div>
-          <span class="meta-time-sync" id="last-updated-text">● Live Synced</span>
+          <div class="esh-line"></div>
+          <a href="#feed" class="esh-view-all-btn">View All</a>
         </div>
 
         <div class="featured-container-grid">
@@ -866,12 +879,13 @@
 
       <!-- Section 2: 8 News Networks (Interactive Network Console Deck) -->
       <section class="sources-section" id="sources">
-        <div class="section-label">
-          <div class="section-title-wrap">
-            <span class="badge-gold">CONSORTIUM</span>
-            <h2 class="section-title">8 Connected News Networks</h2>
+        <div class="editorial-section-header">
+          <div class="esh-title-group">
+            <span class="esh-dot">•</span>
+            <h2 class="esh-title">Connected Networks Consortium</h2>
           </div>
-          <button class="category-pill reset-sources-pill" id="reset-sources-btn" style="display:none;">✕ Show All Networks</button>
+          <div class="esh-line"></div>
+          <button class="esh-view-all-btn reset-sources-pill" id="reset-sources-btn">Show All 8</button>
         </div>
         <p class="section-subtext">Verified international organisations connected via real-time RSS feeds and authenticated broadcast portals.</p>
 
@@ -1046,6 +1060,77 @@
         </div>
       </section>
 
+      <!-- Section: Editorial Magazine Spread (Reference Mockup 2-Column Focus) -->
+      <section class="editorial-magazine-section" id="editorial-focus">
+        <div class="editorial-section-header">
+          <div class="esh-title-group">
+            <span class="esh-dot">•</span>
+            <h2 class="esh-title">Business & Market Insights</h2>
+          </div>
+          <div class="esh-line"></div>
+          <a href="#feed" class="esh-view-all-btn">View All</a>
+        </div>
+
+        <div class="editorial-magazine-grid">
+          <!-- Left Primary Editorial Card -->
+          <article class="editorial-lead-card">
+            <div class="editorial-lead-thumb-wrap">
+              <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80" alt="Editorial Focus" class="editorial-lead-img" id="ed-lead-img" />
+              <span class="editorial-lead-badge" id="ed-lead-badge">BUSINESS</span>
+            </div>
+            <div class="editorial-lead-body">
+              <h3 class="editorial-lead-headline" id="ed-lead-title">
+                <a href="#" target="_blank" rel="noopener noreferrer" id="ed-lead-link">Global Energy Markets Adjust as Export Terminals Expand Liquefied Gas Shipments</a>
+              </h3>
+              <p class="editorial-lead-desc" id="ed-lead-desc">Energy analysts report shifts in European and Asian delivery contracts following upgraded pipeline infrastructure and maritime carrier logistics across the Atlantic corridor.</p>
+              <div class="editorial-author-row">
+                <div class="author-avatar" id="ed-author-avatar">NC</div>
+                <div class="author-info">
+                  <span class="author-name" id="ed-author-name">Newsmax Financial Desk</span>
+                  <span class="author-meta" id="ed-author-meta">Verified Wire • 1h ago</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Right Column Compact Stories Stack -->
+          <div class="editorial-stack-col">
+            <div class="editorial-stack-list" id="editorial-stack-list">
+              <!-- Dynamically populated by JS from live feed articles -->
+              <a href="#" class="editorial-stack-item">
+                <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=300&q=80" class="editorial-stack-thumb" alt="Story" />
+                <div class="editorial-stack-content">
+                  <span class="editorial-stack-tag">AFRICA • 48M AGO</span>
+                  <span class="editorial-stack-title">Global Economic Forum Evaluates Digital Financial Inclusion & Infrastructure in Africa</span>
+                </div>
+              </a>
+              <a href="#" class="editorial-stack-item">
+                <img src="https://images.unsplash.com/photo-1517976487515-59b489816024?auto=format&fit=crop&w=300&q=80" class="editorial-stack-thumb" alt="Story" />
+                <div class="editorial-stack-content">
+                  <span class="editorial-stack-tag">TECH • 1H AGO</span>
+                  <span class="editorial-stack-title">Commercial Aerospace Sector Accelerates Next-Gen Propulsion Flight Testing</span>
+                </div>
+              </a>
+              <a href="#" class="editorial-stack-item">
+                <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=300&q=80" class="editorial-stack-thumb" alt="Story" />
+                <div class="editorial-stack-content">
+                  <span class="editorial-stack-tag">WORLD • 2H AGO</span>
+                  <span class="editorial-stack-title">Allied Naval Exercises Conclude in Western Pacific Amid Modernized Defense Pact</span>
+                </div>
+              </a>
+              <a href="#" class="editorial-stack-item">
+                <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?auto=format&fit=crop&w=300&q=80" class="editorial-stack-thumb" alt="Story" />
+                <div class="editorial-stack-content">
+                  <span class="editorial-stack-tag">INDIA • 20M AGO</span>
+                  <span class="editorial-stack-title">India Advances Semiconductor Manufacturing Hub With Multi-Billion Dollar Fab Approvals</span>
+                </div>
+              </a>
+            </div>
+            <a href="#feed" class="editorial-stack-footer-btn">See All Stories →</a>
+          </div>
+        </div>
+      </section>
+
       <!-- Section 3: Latest News Feed & Search Wire -->
       <section class="news-grid-section" id="feed">
         <!-- Filter & Search Controls (Image 1: 🔍 ☰ Button) -->
@@ -1072,7 +1157,7 @@
             <!-- Search Box -->
             <div class="search-box">
               <span class="search-icon">
-                <svg class="search-input-svg" viewBox="0 0 24 24" fill="none" stroke="#F5B041" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                <svg class="search-input-svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="11" cy="11" r="7"/>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                 </svg>
@@ -1362,6 +1447,20 @@
           </div>
         </div>
       </section>
+    <!-- Newsletter / Wire Dispatch Subscription (Image Reference Component) -->
+      <section class="newsletter-cta-section">
+        <div class="newsletter-cta-card">
+          <div class="newsletter-left">
+            <span class="newsletter-kicker">STAY INFORMED</span>
+            <h3 class="newsletter-title">Join our news letter</h3>
+            <p class="newsletter-desc">Get the world's top headlines, authenticated broadcasts, and market briefs delivered straight to your inbox daily.</p>
+          </div>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to News Connect Daily Dispatch!');">
+            <input type="email" class="newsletter-input" placeholder="Enter Your Email" required />
+            <button type="submit" class="newsletter-btn">Submit</button>
+          </form>
+        </div>
+      </section>
     </main>
 
     <!-- Footer: Global Newspaper Masthead & Directory -->
@@ -1370,10 +1469,8 @@
         <div class="footer-top-grid">
           <div class="footer-brand-pane">
             <div class="footer-logo">
-              <img src="assets/news_connect_logo.jpg" alt="News Connect Logo" class="footer-logo-img" />
-              <div class="footer-logo-text">
-                <h3>NEWS <span>CONNECT</span></h3>
-              </div>
+              <span class="footer-logo-icon">✦</span>
+              <h3>NEWS <span>CONNECT</span></h3>
             </div>
             <p class="footer-mission">Unifying verified international headlines and broadcasts across North America, Europe, Africa, Asia, and Oceania into one modern editorial interface.</p>
             <div class="footer-status-pill">
@@ -1463,7 +1560,12 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <script src="assets/badges.js?v=20261111_lwindia_prime"></script>
   <script src="app.js?v=20261111_lwindia_prime"></script>
+=======
+  <script src="assets/badges.js?v=20261110_golden9"></script>
+  <script src="app.js?v=20261110_golden9"></script>
+>>>>>>> 28eab62 (Update LWindia website)
 </body>
 </html>

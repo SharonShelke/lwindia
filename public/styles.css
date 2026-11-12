@@ -1029,14 +1029,15 @@ a {
 .btn-icon-cluster {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: var(--accent-gold);
+  gap: 7px;
+  color: #FFFFFF;
 }
 
 .search-svg, .menu-svg {
-  width: 16px;
-  height: 16px;
-  stroke: currentColor;
+  width: 17px;
+  height: 17px;
+  stroke: #FFFFFF;
+  color: #FFFFFF;
 }
 
 .search-cat-label {
@@ -1078,15 +1079,15 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #F5B041;
+  color: #FFFFFF;
   pointer-events: none;
 }
 
 .search-input-svg {
   width: 17px;
   height: 17px;
-  stroke: #F5B041;
-  filter: drop-shadow(0 0 4px rgba(245, 176, 65, 0.4));
+  stroke: #FFFFFF;
+  color: #FFFFFF;
 }
 
 .search-input {
@@ -2640,6 +2641,7 @@ a {
 }
 
 /* ==========================================================================
+<<<<<<< HEAD
    GLOBAL PULSE BAR: World Capital Clocks & Financial Market Indices
    ========================================================================== */
 .global-pulse-bar {
@@ -3022,11 +3024,359 @@ a {
   font-weight: 850;
   color: #F5B041;
   letter-spacing: 1px;
+=======
+   Editorial Mockup Reference Design (Authentic Magazine Layouts)
+   Preserves All Brand Colors: Golden Yellow (#F5B041), Deep Luxury Navy (#070C18, #0E162B)
+   ========================================================================== */
+
+
+
+/* Signature Editorial Section Header (Dot + Title + Horizontal Rule Line + Pill Button) */
+.editorial-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.esh-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.esh-dot {
+  color: #F5B041;
+  font-size: 26px;
+  line-height: 0.8;
+  text-shadow: 0 0 10px rgba(245, 176, 65, 0.6);
+}
+
+.esh-title {
+  font-size: 22px;
+  font-weight: 850;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.esh-line {
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, #F5B041 0%, rgba(245, 176, 65, 0.4) 30%, rgba(255, 255, 255, 0.08) 100%);
+  margin: 0 18px;
+  border-radius: 2px;
+}
+
+.esh-view-all-btn {
+  background: #F5B041;
+  color: #0B1325;
+  font-size: 11.5px;
+  font-weight: 850;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(245, 176, 65, 0.35);
+  letter-spacing: 0.3px;
+}
+
+.esh-view-all-btn:hover {
+  background: #F39C12;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(245, 176, 65, 0.5);
+  color: #0B1325;
+}
+
+/* 2-Column Editorial Magazine Focus Section (Mockup Business Section Layout) */
+.editorial-magazine-section {
+  margin: 44px 0 36px;
+}
+
+.editorial-magazine-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.editorial-lead-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.editorial-lead-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(245, 176, 65, 0.4);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4), 0 0 20px rgba(245, 176, 65, 0.15);
+}
+
+.editorial-lead-thumb-wrap {
+  width: 100%;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+}
+
+.editorial-lead-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.editorial-lead-card:hover .editorial-lead-img {
+  transform: scale(1.04);
+}
+
+.editorial-lead-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(11, 19, 37, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(245, 176, 65, 0.4);
+  color: #F5B041;
+  font-size: 11px;
+  font-weight: 850;
+  padding: 4px 12px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.editorial-lead-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.editorial-lead-headline {
+  font-family: var(--font-editorial);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.editorial-lead-headline a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.editorial-lead-headline a:hover {
+  color: #F5B041;
+}
+
+.editorial-lead-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 18px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.editorial-author-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.author-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FFE885, #F5B041);
+  color: #070C18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(245, 176, 65, 0.3);
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-name {
+  font-size: 12.5px;
+  font-weight: 750;
+  color: var(--text-primary);
+}
+
+.author-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Right Column Compact Stories Stack */
+.editorial-stack-col {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: var(--card-shadow);
+}
+
+.editorial-stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.editorial-stack-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.editorial-stack-item:hover {
+  background: var(--bg-surface-hover);
+  transform: translateX(4px);
+}
+
+.editorial-stack-thumb {
+  width: 78px;
+  height: 58px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.editorial-stack-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.editorial-stack-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #F5B041;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.editorial-stack-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.editorial-stack-footer-btn {
+  margin-top: 16px;
+  width: 100%;
+  background: #F5B041;
+  color: #0B1325;
+  font-size: 12.5px;
+  font-weight: 850;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(245, 176, 65, 0.35);
+  letter-spacing: 0.3px;
+}
+
+.editorial-stack-footer-btn:hover {
+  background: #F39C12;
+  box-shadow: 0 6px 16px rgba(245, 176, 65, 0.5);
+  color: #0B1325;
+}
+
+/* Newsletter Subscription Banner Card (Direct from Reference Mockup Bottom) */
+.newsletter-cta-section {
+  margin: 50px 0 42px;
+}
+
+.newsletter-cta-card {
+  background: linear-gradient(135deg, #091122 0%, #060B14 100%);
+  border: 1px solid rgba(245, 176, 65, 0.25);
+  border-radius: 18px;
+  padding: 38px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-cta-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 176, 65, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.newsletter-left {
+  max-width: 520px;
+}
+
+.newsletter-kicker {
+  font-size: 11px;
+  font-weight: 850;
+  color: #F5B041;
+  letter-spacing: 1.5px;
+>>>>>>> 28eab62 (Update LWindia website)
   text-transform: uppercase;
   margin-bottom: 8px;
   display: inline-block;
 }
 
+<<<<<<< HEAD
 .briefing-title {
   font-size: 20px;
   font-weight: 800;
@@ -3054,11 +3404,44 @@ a {
   color: var(--text-primary);
   padding: 12px 16px;
   border-radius: 10px;
+=======
+.newsletter-title {
+  font-size: 26px;
+  font-weight: 850;
+  color: #F8FAFC;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.newsletter-desc {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.newsletter-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  max-width: 440px;
+}
+
+.newsletter-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #F8FAFC;
+  padding: 12px 18px;
+  border-radius: 12px;
+>>>>>>> 28eab62 (Update LWindia website)
   font-size: 13.5px;
   outline: none;
   transition: all 0.2s ease;
 }
 
+<<<<<<< HEAD
 .briefing-input:focus {
   border-color: #F5B041;
   box-shadow: 0 0 0 3px rgba(245, 176, 65, 0.15);
@@ -3137,3 +3520,49 @@ a {
   opacity: 1;
 }
 
+=======
+.newsletter-input:focus {
+  border-color: #F5B041;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(245, 176, 65, 0.2);
+}
+
+.newsletter-btn {
+  background: #F5B041;
+  color: #0B1325;
+  font-size: 13px;
+  font-weight: 850;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(245, 176, 65, 0.35);
+}
+
+.newsletter-btn:hover {
+  background: #F39C12;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(245, 176, 65, 0.5);
+  color: #0B1325;
+}
+
+@media (max-width: 920px) {
+  .editorial-magazine-grid {
+    grid-template-columns: 1fr;
+  }
+  .newsletter-cta-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 28px 24px;
+  }
+  .newsletter-form {
+    max-width: 100%;
+    flex-direction: column;
+  }
+  .newsletter-input, .newsletter-btn {
+    width: 100%;
+  }
+}
+>>>>>>> 28eab62 (Update LWindia website)
