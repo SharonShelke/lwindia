@@ -5,6 +5,8 @@
   "description": "NEWS CONNECT: International News Aggregator (One World. Every Perspective.) built with React Native & Node.js feed aggregator.",
   "main": "index.js",
   "scripts": {
+    "build": "npx expo export -p web",
+    "build:web": "npx expo export -p web",
     "start": "node server.js",
     "dev": "node server.js",
     "server": "node server.js",
@@ -18,6 +20,7 @@
   "dependencies": {
     "@expo/metro-runtime": "~4.0.1",
     "expo": "~52.0.0",
+    "expo-asset": "~11.0.5",
     "expo-status-bar": "~2.0.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",

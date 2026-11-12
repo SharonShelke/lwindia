@@ -11,15 +11,13 @@ if (!fs.existsSync(assetsDir)) {
 }
 
 // Minimal valid 1x1 PNG Buffer
-const minimalPngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkWPjfDwAEeQHzk4tU7AAAAABJRU5ErkJggg==';
+const minimalPngBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
 const pngBuffer = Buffer.from(minimalPngBase64, 'base64');
 
 ['icon.png', 'splash.png', 'adaptive-icon.png', 'favicon.png'].forEach(filename => {
   const targetPath = path.join(assetsDir, filename);
-  if (!fs.existsSync(targetPath)) {
-    fs.writeFileSync(targetPath, pngBuffer);
-    console.log(`[Asset] Created placeholder: ${filename}`);
-  }
+  fs.writeFileSync(targetPath, pngBuffer);
+  console.log(`[Asset] Created placeholder: ${filename}`);
 });
 
 // Also create an SVG logo in assets

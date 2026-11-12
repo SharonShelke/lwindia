@@ -33,7 +33,9 @@
     "extra": {
       "domain": "lwindia.org",
       "canonicalUrl": "https://lwindia.org"
-    }
+    },
+    "plugins": [
+      "expo-asset"
+    ]
   }
 }
-
