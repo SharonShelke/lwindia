@@ -193,7 +193,7 @@
     loveworldsat: '<img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="LoveWorld Sat" />',
     skynews_australia: '<img src="assets/logos/skynews_australia.png" class="source-logo-img" alt="Sky News Australia" />',
     ani: '<img src="assets/logos/ani.png" class="source-logo-img" alt="ANI" />',
-    loveworldindia: '<img src="assets/logos/loveworldindia.svg" class="source-logo-img" alt="LoveWorld India" />'
+    loveworldindia: '<div class="src-logo-wrap" style="background: rgba(255,255,255,0.95); padding: 4px 8px; border-radius: 8px; display:inline-flex; align-items:center; justify-content:center;"><img src="assets/logos/loveworldindia.png" class="source-logo-img" alt="LoveWorld India" style="object-fit: contain; max-height: 36px;" /></div>'
   };
 
   const CATEGORY_ICONS = {
@@ -684,13 +684,36 @@
   }
 
   // Render News Cards
+  // Pagination & 3-Row Limit Settings (3 rows in 3-column grid = 9 stories)
+  const INITIAL_VISIBLE_COUNT = 9;
+  let isReportsExpanded = false;
+  let currentFeedItems = [];
+
+  // Reset pagination state when filters change
+  const _origFilterAndRenderNews = filterAndRenderNews;
+  filterAndRenderNews = function() {
+    isReportsExpanded = false;
+    _origFilterAndRenderNews();
+  };
+
+  // Render News Cards with 3-Row Limit and Animated Read More Reports Button
   function renderArticles(items) {
     if (!newsGrid) return;
     newsGrid.innerHTML = '';
+    currentFeedItems = items || [];
 
-    if (feedCount) feedCount.textContent = `${items.length} ${items.length === 1 ? 'story' : 'stories'}`;
+    const totalCount = currentFeedItems.length;
+    if (feedCount) feedCount.textContent = `${totalCount} ${totalCount === 1 ? 'story' : 'stories'}`;
+
+    const readMoreWrap = document.getElementById('read-more-wrapper');
+    const readMoreBtn = document.getElementById('btn-read-more-reports');
+    const readMoreText = document.getElementById('btn-read-more-text');
+    const readMoreBadge = document.getElementById('btn-read-more-badge');
+    const readMoreIcon = document.getElementById('btn-read-more-icon');
+    const readMoreSubhint = document.getElementById('read-more-subhint');
 
     if (!items || items.length === 0) {
+      if (readMoreWrap) readMoreWrap.style.display = 'none';
       newsGrid.innerHTML = `
         <div style="grid-column: 1/-1; padding: 40px; text-align: center; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md);">
           <div style="font-size: 32px; margin-bottom: 8px;">🔍</div>
@@ -705,15 +728,24 @@
         searchQuery = '';
         if (searchInput) searchInput.value = '';
         if (searchClear) searchClear.style.display = 'none';
+        isReportsExpanded = false;
         renderSources();
         filterAndRenderNews();
       });
       return;
     }
 
-    items.forEach(art => {
+    // Determine slice to display: 3 rows (9 cards) or full list
+    const visibleItems = (isReportsExpanded || totalCount <= INITIAL_VISIBLE_COUNT)
+      ? currentFeedItems
+      : currentFeedItems.slice(0, INITIAL_VISIBLE_COUNT);
+
+    visibleItems.forEach((art, idx) => {
       const card = document.createElement('article');
-      card.className = 'news-card';
+      card.className = 'news-card' + (idx >= INITIAL_VISIBLE_COUNT ? ' card-cascade-in' : '');
+      if (idx >= INITIAL_VISIBLE_COUNT) {
+        card.style.animationDelay = `${Math.min((idx - INITIAL_VISIBLE_COUNT) * 0.04, 0.6)}s`;
+      }
 
       const sourceLogos = {
         newsmax: 'assets/logos/newsmax.png',
@@ -724,7 +756,7 @@
         loveworldsat: 'assets/logos/loveworldsat.png',
         skynews_australia: 'assets/logos/skynews_australia.png',
         ani: 'assets/logos/ani.png',
-        loveworldindia: 'assets/logos/loveworldindia.svg'
+        loveworldindia: 'assets/logos/loveworldindia.png'
       };
       const logoSrc = sourceLogos[art.sourceId] || 'assets/logos/newsmax.png';
 
@@ -797,6 +829,36 @@
       newsGrid.appendChild(card);
     });
 
+    // Update Read More Reports Button & Subhint
+    if (readMoreWrap) {
+      if (totalCount <= INITIAL_VISIBLE_COUNT) {
+        readMoreWrap.style.display = 'none';
+      } else {
+        readMoreWrap.style.display = 'flex';
+        const remaining = totalCount - INITIAL_VISIBLE_COUNT;
+
+        if (!isReportsExpanded) {
+          if (readMoreText) readMoreText.textContent = 'Read More Reports';
+          if (readMoreBadge) readMoreBadge.textContent = `+${remaining} more`;
+          if (readMoreIcon) {
+            readMoreIcon.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>`;
+          }
+          if (readMoreSubhint) {
+            readMoreSubhint.textContent = `Showing ${INITIAL_VISIBLE_COUNT} of ${totalCount} live reports (3 rows)`;
+          }
+        } else {
+          if (readMoreText) readMoreText.textContent = 'Show Less Reports';
+          if (readMoreBadge) readMoreBadge.textContent = '▲';
+          if (readMoreIcon) {
+            readMoreIcon.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>`;
+          }
+          if (readMoreSubhint) {
+            readMoreSubhint.textContent = `Showing all ${totalCount} live reports`;
+          }
+        }
+      }
+    }
+
     if (feedTitle) {
       feedTitle.textContent = currentSource !== 'all'
         ? `${sources.find(s => s.id === currentSource)?.name || currentSource} Headlines`
@@ -804,6 +866,24 @@
         ? `${currentCategory} Headlines`
         : 'Latest International Headlines';
     }
+  }
+
+  // Hook Read More Reports Button Click with Animation & Scroll
+  const readMoreReportsBtn = document.getElementById('btn-read-more-reports');
+  if (readMoreReportsBtn) {
+    readMoreReportsBtn.addEventListener('click', () => {
+      if (!isReportsExpanded) {
+        isReportsExpanded = true;
+        renderArticles(currentFeedItems);
+      } else {
+        isReportsExpanded = false;
+        renderArticles(currentFeedItems);
+        const feedSec = document.getElementById('feed');
+        if (feedSec) {
+          feedSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
   }
 
   // Live Backend Fetchers
@@ -1035,3 +1115,308 @@
   // 3. Asynchronous Live Feed Sync from Backend Proxy
   syncFromBackend();
 })();
+
+
+  // Header Search Input & Ctrl + K Shortcut Integration
+  const headerSearchInput = document.getElementById('header-search-input');
+  if (headerSearchInput) {
+    headerSearchInput.addEventListener('input', (e) => {
+      const q = e.target.value.trim();
+      const mainSearch = document.getElementById('search-input');
+      if (mainSearch) {
+        mainSearch.value = q;
+        mainSearch.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+
+    headerSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const feedSec = document.getElementById('feed');
+        if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Global Ctrl + K / Cmd + K handler
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      const hInput = document.getElementById('header-search-input') || document.getElementById('search-input');
+      if (hInput) {
+        hInput.focus();
+        hInput.select();
+      }
+    }
+  });
+
+  // Dynamic Date in Top Utility Bar
+  const dateEl = document.getElementById('utility-date-text');
+  if (dateEl) {
+    try {
+      const now = new Date();
+      const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+      dateEl.textContent = now.toLocaleDateString('en-GB', options);
+    } catch(err) {}
+  }
+
+  // 3D Perspective Card Tilt Animation (Matching Showcase Reference Image 3)
+  let activeTiltCard = null;
+  document.addEventListener('mousemove', (e) => {
+    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return;
+    const card = e.target.closest('.news-card, .broadcast-tv-card, .source-item');
+    if (!card) {
+      if (activeTiltCard) {
+        activeTiltCard.style.transform = '';
+        activeTiltCard = null;
+      }
+      return;
+    }
+    if (activeTiltCard && activeTiltCard !== card) {
+      activeTiltCard.style.transform = '';
+    }
+    activeTiltCard = card;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const tiltX = -((y - cy) / cy * 7).toFixed(2);
+    const tiltY = ((x - cx) / cx * 7).toFixed(2);
+    card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-8px) scale3d(1.018, 1.018, 1.018)`;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    if (activeTiltCard) {
+      activeTiltCard.style.transform = '';
+      activeTiltCard = null;
+    }
+  });
+
+
+  // ============================================================================
+  // Creative 2-Minute Executive Digest Pop-Up Engine
+  // "Don't have time to read the news? 60-Sec Summary / 2-Min Video Dispatch"
+  // ============================================================================
+  const digestModal = document.getElementById('express-digest-modal');
+  const digestCloseBtn = document.getElementById('digest-modal-close');
+  const digestPillTrigger = document.getElementById('open-express-digest-btn');
+  const digestHeaderTrigger = document.getElementById('header-digest-trigger-btn');
+  const digestExploreBtn = document.getElementById('digest-explore-wire-btn');
+  const digestVideoIframe = document.getElementById('digest-video-iframe');
+
+  let isAudioPlaying = false;
+  let speechSynthUtterance = null;
+  let currentSummaryTextForAudio = '';
+
+  // De-duplicate primary Hero card from Latest Feed Grid
+  if (typeof renderArticles === 'function') {
+    const originalRenderArticles = renderArticles;
+    renderArticles = function(items) {
+      if (items && items.length > 1 && currentSource === 'all' && currentCategory === 'All' && !searchQuery) {
+        const heroArt = articles && articles.length > 0 ? articles[0] : null;
+        const dedupedItems = heroArt ? items.filter(a => a.id !== heroArt.id) : items;
+        originalRenderArticles(dedupedItems);
+      } else {
+        originalRenderArticles(items);
+      }
+    };
+  }
+
+  function updateExecutiveDigestContent() {
+    const bulletsContainer = document.getElementById('digest-summary-bullets');
+    if (!bulletsContainer || !articles || articles.length === 0) return;
+
+    // Pick 4 diverse, distinct stories covering different categories
+    const categoriesWanted = ['world', 'business', 'tech', 'religion'];
+    const chosen = [];
+    const usedIds = new Set();
+
+    // 1. Try finding one from each major thematic category
+    for (const cat of categoriesWanted) {
+      const match = articles.find(a => !usedIds.has(a.id) && a.category && a.category.toLowerCase().includes(cat));
+      if (match) {
+        chosen.push(match);
+        usedIds.add(match.id);
+      }
+    }
+
+    // 2. Fill remaining slots up to 4 with distinct articles
+    for (const art of articles) {
+      if (chosen.length >= 4) break;
+      if (!usedIds.has(art.id)) {
+        chosen.push(art);
+        usedIds.add(art.id);
+      }
+    }
+
+    // 3. Render 4 executive bullet cards
+    bulletsContainer.innerHTML = chosen.map((art, idx) => {
+      const cat = (art.category || 'WORLD NEWS').toUpperCase();
+      const title = cleanHtmlText(art.title);
+      const summary = cleanHtmlText(art.summary);
+      const source = cleanHtmlText(art.sourceName);
+      return `
+        <div class="digest-bullet-card">
+          <div class="digest-bullet-header">
+            <span class="digest-bullet-tag">⚡ ${cat}</span>
+            <span class="digest-bullet-source">${source}</span>
+          </div>
+          <a href="${art.link}" target="_blank" rel="noopener noreferrer" class="digest-bullet-title">${title}</a>
+          <p class="digest-bullet-desc">${summary}</p>
+        </div>
+      `;
+    }).join('');
+
+    // 4. Prepare speech text for Audio Reader
+    currentSummaryTextForAudio = chosen.map((art, idx) => {
+      return `Headline ${idx + 1}: ${art.title}. ${art.summary}`;
+    }).join('. ');
+  }
+
+  function toggleAudioDigest() {
+    if (!('speechSynthesis' in window)) {
+      alert('Text-to-speech audio reader is not supported in this browser.');
+      return;
+    }
+
+    const audioIcon = document.getElementById('audio-icon-slot');
+    const audioLabel = document.getElementById('audio-label-slot');
+    const soundwaves = document.getElementById('audio-soundwaves');
+    const statusText = document.getElementById('audio-prompt-text');
+
+    if (window.speechSynthesis.speaking) {
+      if (isAudioPlaying) {
+        window.speechSynthesis.cancel();
+        isAudioPlaying = false;
+        if (audioIcon) audioIcon.textContent = '▶';
+        if (audioLabel) audioLabel.textContent = 'Play 60-Second Audio Summary';
+        if (soundwaves) soundwaves.classList.remove('playing');
+        if (statusText) statusText.textContent = 'Audio paused. Click to listen from start.';
+        return;
+      }
+    }
+
+    if (!currentSummaryTextForAudio) {
+      updateExecutiveDigestContent();
+    }
+
+    const introText = "Welcome to your 60-second executive global news briefing from News Connect. Here are the top verified headlines. ";
+    const fullText = introText + currentSummaryTextForAudio + ". You are fully caught up across 9 international networks.";
+
+    speechSynthUtterance = new SpeechSynthesisUtterance(fullText);
+    speechSynthUtterance.rate = 1.05;
+    speechSynthUtterance.pitch = 1.0;
+
+    // Pick English voice if available
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Online')));
+    if (englishVoice) speechSynthUtterance.voice = englishVoice;
+
+    speechSynthUtterance.onstart = () => {
+      isAudioPlaying = true;
+      if (audioIcon) audioIcon.textContent = '⏸';
+      if (audioLabel) audioLabel.textContent = 'Pause Audio Dispatch';
+      if (soundwaves) soundwaves.classList.add('playing');
+      if (statusText) statusText.textContent = '🎙️ Reading live executive briefing...';
+    };
+
+    speechSynthUtterance.onend = () => {
+      isAudioPlaying = false;
+      if (audioIcon) audioIcon.textContent = '▶';
+      if (audioLabel) audioLabel.textContent = 'Replay 60-Second Audio Summary';
+      if (soundwaves) soundwaves.classList.remove('playing');
+      if (statusText) statusText.textContent = '✓ You are fully caught up on the global news!';
+    };
+
+    speechSynthUtterance.onerror = () => {
+      isAudioPlaying = false;
+      if (audioIcon) audioIcon.textContent = '▶';
+      if (soundwaves) soundwaves.classList.remove('playing');
+    };
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(speechSynthUtterance);
+  }
+
+  function openDigestModal(defaultTab = 'summary') {
+    if (!digestModal) return;
+    updateExecutiveDigestContent();
+    switchDigestTab(defaultTab);
+    digestModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDigestModal() {
+    if (!digestModal) return;
+    digestModal.style.display = 'none';
+    document.body.style.overflow = '';
+    if (window.speechSynthesis && isAudioPlaying) {
+      window.speechSynthesis.cancel();
+      isAudioPlaying = false;
+      const soundwaves = document.getElementById('audio-soundwaves');
+      if (soundwaves) soundwaves.classList.remove('playing');
+    }
+    if (digestVideoIframe) {
+      digestVideoIframe.src = '';
+    }
+  }
+
+  function switchDigestTab(tabName) {
+    const tabs = ['summary', 'video', 'audio'];
+    tabs.forEach(t => {
+      const btn = document.getElementById(`tab-btn-${t}`);
+      const pane = document.getElementById(`pane-${t}`);
+      if (btn) btn.classList.toggle('active', t === tabName);
+      if (pane) {
+        pane.style.display = t === tabName ? 'block' : 'none';
+        pane.classList.toggle('active', t === tabName);
+      }
+    });
+
+    if (tabName === 'video' && digestVideoIframe && !digestVideoIframe.src) {
+      digestVideoIframe.src = 'https://www.loveworldsat.org/live-tv';
+    }
+  }
+
+  if (digestPillTrigger) digestPillTrigger.addEventListener('click', () => openDigestModal('summary'));
+  if (digestHeaderTrigger) digestHeaderTrigger.addEventListener('click', () => openDigestModal('summary'));
+  if (digestCloseBtn) digestCloseBtn.addEventListener('click', closeDigestModal);
+  if (digestModal) {
+    digestModal.addEventListener('click', (e) => {
+      if (e.target === digestModal) closeDigestModal();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && digestModal && digestModal.style.display === 'flex') {
+      closeDigestModal();
+    }
+  });
+
+  const tabBtnSummary = document.getElementById('tab-btn-summary');
+  const tabBtnVideo = document.getElementById('tab-btn-video');
+  const tabBtnAudio = document.getElementById('tab-btn-audio');
+  if (tabBtnSummary) tabBtnSummary.addEventListener('click', () => switchDigestTab('summary'));
+  if (tabBtnVideo) tabBtnVideo.addEventListener('click', () => switchDigestTab('video'));
+  if (tabBtnAudio) tabBtnAudio.addEventListener('click', () => switchDigestTab('audio'));
+
+  const btnAudioSpeak = document.getElementById('btn-audio-speak');
+  if (btnAudioSpeak) btnAudioSpeak.addEventListener('click', toggleAudioDigest);
+
+  if (digestExploreBtn) {
+    digestExploreBtn.addEventListener('click', () => {
+      closeDigestModal();
+      const feedSec = document.getElementById('feed');
+      if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // Pre-load speech voices
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.onvoiceschanged = () => {
+      window.speechSynthesis.getVoices();
+    };
+  }
+
+  // Auto-populate on startup
+  setTimeout(updateExecutiveDigestContent, 600);

@@ -498,6 +498,33 @@ async function refreshAllFeeds() {
     }
   }
 
+// Smart Title Similarity & Redundancy Filter (Jaccard word-level overlap)
+function normalizeTitleWords(title) {
+  if (!title) return new Set();
+  const stopWords = new Set(['a', 'an', 'the', 'in', 'on', 'at', 'of', 'to', 'is', 'are', 'for', 'with', 'by', 'and', 'or', 'from', 'as', 'it', 'this', 'that', 'after', 'says', 'amid', 'over', 'new']);
+  return new Set(
+    title
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(w => w.length > 2 && !stopWords.has(w))
+  );
+}
+
+function areTitlesRedundant(titleA, titleB) {
+  const wordsA = normalizeTitleWords(titleA);
+  const wordsB = normalizeTitleWords(titleB);
+  if (wordsA.size === 0 || wordsB.size === 0) return false;
+  
+  let intersection = 0;
+  for (const w of wordsA) {
+    if (wordsB.has(w)) intersection++;
+  }
+  const minSize = Math.min(wordsA.size, wordsB.size);
+  // If > 60% of keywords overlap between two headlines, they report the exact same story
+  return (intersection / minSize) >= 0.60;
+}
+
   // Merge live fetched articles with fallback repository for maximum completeness
   let allArticles = [];
   if (fetchedArticles.length > 0) {
@@ -510,25 +537,57 @@ async function refreshAllFeeds() {
     allArticles = [...fallbackArticles];
   }
 
-  // Deduplicate by title & link
-  const seenKeys = new Set();
-  const deduped = [];
+  // 1. Initial link and strict title dedup
+  const seenUrls = new Set();
+  const uniqueArticles = [];
   for (const art of allArticles) {
-    const key = `${art.sourceId}-${art.title.toLowerCase().trim()}`;
-    if (!seenKeys.has(key)) {
-      seenKeys.add(key);
-      deduped.push(art);
+    const cleanUrl = (art.link || '').toLowerCase().split('?')[0].replace(/\/+$/, '');
+    if (cleanUrl && seenUrls.has(cleanUrl)) continue;
+    seenUrls.add(cleanUrl);
+    uniqueArticles.push(art);
+  }
+
+  // 2. Sort by date first to keep freshest version of near-duplicate stories
+  uniqueArticles.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+
+  // 3. Near-Duplicate Filter: Remove redundant/repeated headlines covering the same story
+  const distinctArticles = [];
+  for (const art of uniqueArticles) {
+    const isRedundant = distinctArticles.some(existing => areTitlesRedundant(art.title, existing.title));
+    if (!isRedundant) {
+      distinctArticles.push(art);
     }
   }
 
-  // Sort descending by publication date
-  deduped.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+  // 4. Source-Diversity Interleaving (Round-Robin Consortium Balancing)
+  // Prevents any single wire (like ANI or Fox) from flooding consecutive slots
+  const sourceBuckets = {};
+  for (const art of distinctArticles) {
+    if (!sourceBuckets[art.sourceId]) sourceBuckets[art.sourceId] = [];
+    sourceBuckets[art.sourceId].push(art);
+  }
 
-  feedCache.articles = deduped;
+  const interleaved = [];
+  const sourceKeys = Object.keys(sourceBuckets);
+  let hasMore = true;
+  let round = 0;
+  while (hasMore) {
+    hasMore = false;
+    for (const sKey of sourceKeys) {
+      const bucket = sourceBuckets[sKey];
+      if (round < bucket.length) {
+        interleaved.push(bucket[round]);
+        hasMore = true;
+      }
+    }
+    round++;
+  }
+
+  feedCache.articles = interleaved.length > 0 ? interleaved : distinctArticles;
   feedCache.sourceStatus = sourceStatus;
   feedCache.lastUpdated = new Date().toISOString();
   feedCache.isFetching = false;
-  console.log(`[Aggregator] Sync complete. Total aggregated items: ${feedCache.articles.length}`);
+  console.log(`[Aggregator] Sync complete. Total aggregated items: ${feedCache.articles.length} (deduplicated & balanced across ${sourceKeys.length} networks)`);
 }
 
 // Initial feed load

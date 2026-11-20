@@ -23,35 +23,60 @@
   <!-- Main App Layout Container -->
   <div class="app-viewport" id="app-viewport">
 
+    <!-- Top Utility Bar (Mockup Reference Layout) -->
+    <div class="top-utility-bar">
+      <div class="container utility-container">
+        <div class="utility-left">
+          <span class="utility-date" id="utility-date-text">Friday, 20 November 2026</span>
+          <span class="utility-location">Pune · IN</span>
+        </div>
+        <div class="utility-right">
+          <span class="utility-status-dot">●</span>
+          <span class="utility-status-text" id="utility-status-text">5 feeds live · 4 broadcasts connected</span>
+          <a href="https://lwindia.org" target="_blank" rel="noopener noreferrer" class="utility-lwindia-link">lwindia.org ↗</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Header Section (Mockup Reference Layout) -->
     <header class="site-header">
-      <div class="container">
-        <!-- Top Row: Logo | Center Search Bar | Right Action Buttons -->
+      <div class="container header-container">
+        <!-- Main Header Row: Brand | Search Bar | Actions -->
         <div class="header-top">
-          <!-- Reverted Brand Mark -->
+          <!-- Brand Mark (Exact match to Image 1: Gold Squircle + NEWS CONNECT + LIVE EDITION + Tagline + lwindia.org pill) -->
           <div class="brand-wrapper">
-            <div class="brand-icon" aria-hidden="true">
-              <svg class="brand-symbol-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L14.7 9.3L22 12L14.7 14.7L12 22L9.3 14.7L2 12L9.3 9.3L12 2Z" fill="#070C18"/>
-                <circle cx="12" cy="12" r="2.2" fill="#FFE272"/>
-              </svg>
-            </div>
+            <a href="#" class="brand-logo-link" aria-label="News Connect Home">
+              <div class="brand-icon-gold" aria-hidden="true">
+                <svg class="brand-star-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L14.7 9.3L22 12L14.7 14.7L12 22L9.3 14.7L2 12L9.3 9.3L12 2Z" fill="#0B1325"/>
+                </svg>
+              </div>
+            </a>
             <div class="brand-text">
-              <div class="brand-headline-wrap">
+              <div class="brand-title-line">
                 <h1 class="brand-title">NEWS <span class="brand-highlight">CONNECT</span></h1>
                 <span class="brand-edition-badge">LIVE EDITION</span>
               </div>
+<<<<<<< HEAD
               <div class="brand-subrow" style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                 <p class="brand-tagline">One World. Every Perspective.</p>
                 <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="brand-domain-pill" title="Official Network Domain: lwindia.org">
                   <span class="domain-dot"></span>
                   <span class="domain-text">lwindia.org</span>
                   <span class="domain-arrow">↗</span>
+=======
+              <div class="brand-tagline-line">
+                <span class="brand-tagline">One World. Every Perspective.</span>
+                <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="brand-lwindia-pill">
+                  <span class="pill-green-dot">●</span>
+                  <span class="pill-lwindia-text">lwindia.org ↗</span>
+>>>>>>> 270164d (Update LWindia website and branding)
                 </a>
               </div>
             </div>
           </div>
 
+<<<<<<< HEAD
           <!-- Header Right Actions: Official Domain, Status Badge, Refresh, Theme Toggle -->
           <div class="header-actions">
             <!-- Official Domain Quick Button -->
@@ -67,13 +92,30 @@
                 <span class="status-dot"></span>
               </span>
               <span id="status-text">9 Sources Connected</span>
+=======
+          <!-- Center Search Bar with Ctrl K shortcut -->
+          <div class="header-search-wrap">
+            <div class="header-search-box">
+              <span class="header-search-icon">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+              </span>
+              <input type="text" id="header-search-input" class="header-search-input" placeholder="Search stories, sources, broadcasts..." autocomplete="off">
+              <span class="header-search-shortcut">Ctrl K</span>
+>>>>>>> 270164d (Update LWindia website and branding)
             </div>
-            <button class="refresh-btn" id="refresh-btn" title="Refresh Live Feeds" aria-label="Refresh Feeds">
+          </div>
+
+          <!-- Header Right Actions: Refresh & Theme Toggle -->
+          <div class="header-actions">
+            <button class="header-action-btn refresh-btn" id="refresh-btn" title="Refresh Live Feeds" aria-label="Refresh Feeds">
               <svg class="action-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/>
               </svg>
             </button>
-            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Theme" title="Toggle Theme">
+            <button class="header-action-btn theme-toggle" id="theme-btn" aria-label="Toggle Theme" title="Toggle Theme">
               <span class="theme-icon-wrap" id="theme-icon-slot">
                 <svg class="action-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="5"/>
@@ -91,14 +133,18 @@
           </div>
         </div>
 
-        <!-- Main Navigation Bar -->
+        <!-- Main Navigation Bar (Reverted to exact pill buttons matching Image 2) -->
         <nav class="header-nav" aria-label="Main Navigation">
           <a href="#featured" class="nav-link active" data-tab="all">
             <span class="nav-bullet">✦</span>
             <span>Featured News</span>
           </a>
           <a href="#sources" class="nav-link" data-tab="sources">
+<<<<<<< HEAD
             <span class="nav-bullet">🌐</span>
+=======
+            <span class="nav-bullet">🏛</span>
+>>>>>>> 270164d (Update LWindia website and branding)
             <span>9 News Networks</span>
           </a>
           <a href="#editorial-focus" class="nav-link" data-tab="focus">
@@ -126,6 +172,10 @@
             <span class="nav-bullet">🇮🇳</span>
             <span>lwindia.org ↗</span>
           </a>
+          <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="nav-link nav-link-lwindia">
+            <span class="nav-bullet">🇮🇳</span>
+            <span class="lwindia-gold-text">lwindia.org ↗</span>
+          </a>
         </nav>
       </div>
     </header>
@@ -133,23 +183,20 @@
     <!-- Breaking News Editorial Marquee Ticker -->
     <div class="breaking-ticker-bar">
       <div class="ticker-badge">
-        <span class="ticker-beacon">
-          <span class="beacon-wave"></span>
-          <span class="ticker-pulse"></span>
-        </span>
+        <span class="ticker-dot">●</span>
         <span class="ticker-label">BREAKING</span>
       </div>
       <div class="ticker-track">
         <div class="ticker-marquee" id="ticker-marquee">
-          <span>US Senate Deliberates Bipartisan Defense & Border Security Framework</span>
+          <span>LoveWorld Sat: 24/7 satellite broadcast special live from Johannesburg</span>
+          <span class="ticker-sep">✦</span>
+          <span>Global leaders gather for climate framework talks</span>
+          <span class="ticker-sep">✦</span>
+          <span>Markets open higher as tech rally continues</span>
           <span class="ticker-sep">✦</span>
           <span>India Advances Semiconductor Manufacturing Hub With Multi-Billion Dollar Fab Approvals</span>
           <span class="ticker-sep">✦</span>
-          <span>LoveWorld Sat: 24/7 Satellite Broadcast Special Live from Johannesburg</span>
-          <span class="ticker-sep">✦</span>
-          <span>Global Energy Markets Adjust as Export Terminals Expand Liquefied Gas Shipments</span>
-          <span class="ticker-sep">✦</span>
-          <span>Sky News Australia: Canberra Debates Natural Resource Tariffs and Energy Grid</span>
+          <span>US Senate Deliberates Bipartisan Defense & Border Security Framework</span>
         </div>
       </div>
     </div>
@@ -165,6 +212,10 @@
             <h2 class="esh-title">Global Spotlight</h2>
           </div>
           <div class="esh-line"></div>
+          <button class="btn-express-digest-trigger" id="header-digest-trigger-btn" title="Open 2-Minute Summary & Video">
+            <span class="digest-pulse-icon">⚡</span>
+            <span>2-Min Summary</span>
+          </button>
           <a href="#feed" class="esh-view-all-btn">View All</a>
         </div>
 
@@ -227,11 +278,11 @@
             <span class="esh-dot">•</span>
             <div class="consortium-title-stack">
               <span class="consortium-pill">CONSORTIUM</span>
-              <h2 class="esh-title">8 Connected News Networks</h2>
+              <h2 class="esh-title">9 Connected News Networks</h2>
             </div>
           </div>
           <div class="esh-line"></div>
-          <button class="esh-view-all-btn reset-sources-pill" id="reset-sources-btn">Show All 8</button>
+          <button class="esh-view-all-btn reset-sources-pill" id="reset-sources-btn">Show All 9</button>
         </div>
         <p class="section-subtext">Verified international organisations connected via real-time RSS feeds and authenticated broadcast portals.</p>
 
@@ -403,6 +454,27 @@
               <a href="https://www.aninews.in" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a>
             </div>
           </div>
+
+          <!-- Card 9: LoveWorld India (LBN TV) -->
+          <div class="source-card" data-source="loveworldindia" style="--source-accent: #08182D;">
+            <div class="src-card-header">
+              <div class="src-logo-wrap" style="background: rgba(255, 255, 255, 0.95); padding: 4px 8px; border-radius: 8px;">
+                <img src="assets/logos/loveworldindia.png" class="source-logo-img" alt="LoveWorld India Logo" style="object-fit: contain; max-height: 38px;" />
+              </div>
+              <span class="src-status-tv">● 24/7 TV & Portal</span>
+            </div>
+            <div class="src-card-body">
+              <div class="src-network-name">LoveWorld India (LBN TV)</div>
+              <div class="src-region-row">
+                <span class="src-flag">🇮🇳</span>
+                <span class="src-region">India & South Asia</span>
+              </div>
+            </div>
+            <div class="src-card-footer">
+              <button class="src-filter-btn">Filter Stories</button>
+              <a href="https://lwindia.org/" target="_blank" rel="noopener noreferrer" class="src-portal-link" style="color: #F5B041; font-weight: 700;">lwindia.org ↗</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -556,6 +628,20 @@
 
         <div class="news-cards-grid view-mode-cards" id="news-grid">
           <!-- Rendered by JS -->
+        </div>
+
+        <!-- Animated "Read More Reports" Container (After 3 Rows) -->
+        <div class="read-more-wrapper" id="read-more-wrapper" style="display:none;">
+          <button class="btn-read-more-animated" id="btn-read-more-reports" aria-label="Read More News Reports">
+            <span class="btn-read-more-icon" id="btn-read-more-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </span>
+            <span class="btn-read-more-text" id="btn-read-more-text">Read More Reports</span>
+            <span class="btn-read-more-badge" id="btn-read-more-badge">+0 more</span>
+          </button>
+          <span class="read-more-subhint" id="read-more-subhint">Showing 9 of 71 live reports</span>
         </div>
       </section>
 
@@ -854,6 +940,88 @@
         </div>
       </div>
     </footer>
+  </div>
+
+  <!-- Aesthetic Floating 2-Minute Executive Digest Pill (Bottom-Right Floating Trigger) -->
+  <div class="express-digest-floating-pill" id="express-digest-pill">
+    <button class="express-pill-btn" id="open-express-digest-btn" aria-label="Open 2-Minute Quick Summary">
+      <span class="express-pill-pulse">⚡</span>
+      <div class="express-pill-text">
+        <span class="express-pill-title">Don't have time to read?</span>
+        <span class="express-pill-sub">2-Min Summary & Video →</span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Aesthetic 2-Minute Quick Summary & Video Pop-Up Modal -->
+  <div class="digest-modal-backdrop" id="express-digest-modal" style="display:none;" aria-hidden="true">
+    <div class="digest-modal-card" role="dialog" aria-modal="true" aria-labelledby="digest-modal-title">
+      <button class="digest-modal-close" id="digest-modal-close" aria-label="Close Summary">✕</button>
+
+      <div class="digest-modal-header">
+        <div class="digest-badge-row">
+          <span class="digest-badge-pill">⚡ 120-SECOND EXECUTIVE PULSE</span>
+          <span class="digest-duration-tag">⏱ 2 Mins Read / Watch</span>
+        </div>
+        <h2 class="digest-modal-title" id="digest-modal-title">Don't have time to read the news?</h2>
+        <p class="digest-modal-subtitle">Read this verified 60-second summary or watch our 2-minute video dispatch to stay fully informed.</p>
+      </div>
+
+      <!-- Creative Tab Navigation -->
+      <div class="digest-tabs">
+        <button class="digest-tab-btn active" id="tab-btn-summary" data-tab="summary">
+          <span>📝 60-Sec Summary</span>
+        </button>
+        <button class="digest-tab-btn" id="tab-btn-video" data-tab="video">
+          <span>📺 2-Min Video Dispatch</span>
+        </button>
+        <button class="digest-tab-btn" id="tab-btn-audio" data-tab="audio">
+          <span>🔊 Listen (Voice Reader)</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: 60-Sec Smart Summary -->
+      <div class="digest-tab-pane active" id="pane-summary">
+        <div class="summary-bullets-container" id="digest-summary-bullets">
+          <!-- Populated dynamically with top distinct headlines -->
+        </div>
+      </div>
+
+      <!-- Tab 2: 2-Minute Video Dispatch -->
+      <div class="digest-tab-pane" id="pane-video" style="display:none;">
+        <div class="digest-video-box">
+          <div class="digest-video-player-wrap">
+            <iframe id="digest-video-iframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="digest-video-details">
+            <span class="digest-live-indicator">● SATELLITE VIDEO WIRE</span>
+            <p class="digest-video-caption">LoveWorld & Sky News international satellite feed — 120-second continuous geopolitical, business, and faith brief.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Audio Briefing Player -->
+      <div class="digest-tab-pane" id="pane-audio" style="display:none;">
+        <div class="digest-audio-box">
+          <div class="audio-soundwaves" id="audio-soundwaves">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="audio-prompt-text" id="audio-prompt-text">Narrated AI News Wire • Clear 60-Second Audio Dispatch</p>
+          <button class="btn-audio-speak" id="btn-audio-speak">
+            <span id="audio-icon-slot">▶</span> <span id="audio-label-slot">Play 60-Second Audio Summary</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="digest-modal-footer">
+        <div class="digest-footer-status">
+          <span class="digest-status-check">✓</span>
+          <span>Caught up in 2 mins • 9 verified global wires</span>
+        </div>
+        <button class="btn-digest-explore" id="digest-explore-wire-btn">Explore Full Feed ↓</button>
+      </div>
+    </div>
   </div>
 
   <!-- Interactive Live Stream Player Modal -->
