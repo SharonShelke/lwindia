@@ -60,7 +60,7 @@ const AUTHENTIC_FALLBACK_ARTICLES = [
   {
     id: 'ln24intl-1',
     sourceId: 'ln24international',
-    sourceName: 'LoveWorld LN24 International',
+    sourceName: 'Loveworld LN24 International',
     title: 'Global Economic Forum Evaluates Digital Financial Inclusion & Infrastructure in Africa',
     link: 'https://ln24international.com/global-economic-forum-evaluates-digital-financial-inclusion-africa/',
     summary: 'Regional ministers and financial technology leaders assess regulatory harmonization to accelerate cross-border trade, agricultural investments, and digital currency pilots across West and Southern Africa.',
@@ -72,10 +72,10 @@ const AUTHENTIC_FALLBACK_ARTICLES = [
   {
     id: 'ln24intl-2',
     sourceId: 'ln24international',
-    sourceName: 'LoveWorld LN24 International',
+    sourceName: 'Loveworld LN24 International',
     title: 'Global Prayer & Faith Assembly Connects Millions in Worldwide Intercession Initiative',
     link: 'https://ln24international.com/global-prayer-and-faith-assembly-connects-millions-worldwide/',
-    summary: 'LoveWorld Networks broadcasts special international sessions led by Pastor Chris Oyakhilome, emphasizing global peace, humanitarian medical missions, and community outreach in dozens of nations.',
+    summary: 'Loveworld Networks broadcasts special international sessions led by Pastor Chris Oyakhilome, emphasizing global peace, humanitarian medical missions, and community outreach in dozens of nations.',
     publishedAt: new Date(Date.now() - 110 * 60 * 1000).toISOString(),
     category: 'Religion and Faith',
     imageUrl: 'https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80',
@@ -132,10 +132,10 @@ const AUTHENTIC_FALLBACK_ARTICLES = [
   {
     id: 'loveworldsat-broadcast-1',
     sourceId: 'loveworldsat',
-    sourceName: 'LoveWorld Sat',
+    sourceName: 'Loveworld Sat',
     title: "Live Broadcast Special: 'Good Morning World' & Global Business Updates From Johannesburg",
     link: 'https://www.loveworldsat.org/live-tv',
-    summary: 'LoveWorld SAT delivers scheduled 24/7 satellite news bulletins, in-depth discussions on African economic transformation, community empowerment, and Christian ministry updates.',
+    summary: 'Loveworld SAT delivers scheduled 24/7 satellite news bulletins, in-depth discussions on African economic transformation, community empowerment, and Christian ministry updates.',
     publishedAt: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
     category: 'Africa',
     imageUrl: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80',
@@ -145,7 +145,7 @@ const AUTHENTIC_FALLBACK_ARTICLES = [
   {
     id: 'loveworldeurope-broadcast-1',
     sourceId: 'loveworldeurope',
-    sourceName: 'LoveWorld Europe',
+    sourceName: 'Loveworld Europe',
     title: 'European Continental Stream: Multilingual Christian News & Inspirational Programming',
     link: 'https://loveworldeurope.org',
     summary: 'Live broadcast programming across the UK and Continental Europe delivering multilingual faith broadcasts, youth forums, and community outreach specials.',

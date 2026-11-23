@@ -6,13 +6,13 @@
 const BRAND_ICONS = {
   newsmax: '<img src="assets/logos/newsmax.png" class="source-logo-img" alt="Newsmax Logo" />',
   foxnews: '<img src="assets/logos/foxnews.png" class="source-logo-img" alt="Fox News Logo" />',
-  ln24international: '<img src="assets/logos/ln24international.png" class="source-logo-img" alt="LoveWorld LN24 International Logo" onerror="this.src=\'assets/logos/ln24international.jpg\'" />',
+  ln24international: '<img src="assets/logos/ln24international.png" class="source-logo-img" alt="Loveworld LN24 International Logo" onerror="this.src=\'assets/logos/ln24international.jpg\'" />',
   ln247: '<img src="assets/logos/ln247.png" class="source-logo-img" alt="LN247 Logo" />',
-  loveworldeurope: '<img src="assets/logos/loveworldeurope.png" class="source-logo-img" alt="LoveWorld Europe Logo" onerror="this.src=\'assets/logos/loveworldeurope.jpg\'" />',
-  loveworldsat: '<img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="LoveWorld Sat Logo" />',
+  loveworldeurope: '<img src="assets/logos/loveworldeurope.png" class="source-logo-img" alt="Loveworld Europe Logo" onerror="this.src=\'assets/logos/loveworldeurope.jpg\'" />',
+  loveworldsat: '<img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="Loveworld Sat Logo" />',
   skynews_australia: '<img src="assets/logos/skynews_australia.png" class="source-logo-img" alt="Sky News Australia Logo" />',
   ani: '<img src="assets/logos/ani.png" class="source-logo-img" alt="ANI News Logo" />',
-  loveworldindia: '<img src="assets/logos/loveworldindia.svg" class="source-logo-img" alt="LoveWorld India Logo" />'
+  loveworldindia: '<img src="assets/logos/loveworldindia.svg" class="source-logo-img" alt="Loveworld India Logo" />'
 };
 
 if (typeof window !== 'undefined') {

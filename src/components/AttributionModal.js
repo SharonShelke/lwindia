@@ -117,7 +117,7 @@ export const AttributionModal = ({ visible, onClose, theme }) => {
                   1. Non-Commercial Discovery: All feeds and headlines are presented strictly for personal, non-commercial discovery in accordance with publisher syndication policies.
                 </Text>
                 <Text style={[styles.paragraph, { color: theme.textSecondary }]}>
-                  2. Strict Attribution: Full credit and trademark rights are preserved for Newsmax, Fox News, LoveWorld Networks (LN24, LN247, LoveWorld Sat, LoveWorld Europe), Sky News Australia, and Asian News International (ANI).
+                  2. Strict Attribution: Full credit and trademark rights are preserved for Newsmax, Fox News, Loveworld Networks (LN24, LN247, Loveworld Sat, Loveworld Europe), Sky News Australia, and Asian News International (ANI).
                 </Text>
                 <Text style={[styles.paragraph, { color: theme.textSecondary }]}>
                   3. Canonical Linking: News Connect never strips links, injects intermediary ad pages, or republishes full story text without licensing.

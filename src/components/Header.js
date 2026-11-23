@@ -135,7 +135,7 @@ export const Header = ({ theme, isDark, onToggleTheme, activeTab, onSelectTab, l
           <Text style={styles.breakingText}>BREAKING</Text>
         </View>
         <Text style={styles.tickerText} numberOfLines={1}>
-          ✦  LoveWorld Sat: 24/7 satellite broadcast special live from Johannesburg   ✦   Global leaders gather for climate framework talks   ✦   Markets open higher
+          ✦  Loveworld Sat: 24/7 satellite broadcast special live from Johannesburg   ✦   Global leaders gather for climate framework talks   ✦   Markets open higher
         </Text>
       </View>
     </View>

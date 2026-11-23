@@ -9,13 +9,13 @@
   const FALLBACK_SOURCES = [
     { id: 'newsmax', name: 'Newsmax', shortName: 'Newsmax', region: 'United States', flag: '🇺🇸', website: 'https://www.newsmax.com', brandColor: '#002B49', hasRss: true, feedStatus: 'available' },
     { id: 'foxnews', name: 'Fox News', shortName: 'Fox News', region: 'United States', flag: '🇺🇸', website: 'https://www.foxnews.com', brandColor: '#003366', hasRss: true, feedStatus: 'available' },
-    { id: 'ln24international', name: 'LoveWorld LN24 International', shortName: 'LN24 Intl', region: 'International', flag: '🌐', website: 'https://ln24international.com', brandColor: '#0C2340', hasRss: true, feedStatus: 'available' },
+    { id: 'ln24international', name: 'Loveworld LN24 International', shortName: 'LN24 Intl', region: 'International', flag: '🌐', website: 'https://ln24international.com', brandColor: '#0C2340', hasRss: true, feedStatus: 'available' },
     { id: 'ln247', name: 'LN247', shortName: 'LN247', region: 'International', flag: '🌐', website: 'https://ln247.news', brandColor: '#0A2540', hasRss: true, feedStatus: 'available' },
-    { id: 'loveworldeurope', name: 'LoveWorld Europe', shortName: 'LW Europe', region: 'UK & Europe', flag: '🇪🇺', website: 'https://loveworldeurope.org', brandColor: '#1E3A8A', hasRss: false, feedStatus: 'portal_only' },
-    { id: 'loveworldsat', name: 'LoveWorld Sat', shortName: 'LW Sat', region: 'South Africa', flag: '🇿🇦', website: 'https://www.loveworldsat.org', brandColor: '#1A365D', hasRss: false, feedStatus: 'broadcast_only' },
+    { id: 'loveworldeurope', name: 'Loveworld Europe', shortName: 'LW Europe', region: 'UK & Europe', flag: '🇪🇺', website: 'https://loveworldeurope.org', brandColor: '#1E3A8A', hasRss: false, feedStatus: 'portal_only' },
+    { id: 'loveworldsat', name: 'Loveworld Sat', shortName: 'LW Sat', region: 'South Africa', flag: '🇿🇦', website: 'https://www.loveworldsat.org', brandColor: '#1A365D', hasRss: false, feedStatus: 'broadcast_only' },
     { id: 'skynews_australia', name: 'Sky News Australia', shortName: 'Sky News AU', region: 'Australia', flag: '🇦🇺', website: 'https://www.skynews.com.au', brandColor: '#990000', hasRss: false, feedStatus: 'portal_only' },
     { id: 'ani', name: 'ANI – Asian News International', shortName: 'ANI News', region: 'India', flag: '🇮🇳', website: 'https://www.aninews.in', brandColor: '#8B0000', hasRss: true, feedStatus: 'available' },
-    { id: 'loveworldindia', name: 'LoveWorld India (LBN TV)', shortName: 'LW India', region: 'India & South Asia', flag: '🇮🇳', website: 'https://lwindia.org/', brandColor: '#08182D', hasRss: false, feedStatus: 'broadcast_only' }
+    { id: 'loveworldindia', name: 'Loveworld India (LBN TV)', shortName: 'LW India', region: 'India & South Asia', flag: '🇮🇳', website: 'https://lwindia.org/', brandColor: '#08182D', hasRss: false, feedStatus: 'broadcast_only' }
   ];
 
   const FALLBACK_ARTICLES = [
@@ -44,7 +44,7 @@
     {
       id: 'ln24intl-1',
       sourceId: 'ln24international',
-      sourceName: 'LoveWorld LN24 International',
+      sourceName: 'Loveworld LN24 International',
       title: 'Global Economic Forum Evaluates Digital Financial Inclusion & Infrastructure in Africa',
       link: 'https://ln24international.com/global-economic-forum-evaluates-digital-financial-inclusion-africa/',
       summary: 'Regional ministers and financial technology leaders assess regulatory harmonization to accelerate cross-border trade, agricultural investments, and digital currency pilots across Africa.',
@@ -88,10 +88,10 @@
     {
       id: 'loveworldsat-broadcast-1',
       sourceId: 'loveworldsat',
-      sourceName: 'LoveWorld Sat',
+      sourceName: 'Loveworld Sat',
       title: "Live Broadcast Special: 'Good Morning World' & Global Business Updates From Johannesburg",
       link: 'https://www.loveworldsat.org/live-tv',
-      summary: 'LoveWorld SAT delivers scheduled 24/7 satellite news bulletins, in-depth discussions on African economic transformation, community empowerment, and Christian ministry updates.',
+      summary: 'Loveworld SAT delivers scheduled 24/7 satellite news bulletins, in-depth discussions on African economic transformation, community empowerment, and Christian ministry updates.',
       publishedAt: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
       category: 'Africa',
       imageUrl: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80'
@@ -99,7 +99,7 @@
     {
       id: 'loveworldeurope-broadcast-1',
       sourceId: 'loveworldeurope',
-      sourceName: 'LoveWorld Europe',
+      sourceName: 'Loveworld Europe',
       title: 'European Continental Stream: Multilingual Christian News & Inspirational Programming',
       link: 'https://loveworldeurope.org',
       summary: 'Live broadcast programming across the UK and Continental Europe delivering multilingual faith broadcasts, youth forums, and community outreach specials.',
@@ -121,10 +121,10 @@
     {
       id: 'loveworldindia-broadcast-1',
       sourceId: 'loveworldindia',
-      sourceName: 'LoveWorld India (LBN TV)',
-      title: 'LoveWorld India Broadcast: Faith, Leadership & Inspiring Programs Transmitted Across South Asia',
+      sourceName: 'Loveworld India (LBN TV)',
+      title: 'Loveworld India Broadcast: Faith, Leadership & Inspiring Programs Transmitted Across South Asia',
       link: 'https://lwindia.org/',
-      summary: 'LoveWorld India (LBN TV) streams 24/7 television broadcasts, community outreach, and global prayer sessions led by Pastor Chris Oyakhilome to millions across India and the diaspora (JioTV 4080).',
+      summary: 'Loveworld India (LBN TV) streams 24/7 television broadcasts, community outreach, and global prayer sessions led by Pastor Chris Oyakhilome to millions across India and the diaspora (JioTV 4080).',
       publishedAt: new Date(Date.now() - 10 * 60 * 1000).toISOString(),
       category: 'India',
       imageUrl: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80'
@@ -189,11 +189,11 @@
     foxnews: '<img src="assets/logos/foxnews.png" class="source-logo-img" alt="Fox News" />',
     ln24international: '<img src="assets/logos/ln24international.png" class="source-logo-img" alt="LN24 International" onerror="this.src=\'assets/logos/ln24international.jpg\'" />',
     ln247: '<img src="assets/logos/ln247.png" class="source-logo-img" alt="LN247" />',
-    loveworldeurope: '<img src="assets/logos/loveworldeurope.png" class="source-logo-img" alt="LoveWorld Europe" onerror="this.src=\'assets/logos/loveworldeurope.jpg\'" />',
-    loveworldsat: '<img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="LoveWorld Sat" />',
+    loveworldeurope: '<img src="assets/logos/loveworldeurope.png" class="source-logo-img" alt="Loveworld Europe" onerror="this.src=\'assets/logos/loveworldeurope.jpg\'" />',
+    loveworldsat: '<img src="assets/logos/loveworldsat.png" class="source-logo-img" alt="Loveworld Sat" />',
     skynews_australia: '<img src="assets/logos/skynews_australia.png" class="source-logo-img" alt="Sky News Australia" />',
     ani: '<img src="assets/logos/ani.png" class="source-logo-img" alt="ANI" />',
-    loveworldindia: '<div class="src-logo-wrap" style="background: rgba(255,255,255,0.95); padding: 4px 8px; border-radius: 8px; display:inline-flex; align-items:center; justify-content:center;"><img src="assets/logos/loveworldindia.png" class="source-logo-img" alt="LoveWorld India" style="object-fit: contain; max-height: 36px;" /></div>'
+    loveworldindia: '<div class="src-logo-wrap" style="background: rgba(255,255,255,0.95); padding: 4px 8px; border-radius: 8px; display:inline-flex; align-items:center; justify-content:center;"><img src="assets/logos/loveworldindia.png" class="source-logo-img" alt="Loveworld India" style="object-fit: contain; max-height: 36px;" /></div>'
   };
 
   const CATEGORY_ICONS = {
@@ -987,6 +987,52 @@
   if (statusText) statusText.textContent = '8 Sources Connected';
   if (lastUpdatedText) lastUpdatedText.textContent = 'Sync: Active';
 
+  
+    // ============================================================================
+  // Watch More Live TV Toggle Controller (Styled like Latest Live Dispatches)
+  // ============================================================================
+  const btnWatchMoreTv = document.getElementById('btn-watch-more-tv');
+  const beaconBadge = document.getElementById('broadcast-beacon-badge');
+  const bwmtText = document.getElementById('btn-watch-more-text');
+  const bwmtBadge = document.getElementById('btn-watch-more-badge');
+  const bwmtIcon = document.getElementById('btn-watch-more-icon');
+  const bwmtSubhint = document.getElementById('broadcast-subhint');
+
+  if (btnWatchMoreTv) {
+    btnWatchMoreTv.addEventListener('click', (e) => {
+      e.preventDefault();
+      const extraCards = document.querySelectorAll('.broadcast-card-extra');
+      const isExpanded = btnWatchMoreTv.classList.contains('expanded');
+
+      if (isExpanded) {
+        extraCards.forEach(c => c.style.display = 'none');
+        btnWatchMoreTv.classList.remove('expanded');
+        btnWatchMoreTv.setAttribute('aria-expanded', 'false');
+        if (bwmtText) bwmtText.textContent = 'Watch More Live TV';
+        if (bwmtBadge) bwmtBadge.textContent = '+3 channels';
+        if (bwmtIcon) bwmtIcon.style.transform = 'rotate(0deg)';
+        if (bwmtSubhint) bwmtSubhint.textContent = 'Showing 3 of 6 live broadcast channels';
+        if (beaconBadge) beaconBadge.textContent = '● 3 CHANNELS ACTIVE';
+
+        const section = document.getElementById('broadcasts');
+        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        extraCards.forEach((c, idx) => {
+          c.style.display = 'flex';
+          c.style.animation = 'cardCascadeFadeIn 0.35s ease-out';
+          c.style.animationDelay = (idx * 0.08) + 's';
+        });
+        btnWatchMoreTv.classList.add('expanded');
+        btnWatchMoreTv.setAttribute('aria-expanded', 'true');
+        if (bwmtText) bwmtText.textContent = 'Show Fewer Channels';
+        if (bwmtBadge) bwmtBadge.textContent = 'All Visible';
+        if (bwmtIcon) bwmtIcon.style.transform = 'rotate(180deg)';
+        if (bwmtSubhint) bwmtSubhint.textContent = 'Showing 6 of 6 live broadcast channels';
+        if (beaconBadge) beaconBadge.textContent = '● 6 CHANNELS ACTIVE';
+      }
+    });
+  }
+
   // 2. Stream Player Modal Controller
   const streamModal = document.getElementById('stream-modal');
   const streamModalClose = document.getElementById('stream-modal-close');
@@ -996,14 +1042,20 @@
   const streamExternalLink = document.getElementById('stream-external-link');
 
   const STREAM_CHANNELS = {
+    loveworldindia: {
+      title: '🇮🇳 Loveworld India (LBN TV) — Live Stream',
+      desc: '24/7 Satellite & Digital Broadcast Live: Impacting India and South Asia with faith, prayer, and life-changing programs (JioTV 4080).',
+      embedUrl: 'https://lwindia.org/',
+      externalUrl: 'https://lwindia.org/'
+    },
     loveworldsat: {
-      title: '🇿🇦 LoveWorld Sat — Live TV Stream',
+      title: '🇿🇦 Loveworld Sat — Live TV Stream',
       desc: '24/7 Satellite Broadcast Live from Johannesburg: News On The Hour, Good Morning World, and Global Business Update.',
       embedUrl: 'https://www.loveworldsat.org/live-tv',
       externalUrl: 'https://www.loveworldsat.org/live-tv'
     },
     loveworldeurope: {
-      title: '🇪🇺 LoveWorld Europe — Live Stream',
+      title: '🇪🇺 Loveworld Europe — Live Stream',
       desc: 'Continental Multilingual Christian Broadcasting & Youth Leadership Special Programs.',
       embedUrl: 'https://loveworldeurope.org',
       externalUrl: 'https://loveworldeurope.org'
@@ -1014,11 +1066,17 @@
       embedUrl: 'https://www.skynews.com.au',
       externalUrl: 'https://www.skynews.com.au'
     },
-    loveworldindia: {
-      title: '🇮🇳 LoveWorld India (LBN TV) — Live Stream',
-      desc: '24/7 Satellite & Digital Broadcast Live: Impacting India and South Asia with faith, prayer, and life-changing programs (JioTV 4080).',
-      embedUrl: 'https://lwindia.org/',
-      externalUrl: 'https://lwindia.org/'
+    loveworldusa: {
+      title: '🇺🇸 Loveworld USA — Live TV Broadcast',
+      desc: '24/7 Satellite Christian Television from California & Atlanta: In-depth Bible teaching, global praise, and family programming.',
+      embedUrl: 'https://live.loveworldusa.org/',
+      externalUrl: 'https://www.loveworldusa.org/'
+    },
+    ln24intl: {
+      title: '🌐 LN24 International — 24/7 Global News',
+      desc: 'International investigative news journalism, geopolitical analysis, and live global event dispatches.',
+      embedUrl: 'https://ln24international.com/',
+      externalUrl: 'https://ln24international.com/'
     }
   };
 
@@ -1045,154 +1103,13 @@
     });
   }
 
-  // Refresh Button Handler
-  const refreshBtn = document.getElementById('refresh-btn');
-  if (refreshBtn) {
-    refreshBtn.addEventListener('click', () => {
-      refreshBtn.style.transform = 'rotate(360deg)';
-      refreshBtn.style.transition = 'transform 0.6s ease';
-      syncFromBackend().finally(() => {
-        setTimeout(() => { refreshBtn.style.transform = 'none'; }, 600);
-      });
-    });
-  }
-
-  // 4. World Capital Clocks Real-Time Engine
-  function updateWorldClocks() {
-    const now = new Date();
-    const formatTime = (timeZone) => {
-      try {
-        return new Intl.DateTimeFormat('en-US', {
-          timeZone,
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
-        }).format(now);
-      } catch (e) {
-        return '--:--';
-      }
-    };
-
-    const nycEl = document.getElementById('clock-nyc');
-    const lonEl = document.getElementById('clock-lon');
-    const jnbEl = document.getElementById('clock-jnb');
-    const delEl = document.getElementById('clock-del');
-    const sydEl = document.getElementById('clock-syd');
-
-    if (nycEl) nycEl.textContent = formatTime('America/New_York');
-    if (lonEl) lonEl.textContent = formatTime('Europe/London');
-    if (jnbEl) jnbEl.textContent = formatTime('Africa/Johannesburg');
-    if (delEl) delEl.textContent = formatTime('Asia/Kolkata');
-    if (sydEl) sydEl.textContent = formatTime('Australia/Sydney');
-  }
-  updateWorldClocks();
-  setInterval(updateWorldClocks, 10000);
-
-  // 5. Toast Notification System
-  function showToast(message, duration = 3000) {
-    let toast = document.getElementById('nc-toast');
-    if (!toast) {
-      toast = document.createElement('div');
-      toast.id = 'nc-toast';
-      toast.className = 'nc-floating-toast';
-      document.body.appendChild(toast);
-    }
-    toast.textContent = message;
-    toast.classList.add('visible');
-    clearTimeout(toast._timeout);
-    toast._timeout = setTimeout(() => {
-      toast.classList.remove('visible');
-    }, duration);
-  }
-
-  // 6. Reader Font Size Scaler
-  let fontScale = parseFloat(localStorage.getItem('nc-font-scale') || '1.0');
-  function applyFontScale(scale) {
-    fontScale = Math.min(1.25, Math.max(0.85, scale));
-    document.documentElement.style.setProperty('--user-font-scale', fontScale);
-    localStorage.setItem('nc-font-scale', fontScale.toFixed(2));
-  }
-  applyFontScale(fontScale);
-
-  const fontIncBtn = document.getElementById('font-increase');
-  const fontDecBtn = document.getElementById('font-decrease');
-  if (fontIncBtn) {
-    fontIncBtn.addEventListener('click', () => {
-      applyFontScale(fontScale + 0.05);
-      showToast(`Text size: ${Math.round(fontScale * 100)}%`);
-    });
-  }
-  if (fontDecBtn) {
-    fontDecBtn.addEventListener('click', () => {
-      applyFontScale(fontScale - 0.05);
-      showToast(`Text size: ${Math.round(fontScale * 100)}%`);
-    });
-  }
-
-  // 7. Newsletter / Daily Briefing Form
-  const newsletterForm = document.getElementById('newsletter-form');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const emailInput = document.getElementById('newsletter-email');
-      const email = emailInput ? emailInput.value.trim() : '';
-      if (email) {
-        showToast('🎉 You are subscribed to The Morning Global Briefing!');
-        if (emailInput) emailInput.value = '';
-      }
-    });
-  }
-
-  // 8. Enhanced Share/Bookmark Toast Hook
-  document.addEventListener('click', (e) => {
-    if (e.target.closest('.share-btn')) {
-      showToast('🔗 Canonical article link copied to clipboard!');
-    }
-  });
-  // 3. Asynchronous Live Feed Sync from Backend Proxy
-  syncFromBackend();
-
-
-
-  // Header Search Input & Ctrl + K Shortcut Integration
-  const headerSearchInput = document.getElementById('header-search-input');
-  if (headerSearchInput) {
-    headerSearchInput.addEventListener('input', (e) => {
-      const q = e.target.value.trim();
-      const mainSearch = document.getElementById('search-input');
-      if (mainSearch) {
-        mainSearch.value = q;
-        mainSearch.dispatchEvent(new Event('input', { bubbles: true }));
-      }
-    });
-
-    headerSearchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const feedSec = document.getElementById('feed');
-        if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  }
-
-  // Global Ctrl + K / Cmd + K handler
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      const hInput = document.getElementById('header-search-input') || document.getElementById('search-input');
-      if (hInput) {
-        hInput.focus();
-        hInput.select();
-      }
-    }
-  });
-
   // Dynamic Date in Top Utility Bar
   const dateEl = document.getElementById('utility-date-text');
   if (dateEl) {
     try {
       const now = new Date();
       const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-      videoDateEl.textContent = now.toLocaleDateString('en-GB', options);
+      dateEl.textContent = now.toLocaleDateString('en-GB', options);
     } catch(err) {}
   }
 

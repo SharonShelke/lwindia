@@ -9,7 +9,7 @@ import { View, Text, TouchableOpacity, Linking, StyleSheet } from 'react-native'
 const BROADCAST_SOURCES = [
   {
     id: 'loveworldsat',
-    name: 'LoveWorld Sat',
+    name: 'Loveworld Sat',
     badge: 'LW SAT',
     region: 'South Africa & Pan-Africa',
     flag: '🇿🇦',
@@ -24,7 +24,7 @@ const BROADCAST_SOURCES = [
   },
   {
     id: 'loveworldeurope',
-    name: 'LoveWorld Europe',
+    name: 'Loveworld Europe',
     badge: 'LW EU',
     region: 'United Kingdom & Europe',
     flag: '🇪🇺',
@@ -34,7 +34,7 @@ const BROADCAST_SOURCES = [
     accentColor: '#F59E0B',
     liveUrl: 'https://loveworldeurope.org',
     portalUrl: 'https://loveworlduk.org',
-    programs: ['LoveWorld News Special', 'European Perspective', 'Youth Live UK', 'Faith & Society'],
+    programs: ['Loveworld News Special', 'European Perspective', 'Youth Live UK', 'Faith & Society'],
     statusNote: 'Live TV & Multilingual Portal (No Public Article RSS)'
   },
   {
@@ -54,7 +54,7 @@ const BROADCAST_SOURCES = [
   },
   {
     id: 'loveworldindia',
-    name: 'LoveWorld India (LBN TV)',
+    name: 'Loveworld India (LBN TV)',
     badge: 'LW INDIA',
     region: 'India & South Asia',
     flag: '🇮🇳',

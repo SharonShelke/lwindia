@@ -74,7 +74,7 @@ export const Footer = ({ theme, onOpenModal, lastUpdated, isLiveServer }) => {
       {/* Copyright & Disclaimer Notice */}
       <View style={styles.disclaimerSection}>
         <Text style={[styles.disclaimerText, { color: theme.textMuted }]}>
-          Content Disclaimer: News Connect is an indexing news aggregator. All article titles, excerpts, logos and trademarks are the exclusive property of their respective publishers (Newsmax, Fox News, LoveWorld Networks, Sky News Australia, Asian News International). Articles are subject to publisher terms and copyright.
+          Content Disclaimer: News Connect is an indexing news aggregator. All article titles, excerpts, logos and trademarks are the exclusive property of their respective publishers (Newsmax, Fox News, Loveworld Networks, Sky News Australia, Asian News International). Articles are subject to publisher terms and copyright.
         </Text>
         <View style={styles.syncRow}>
           <Text style={[styles.syncText, { color: theme.textMuted }]}>

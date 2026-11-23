@@ -55,7 +55,7 @@ export const NEWS_SOURCES = [
   },
   {
     id: 'ln24international',
-    name: 'LoveWorld LN24 International',
+    name: 'Loveworld LN24 International',
     shortName: 'LN24 Intl',
     region: 'International',
     regionCode: 'INTL',
@@ -72,9 +72,9 @@ export const NEWS_SOURCES = [
     integrationMethod: 'Official WordPress RSS 2.0',
     brandColor: '#0C2340',
     accentColor: '#D4AF37',
-    description: 'Global news and current affairs television network delivering truth-oriented global analysis from LoveWorld Networks.',
+    description: 'Global news and current affairs television network delivering truth-oriented global analysis from Loveworld Networks.',
     categories: ['World News', 'Politics', 'Africa', 'International Affairs', 'Business', 'Religion and Faith'],
-    attributionRule: 'Attribution to LoveWorld LN24 International with direct links to full reports on ln24international.com.'
+    attributionRule: 'Attribution to Loveworld LN24 International with direct links to full reports on ln24international.com.'
   },
   {
     id: 'ln247',
@@ -93,13 +93,13 @@ export const NEWS_SOURCES = [
     integrationMethod: 'Official WordPress RSS 2.0',
     brandColor: '#0A2540',
     accentColor: '#00D4B2',
-    description: '24/7 digital hybrid media and news platform by LoveWorld Inc., covering international news and lifestyle.',
+    description: '24/7 digital hybrid media and news platform by Loveworld Inc., covering international news and lifestyle.',
     categories: ['World News', 'Technology', 'Business', 'Health', 'Religion and Faith', 'International Affairs'],
     attributionRule: 'Headlines and summaries aggregated with publisher attribution and canonical links to ln247.news.'
   },
   {
     id: 'loveworldeurope',
-    name: 'LoveWorld Europe',
+    name: 'Loveworld Europe',
     shortName: 'LW Europe',
     region: 'UK & Europe',
     regionCode: 'EU',
@@ -114,13 +114,13 @@ export const NEWS_SOURCES = [
     accentColor: '#F59E0B',
     description: 'European continental television network delivering multilingual broadcasts and faith programming across Europe and the UK.',
     categories: ['Europe', 'Religion and Faith', 'International Affairs', 'Health'],
-    attributionRule: 'Broadcasting service by LoveWorld Television Ministry. Direct links to official streaming platform loveworldeurope.org.',
+    attributionRule: 'Broadcasting service by Loveworld Television Ministry. Direct links to official streaming platform loveworldeurope.org.',
     broadcastUrl: 'https://loveworldeurope.org',
     ukPortal: 'https://loveworlduk.org'
   },
   {
     id: 'loveworldsat',
-    name: 'LoveWorld Sat',
+    name: 'Loveworld Sat',
     shortName: 'LW Sat',
     region: 'South Africa',
     regionCode: 'ZA',
@@ -135,7 +135,7 @@ export const NEWS_SOURCES = [
     accentColor: '#EA580C',
     description: 'Premier 24/7 Christian satellite television network broadcasting from Johannesburg across Africa and globally.',
     categories: ['Africa', 'Religion and Faith', 'Business', 'World News'],
-    attributionRule: 'LoveWorld SAT broadcast programming. Deep-linking to official portal and Live TV streaming at loveworldsat.org.',
+    attributionRule: 'Loveworld SAT broadcast programming. Deep-linking to official portal and Live TV streaming at loveworldsat.org.',
     broadcastUrl: 'https://www.loveworldsat.org/live-tv',
     newsPortalUrl: 'https://www.loveworldsat.org/news'
   },
@@ -185,7 +185,7 @@ export const NEWS_SOURCES = [
   },
   {
     id: 'loveworldindia',
-    name: 'LoveWorld India (LBN TV)',
+    name: 'Loveworld India (LBN TV)',
     shortName: 'LW India',
     region: 'India & South Asia',
     regionCode: 'IN',
@@ -200,7 +200,7 @@ export const NEWS_SOURCES = [
     accentColor: '#F5B041',
     description: 'Premier 24/7 Christian television & media network impacting India and South Asia with faith programming, prayer services, and youth leadership (JioTV Channel 4080).',
     categories: ['India', 'Religion and Faith', 'International Affairs', 'World News'],
-    attributionRule: 'LoveWorld India & LBN Broadcasting Network. Direct access to live television streaming, programs, and news at lwindia.org.',
+    attributionRule: 'Loveworld India & LBN Broadcasting Network. Direct access to live television streaming, programs, and news at lwindia.org.',
     broadcastUrl: 'https://lwindia.org/',
     portalUrl: 'https://lwindia.org/'
   }

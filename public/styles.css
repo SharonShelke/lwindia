@@ -3890,35 +3890,13 @@ a {
   filter: drop-shadow(0 0 6px rgba(245, 176, 65, 0.6)) !important;
 }
 
-.nav-link-lwindia {
-  background: rgba(245, 176, 65, 0.06) !important;
-  border: 1px solid rgba(245, 176, 65, 0.35) !important;
-}
+/* .nav-link-lwindia neutralized to standard nav-link */
 
-.nav-link-lwindia:hover {
-  background: rgba(245, 176, 65, 0.14) !important;
-  border-color: #F5B041 !important;
-}
+/* .nav-link-lwindia hover neutralized */
 
-.lwindia-gold-text {
-  color: #F5B041 !important;
-  font-weight: 700 !important;
-}
+/* .lwindia-gold-text neutralized */
 
-.nav-in-pill {
-  font-size: 10px !important;
-  font-weight: 850 !important;
-  letter-spacing: 0.5px !important;
-  color: #F5B041 !important;
-  background: rgba(245, 176, 65, 0.16) !important;
-  border: 1px solid rgba(245, 176, 65, 0.45) !important;
-  padding: 1px 5px !important;
-  border-radius: 4px !important;
-  line-height: 1.2 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
+/* .nav-in-pill neutralized */
 
 .saved-pill {
   background: #F5B041 !important;
@@ -3956,25 +3934,13 @@ a {
   filter: none !important;
 }
 
-[data-theme="light"] .nav-link-lwindia {
-  background: rgba(194, 122, 0, 0.08) !important;
-  border-color: rgba(194, 122, 0, 0.35) !important;
-}
+[data-theme="light"] /* .nav-link-lwindia neutralized to standard nav-link */
 
-[data-theme="light"] .nav-link-lwindia:hover {
-  background: rgba(194, 122, 0, 0.15) !important;
-  border-color: #c27a00 !important;
-}
+[data-theme="light"] /* .nav-link-lwindia hover neutralized */
 
-[data-theme="light"] .lwindia-gold-text {
-  color: #c27a00 !important;
-}
+[data-theme="light"] /* .lwindia-gold-text neutralized */
 
-[data-theme="light"] .nav-in-pill {
-  color: #c27a00 !important;
-  background: rgba(194, 122, 0, 0.15) !important;
-  border-color: rgba(194, 122, 0, 0.4) !important;
-}
+[data-theme="light"] /* .nav-in-pill neutralized */
 
 [data-theme="light"] .saved-pill {
   background: #c27a00 !important;
@@ -4093,21 +4059,11 @@ a {
 
 
 /* 9th Network & Navbar Link (lwindia.org) */
-.nav-link-lwindia {
-  border-color: rgba(245, 176, 65, 0.35) !important;
-  color: #F5B041 !important;
-}
+/* .nav-link-lwindia neutralized to standard nav-link */
 
-.nav-link-lwindia .lwindia-gold-text {
-  color: #F5B041 !important;
-  font-weight: 700 !important;
-}
+.nav-link-lwindia /* .lwindia-gold-text neutralized */
 
-.nav-link-lwindia:hover {
-  background: rgba(245, 176, 65, 0.12) !important;
-  border-color: #F5B041 !important;
-  box-shadow: 0 0 14px rgba(245, 176, 65, 0.25) !important;
-}
+/* .nav-link-lwindia hover neutralized */
 
 
 /* ==========================================================================
@@ -4448,14 +4404,9 @@ a {
   filter: drop-shadow(0 0 5px rgba(194, 122, 0, 0.5)) !important;
 }
 
-[data-theme="light"] .nav-link-lwindia {
-  background: rgba(194, 122, 0, 0.07) !important;
-  border-color: rgba(194, 122, 0, 0.2) !important;
-}
+[data-theme="light"] /* .nav-link-lwindia neutralized to standard nav-link */
 
-[data-theme="light"] .lwindia-gold-text {
-  color: #c27a00 !important;
-}
+[data-theme="light"] /* .lwindia-gold-text neutralized */
 
 [data-theme="light"] .saved-pill {
   background: #c27a00 !important;
@@ -5977,4 +5928,172 @@ a {
 [data-theme="light"] .bvsc-read-link:hover {
   background: #c27a00;
   color: #fffdf8;
+}
+
+
+/* ==========================================================================
+   Watch More Live TV Button & Extra Row Grid
+   ========================================================================== */
+.broadcast-more-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.btn-watch-more-tv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(245, 176, 65, 0.08);
+  border: 1px solid rgba(245, 176, 65, 0.45);
+  color: #F5B041;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif);
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 0 16px rgba(245, 176, 65, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-watch-more-tv:hover {
+  background: linear-gradient(135deg, #F5B041 0%, #D97706 100%);
+  color: #0B1325;
+  border-color: #F5B041;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(245, 176, 65, 0.45), 0 0 25px rgba(245, 176, 65, 0.3);
+}
+
+.bwmt-icon {
+  font-size: 16px;
+}
+
+.bwmt-badge {
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 12px;
+  letter-spacing: 0.3px;
+  transition: all 0.2s ease;
+}
+
+.btn-watch-more-tv:hover .bwmt-badge {
+  background: rgba(11, 19, 37, 0.25);
+  color: #0B1325;
+}
+
+.bwmt-arrow {
+  font-size: 14px;
+  transition: transform 0.25s ease;
+}
+
+.btn-watch-more-tv.expanded .bwmt-arrow {
+  transform: rotate(180deg);
+}
+
+.broadcast-extra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  animation: broadcastFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes broadcastFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Day/Light Theme */
+[data-theme="light"] .btn-watch-more-tv {
+  background: rgba(255, 253, 248, 0.95);
+  border-color: rgba(194, 122, 0, 0.45);
+  color: #c27a00;
+  box-shadow: 0 6px 20px rgba(20, 30, 60, 0.08), 0 0 14px rgba(194, 122, 0, 0.12);
+}
+
+[data-theme="light"] .btn-watch-more-tv:hover {
+  background: linear-gradient(135deg, #e09000 0%, #c27a00 100%);
+  color: #fffdf8;
+  border-color: #c27a00;
+}
+
+[data-theme="light"] .btn-watch-more-tv:hover .bwmt-badge {
+  background: rgba(255, 253, 248, 0.3);
+  color: #fffdf8;
+}
+
+
+/* Unified Watch Live TV Buttons - Exact Same Golden Amber Color */
+.btn-stream {
+  flex: 1.2 !important;
+  padding: 10px 16px !important;
+  background: linear-gradient(135deg, #F5B041 0%, #D97706 100%) !important;
+  color: #0B1325 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', system-ui, sans-serif) !important;
+  font-size: 12.5px !important;
+  font-weight: 850 !important;
+  cursor: pointer !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 14px rgba(245, 176, 65, 0.35) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  text-decoration: none !important;
+}
+
+.btn-stream:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 22px rgba(245, 176, 65, 0.55) !important;
+  filter: brightness(1.06) !important;
+  color: #0B1325 !important;
+}
+
+.btn-play-trigger {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #F5B041 0%, #D97706 100%) !important;
+  color: #0B1325 !important;
+  border: 2px solid rgba(255, 255, 255, 0.4) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 0 0 20px rgba(245, 176, 65, 0.55) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.btn-play-trigger:hover {
+  transform: scale(1.12) !important;
+  box-shadow: 0 0 28px rgba(245, 176, 65, 0.85) !important;
+}
+
+/* Day/Light Theme Unified Buttons */
+[data-theme="light"] .btn-stream {
+  background: linear-gradient(135deg, #e09000 0%, #c27a00 100%) !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 4px 14px rgba(194, 122, 0, 0.3) !important;
+}
+
+[data-theme="light"] .btn-stream:hover {
+  box-shadow: 0 6px 22px rgba(194, 122, 0, 0.45) !important;
+  color: #fffdf8 !important;
+}
+
+[data-theme="light"] .btn-play-trigger {
+  background: linear-gradient(135deg, #e09000 0%, #c27a00 100%) !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 0 18px rgba(194, 122, 0, 0.45) !important;
 }
