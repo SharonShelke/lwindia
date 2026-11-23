@@ -96,7 +96,7 @@ export const FeaturedNews = ({ theme, featuredArticles = [] }) => {
               resizeMode="cover"
             />
             <View style={styles.imageOverlay} />
-            
+
             {/* Top Source Overlay Badge */}
             <View style={styles.badgeRow}>
               <View style={[styles.sourcePill, { backgroundColor: 'rgba(11, 19, 37, 0.85)' }]}>
