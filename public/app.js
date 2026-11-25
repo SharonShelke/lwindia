@@ -308,8 +308,8 @@
       const statusPill = source.hasRss
         ? '<span class="src-status-rss">📡 Live RSS</span>'
         : source.feedStatus === 'broadcast_only'
-        ? '<span class="src-status-tv">📺 Live TV</span>'
-        : '<span class="src-status-portal">🔗 Portal</span>';
+          ? '<span class="src-status-tv">📺 Live TV</span>'
+          : '<span class="src-status-portal">🔗 Portal</span>';
 
       const logoImg = APP_BRAND_ICONS[source.id]
         || '<div class="src-logo-fallback" style="background:' + source.brandColor + '">' + source.shortName + '</div>';
@@ -322,7 +322,7 @@
         + (isActive ? '✓ Showing Feed' : 'Filter Stories') + '</button>'
         + '<a href="' + source.website + '" target="_blank" rel="noopener noreferrer" class="src-portal-link">Portal ↗</a></div>';
 
-      el.addEventListener('click', function(e) {
+      el.addEventListener('click', function (e) {
         if (e.target.tagName.toLowerCase() === 'a') return;
         currentSource = currentSource === source.id ? 'all' : source.id;
         renderSources();
@@ -533,7 +533,7 @@
       btnViewList.classList.remove('active');
       newsGrid.classList.remove('view-mode-list');
       newsGrid.classList.add('view-mode-cards');
-      try { localStorage.setItem('newsconnect_view_mode', 'cards'); } catch (e) {}
+      try { localStorage.setItem('newsconnect_view_mode', 'cards'); } catch (e) { }
     });
 
     btnViewList.addEventListener('click', () => {
@@ -541,7 +541,7 @@
       btnViewCards.classList.remove('active');
       newsGrid.classList.remove('view-mode-cards');
       newsGrid.classList.add('view-mode-list');
-      try { localStorage.setItem('newsconnect_view_mode', 'list'); } catch (e) {}
+      try { localStorage.setItem('newsconnect_view_mode', 'list'); } catch (e) { }
     });
 
     // Restore saved view mode preference
@@ -553,7 +553,7 @@
         newsGrid.classList.remove('view-mode-cards');
         newsGrid.classList.add('view-mode-list');
       }
-    } catch (e) {}
+    } catch (e) { }
   }
 
   function cleanHtmlText(txt) {
@@ -619,7 +619,7 @@
   function renderEditorialMagazine(items) {
     if (!items || items.length === 0) return;
     const leadArt = items.find(a => (a.category && a.category.toLowerCase().includes('business')) || (a.category && a.category.toLowerCase().includes('world'))) || items[1] || items[0];
-    
+
     const edImg = document.getElementById('ed-lead-img');
     const edBadge = document.getElementById('ed-lead-badge');
     const edLink = document.getElementById('ed-lead-link');
@@ -699,12 +699,16 @@
   // Render News Cards
   // Pagination & 3-Row Limit Settings (3 rows in 3-column grid = 9 stories)
   const INITIAL_VISIBLE_COUNT = 9;
+  // Pagination & 3-Row Limit Settings (3 rows in 3-col desktop = 9, 3 rows in 2-col mobile = 6)
+  function getInitialVisibleCount() {
+    return window.innerWidth <= 768 ? 6 : 9;
+  }
   let isReportsExpanded = false;
   let currentFeedItems = [];
 
   // Reset pagination state when filters change
   const _origFilterAndRenderNews = filterAndRenderNews;
-  filterAndRenderNews = function() {
+  filterAndRenderNews = function () {
     isReportsExpanded = false;
     _origFilterAndRenderNews();
   };
@@ -765,36 +769,37 @@
       return;
     }
 
-    // Determine slice to display: 3 rows (9 cards) or full list
-    const visibleItems = (isReportsExpanded || totalCount <= INITIAL_VISIBLE_COUNT)
+    // Determine slice to display: 3 rows (9 desktop / 6 mobile) or full list
+    const initialCount = getInitialVisibleCount();
+    const visibleItems = (isReportsExpanded || totalCount <= initialCount)
       ? currentFeedItems
-      : currentFeedItems.slice(0, INITIAL_VISIBLE_COUNT);
+      : currentFeedItems.slice(0, initialCount);
 
     visibleItems.forEach((art, idx) => {
       const card = document.createElement('article');
-      card.className = 'news-card' + (idx >= INITIAL_VISIBLE_COUNT ? ' card-cascade-in' : '');
+      card.className = 'news-card' + (idx >= initialCount ? ' card-cascade-in' : '');
       const catColor = getCategoryGlow(art.category);
       card.style.setProperty('--cat-color', catColor);
       card.setAttribute('data-category', (art.category || 'general').toLowerCase());
-      if (idx >= INITIAL_VISIBLE_COUNT) {
-        card.style.animationDelay = `${Math.min((idx - INITIAL_VISIBLE_COUNT) * 0.04, 0.6)}s`;
+      if (idx >= initialCount) {
+        card.style.animationDelay = `${Math.min((idx - initialCount) * 0.04, 0.6)}s`;
       }
 
-      const sourceLogos = {
-        newsmax: 'assets/logos/newsmax.png',
-        foxnews: 'assets/logos/foxnews.png',
-        ln24international: 'assets/logos/ln24international.png',
-        ln247: 'assets/logos/ln247.png',
-        loveworldeurope: 'assets/logos/loveworldeurope.png',
-        loveworldsat: 'assets/logos/loveworldsat.png',
-        skynews_australia: 'assets/logos/skynews_australia.png',
-        ani: 'assets/logos/ani.png',
-        loveworldindia: 'assets/logos/loveworldindia.png'
-      };
-      const logoSrc = sourceLogos[art.sourceId] || 'assets/logos/newsmax.png';
-      const numFormatted = String(idx + 1).padStart(2, '0');
+        const sourceLogos = {
+          newsmax: 'assets/logos/newsmax.png',
+          foxnews: 'assets/logos/foxnews.png',
+          ln24international: 'assets/logos/ln24international.png',
+          ln247: 'assets/logos/ln247.png',
+          loveworldeurope: 'assets/logos/loveworldeurope.png',
+          loveworldsat: 'assets/logos/loveworldsat.png',
+          skynews_australia: 'assets/logos/skynews_australia.png',
+          ani: 'assets/logos/ani.png',
+          loveworldindia: 'assets/logos/loveworldindia.png'
+        };
+        const logoSrc = sourceLogos[art.sourceId] || 'assets/logos/newsmax.png';
+        const numFormatted = String(idx + 1).padStart(2, '0');
 
-      card.innerHTML = `
+        card.innerHTML = `
         <div class="card-thumb-wrap">
           <img src="${art.imageUrl}" alt="${cleanHtmlText(art.title)}" class="card-thumb" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80'">
           <span class="card-cat-badge">${art.category}</span>
@@ -828,52 +833,52 @@
         </div>
       `;
 
-      // Bookmark Action Handler
-      const bmBtn = card.querySelector('.bookmark-card-btn');
-      if (bmBtn) {
-        if (isArticleSaved(art.id)) {
-          bmBtn.classList.add('active');
-          bmBtn.style.color = 'var(--accent-gold)';
-        }
-        bmBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          toggleSavedArticle(art);
-          const saved = isArticleSaved(art.id);
-          bmBtn.classList.toggle('active', saved);
-          bmBtn.style.color = saved ? 'var(--accent-gold)' : '';
-        });
-      }
-
-      // Share Action Handler
-      const shareBtn = card.querySelector('.share-btn');
-      if (shareBtn) {
-        shareBtn.addEventListener('click', async (e) => {
-          e.preventDefault();
-          const shareUrl = shareBtn.getAttribute('data-url');
-          const shareTitle = decodeURIComponent(shareBtn.getAttribute('data-title'));
-          if (navigator.share) {
-            try {
-              await navigator.share({ title: shareTitle, url: shareUrl });
-            } catch (err) {}
-          } else {
-            navigator.clipboard.writeText(shareUrl).then(() => {
-              shareBtn.textContent = '✓ Copied';
-              setTimeout(() => { shareBtn.textContent = '↗ Share'; }, 2000);
-            });
+        // Bookmark Action Handler
+        const bmBtn = card.querySelector('.bookmark-card-btn');
+        if (bmBtn) {
+          if (isArticleSaved(art.id)) {
+            bmBtn.classList.add('active');
+            bmBtn.style.color = 'var(--accent-gold)';
           }
-        });
-      }
+          bmBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleSavedArticle(art);
+            const saved = isArticleSaved(art.id);
+            bmBtn.classList.toggle('active', saved);
+            bmBtn.style.color = saved ? 'var(--accent-gold)' : '';
+          });
+        }
 
-      newsGrid.appendChild(card);
-    });
+        // Share Action Handler
+        const shareBtn = card.querySelector('.share-btn');
+        if (shareBtn) {
+          shareBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const shareUrl = shareBtn.getAttribute('data-url');
+            const shareTitle = decodeURIComponent(shareBtn.getAttribute('data-title'));
+            if (navigator.share) {
+              try {
+                await navigator.share({ title: shareTitle, url: shareUrl });
+              } catch (err) { }
+            } else {
+              navigator.clipboard.writeText(shareUrl).then(() => {
+                shareBtn.textContent = '✓ Copied';
+                setTimeout(() => { shareBtn.textContent = '↗ Share'; }, 2000);
+              });
+            }
+          });
+        }
+
+        newsGrid.appendChild(card);
+      });
 
     // Update Read More Reports Button & Subhint
     if (readMoreWrap) {
-      if (totalCount <= INITIAL_VISIBLE_COUNT) {
+      if (totalCount <= initialCount) {
         readMoreWrap.style.display = 'none';
       } else {
         readMoreWrap.style.display = 'flex';
-        const remaining = totalCount - INITIAL_VISIBLE_COUNT;
+        const remaining = totalCount - initialCount;
 
         if (!isReportsExpanded) {
           if (readMoreText) readMoreText.textContent = 'Read More Reports';
@@ -882,7 +887,7 @@
             readMoreIcon.innerHTML = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>`;
           }
           if (readMoreSubhint) {
-            readMoreSubhint.textContent = `Showing ${INITIAL_VISIBLE_COUNT} of ${totalCount} live reports (3 rows)`;
+            readMoreSubhint.textContent = `Showing ${initialCount} of ${totalCount} live reports (3 rows)`;
           }
         } else {
           if (readMoreText) readMoreText.textContent = 'Show Less Reports';
@@ -897,342 +902,429 @@
       }
     }
 
-    if (feedTitle) {
-      feedTitle.textContent = currentSource !== 'all'
-        ? `${sources.find(s => s.id === currentSource)?.name || currentSource} Headlines`
-        : currentCategory !== 'All'
-        ? `${currentCategory} Headlines`
-        : 'Latest International Headlines';
-    }
-  }
-
-  // Hook Read More Reports Button Click with Animation & Scroll
-  const readMoreReportsBtn = document.getElementById('btn-read-more-reports');
-  if (readMoreReportsBtn) {
-    readMoreReportsBtn.addEventListener('click', () => {
-      if (!isReportsExpanded) {
-        isReportsExpanded = true;
-        renderArticles(currentFeedItems);
-      } else {
-        isReportsExpanded = false;
-        renderArticles(currentFeedItems);
-        const feedSec = document.getElementById('feed');
-        if (feedSec) {
-          feedSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+      if (feedTitle) {
+        feedTitle.textContent = currentSource !== 'all'
+          ? `${sources.find(s => s.id === currentSource)?.name || currentSource} Headlines`
+          : currentCategory !== 'All'
+            ? `${currentCategory} Headlines`
+            : 'Latest International Headlines';
       }
-    });
-  }
+    }
 
-  // Live Backend Fetchers
-  async function syncFromBackend() {
-    try {
-      const res = await fetch('/api/sources');
-      if (res.ok) {
-        const data = await res.json();
-        if (data.sources && data.sources.length > 0) {
-          sources = data.sources;
-          renderSources();
-          if (statusText) {
-            statusText.textContent = `${data.connectedFeeds} Feeds Live • ${data.broadcastPortals} Broadcasts Connected`;
+    // Hook Read More Reports Button Click with Animation & Scroll
+    const readMoreReportsBtn = document.getElementById('btn-read-more-reports');
+    if (readMoreReportsBtn) {
+      readMoreReportsBtn.addEventListener('click', () => {
+        if (!isReportsExpanded) {
+          isReportsExpanded = true;
+          renderArticles(currentFeedItems);
+        } else {
+          isReportsExpanded = false;
+          renderArticles(currentFeedItems);
+          const feedSec = document.getElementById('feed');
+          if (feedSec) {
+            feedSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         }
-      }
-    } catch (e) {
-      // Offline or direct file view - fallback stays active seamlessly
+      });
     }
 
-    try {
-      const res = await fetch('/api/news');
-      if (res.ok) {
-        const data = await res.json();
-        if (data.articles && data.articles.length > 0) {
-          articles = data.articles;
+    // Live Backend Fetchers
+    async function syncFromBackend() {
+      try {
+        const res = await fetch('/api/sources');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.sources && data.sources.length > 0) {
+            sources = data.sources;
+            renderSources();
+            if (statusText) {
+              statusText.textContent = `${data.connectedFeeds} Feeds Live • ${data.broadcastPortals} Broadcasts Connected`;
+            }
+          }
+        }
+      } catch (e) {
+        // Offline or direct file view - fallback stays active seamlessly
+      }
+
+      try {
+        const res = await fetch('/api/news');
+        if (res.ok) {
+          const data = await res.json();
+          if (data.articles && data.articles.length > 0) {
+            articles = data.articles;
+            filterAndRenderNews();
+            if (lastUpdatedText) {
+              lastUpdatedText.textContent = `Sync: ${formatRelative(data.lastUpdated)}`;
+            }
+          }
+        }
+      } catch (e) {
+        // Offline fallback already rendered
+      }
+    }
+
+    // Search Input Handler (Debounced)
+    let searchTimer;
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        if (searchClear) searchClear.style.display = searchQuery ? 'block' : 'none';
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
           filterAndRenderNews();
-          if (lastUpdatedText) {
-            lastUpdatedText.textContent = `Sync: ${formatRelative(data.lastUpdated)}`;
-          }
-        }
-      }
-    } catch (e) {
-      // Offline fallback already rendered
+        }, 200);
+      });
     }
-  }
 
-  // Search Input Handler (Debounced)
-  let searchTimer;
-  if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      searchQuery = e.target.value;
-      if (searchClear) searchClear.style.display = searchQuery ? 'block' : 'none';
-      clearTimeout(searchTimer);
-      searchTimer = setTimeout(() => {
+    if (searchClear) {
+      searchClear.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        searchClear.style.display = 'none';
         filterAndRenderNews();
-      }, 200);
-    });
-  }
+      });
+    }
 
-  if (searchClear) {
-    searchClear.addEventListener('click', () => {
-      if (searchInput) searchInput.value = '';
-      searchQuery = '';
-      searchClear.style.display = 'none';
-      filterAndRenderNews();
-    });
-  }
+    // 1. Instant Synchronous Initial Render (Screen is never white/blank!)
+    renderSources();
+    filterAndRenderNews();
+    if (statusText) statusText.textContent = '8 Sources Connected';
+    if (lastUpdatedText) lastUpdatedText.textContent = 'Sync: Active';
 
-  // 1. Instant Synchronous Initial Render (Screen is never white/blank!)
-  renderSources();
-  filterAndRenderNews();
-  if (statusText) statusText.textContent = '8 Sources Connected';
-  if (lastUpdatedText) lastUpdatedText.textContent = 'Sync: Active';
 
-  
     // ============================================================================
-  // Watch More Live TV Toggle Controller (Styled like Latest Live Dispatches)
-  // ============================================================================
-  const btnWatchMoreTv = document.getElementById('btn-watch-more-tv');
-  const beaconBadge = document.getElementById('broadcast-beacon-badge');
-  const bwmtText = document.getElementById('btn-watch-more-text');
-  const bwmtBadge = document.getElementById('btn-watch-more-badge');
-  const bwmtIcon = document.getElementById('btn-watch-more-icon');
-  const bwmtSubhint = document.getElementById('broadcast-subhint');
+    // Watch More Live TV Toggle Controller (Styled like Latest Live Dispatches)
+    // Watch More Live TV Toggle Controller (Desktop: 3 cards / Mobile: 4 cards = 2x2)
+    // ============================================================================
+    const btnWatchMoreTv = document.getElementById('btn-watch-more-tv');
+    const beaconBadge = document.getElementById('broadcast-beacon-badge');
+    const bwmtText = document.getElementById('btn-watch-more-text');
+    const bwmtBadge = document.getElementById('btn-watch-more-badge');
+    const bwmtIcon = document.getElementById('btn-watch-more-icon');
+    const bwmtSubhint = document.getElementById('broadcast-subhint');
 
-  if (btnWatchMoreTv) {
-    btnWatchMoreTv.addEventListener('click', (e) => {
-      e.preventDefault();
-      const extraCards = document.querySelectorAll('.broadcast-card-extra');
-      const isExpanded = btnWatchMoreTv.classList.contains('expanded');
+    function syncBroadcastVisibility() {
+      const allBroadcastCards = document.querySelectorAll('#broadcast-grid .broadcast-tv-card');
+      const broadcastWrap = document.getElementById('broadcast-read-more-wrapper');
+      if (!allBroadcastCards.length) return;
+      const isExpanded = btnWatchMoreTv && btnWatchMoreTv.classList.contains('expanded');
+      const isMobile = window.innerWidth <= 768;
+      const initialTvCount = isMobile ? 4 : 3;
+      const totalTv = allBroadcastCards.length;
 
-      if (isExpanded) {
-        extraCards.forEach(c => c.style.display = 'none');
-        btnWatchMoreTv.classList.remove('expanded');
-        btnWatchMoreTv.setAttribute('aria-expanded', 'false');
-        if (bwmtText) bwmtText.textContent = 'Watch More Live TV';
-        if (bwmtBadge) bwmtBadge.textContent = '+3 channels';
-        if (bwmtIcon) bwmtIcon.style.transform = 'rotate(0deg)';
-        if (bwmtSubhint) bwmtSubhint.textContent = 'Showing 3 of 6 live broadcast channels';
-        if (beaconBadge) beaconBadge.textContent = '● 3 CHANNELS ACTIVE';
+      if (broadcastWrap) {
+        broadcastWrap.style.display = totalTv <= initialTvCount ? 'none' : 'flex';
+      }
 
-        const section = document.getElementById('broadcasts');
-        if (section) section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } else {
-        extraCards.forEach((c, idx) => {
-          c.style.display = 'flex';
-          c.style.animation = 'cardCascadeFadeIn 0.35s ease-out';
-          c.style.animationDelay = (idx * 0.08) + 's';
-        });
-        btnWatchMoreTv.classList.add('expanded');
-        btnWatchMoreTv.setAttribute('aria-expanded', 'true');
+      if (isExpanded && totalTv > initialTvCount) {
+        allBroadcastCards.forEach(c => { c.style.display = 'flex'; });
         if (bwmtText) bwmtText.textContent = 'Show Fewer Channels';
         if (bwmtBadge) bwmtBadge.textContent = 'All Visible';
         if (bwmtIcon) bwmtIcon.style.transform = 'rotate(180deg)';
-        if (bwmtSubhint) bwmtSubhint.textContent = 'Showing 6 of 6 live broadcast channels';
-        if (beaconBadge) beaconBadge.textContent = '● 6 CHANNELS ACTIVE';
-      }
-    });
-  }
-
-  // 2. Stream Player Modal Controller
-  const streamModal = document.getElementById('stream-modal');
-  const streamModalClose = document.getElementById('stream-modal-close');
-  const streamModalTitle = document.getElementById('stream-modal-title');
-  const streamModalDesc = document.getElementById('stream-modal-desc');
-  const streamPlayerArea = document.getElementById('stream-player-area');
-  const streamExternalLink = document.getElementById('stream-external-link');
-
-  const STREAM_CHANNELS = {
-    loveworldindia: {
-      title: '🇮🇳 Loveworld India (LBN TV) — Live Stream',
-      desc: '24/7 Satellite & Digital Broadcast Live: Impacting India and South Asia with faith, prayer, and life-changing programs (JioTV 4080).',
-      embedUrl: 'https://lwindia.org/',
-      externalUrl: 'https://lwindia.org/'
-    },
-    loveworldsat: {
-      title: '🇿🇦 Loveworld Sat — Live TV Stream',
-      desc: '24/7 Satellite Broadcast Live from Johannesburg: News On The Hour, Good Morning World, and Global Business Update.',
-      embedUrl: 'https://www.loveworldsat.org/live-tv',
-      externalUrl: 'https://www.loveworldsat.org/live-tv'
-    },
-    loveworldeurope: {
-      title: '🇪🇺 Loveworld Europe — Live Stream',
-      desc: 'Continental Multilingual Christian Broadcasting & Youth Leadership Special Programs.',
-      embedUrl: 'https://loveworldeurope.org',
-      externalUrl: 'https://loveworldeurope.org'
-    },
-    skynews: {
-      title: '🇦🇺 Sky News Australia — Digital Reports',
-      desc: 'Canberra Parliament, National Politics, and Global Affairs on-demand video coverage.',
-      embedUrl: 'https://www.skynews.com.au',
-      externalUrl: 'https://www.skynews.com.au'
-    },
-    loveworldusa: {
-      title: '🇺🇸 Loveworld USA — Live TV Broadcast',
-      desc: '24/7 Satellite Christian Television from California & Atlanta: In-depth Bible teaching, global praise, and family programming.',
-      embedUrl: 'https://live.loveworldusa.org/',
-      externalUrl: 'https://www.loveworldusa.org/'
-    },
-    ln24intl: {
-      title: '🌐 LN24 International — 24/7 Global News',
-      desc: 'International investigative news journalism, geopolitical analysis, and live global event dispatches.',
-      embedUrl: 'https://ln24international.com/',
-      externalUrl: 'https://ln24international.com/'
-    }
-  };
-
-  document.querySelectorAll('.open-player-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const channelKey = btn.getAttribute('data-channel');
-      const channel = STREAM_CHANNELS[channelKey];
-      if (!channel) return;
-
-      if (streamModalTitle) streamModalTitle.textContent = channel.title;
-      if (streamModalDesc) streamModalDesc.textContent = channel.desc;
-      if (streamExternalLink) streamExternalLink.href = channel.externalUrl;
-      if (streamPlayerArea) {
-        streamPlayerArea.innerHTML = `<iframe src="${channel.embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>`;
-      }
-      if (streamModal) streamModal.style.display = 'flex';
-    });
-  });
-
-  if (streamModalClose) {
-    streamModalClose.addEventListener('click', () => {
-      if (streamModal) streamModal.style.display = 'none';
-      if (streamPlayerArea) streamPlayerArea.innerHTML = '';
-    });
-  }
-
-  // Dynamic Date in Top Utility Bar
-  const dateEl = document.getElementById('utility-date-text');
-  if (dateEl) {
-    try {
-      const now = new Date();
-      const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-      dateEl.textContent = now.toLocaleDateString('en-GB', options);
-    } catch(err) {}
-  }
-
-  // 3D Perspective Card Tilt Animation (Matching Showcase Reference Image 3)
-  let activeTiltCard = null;
-  document.addEventListener('mousemove', (e) => {
-    if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return;
-    const card = e.target.closest('.news-card, .broadcast-tv-card, .source-item');
-    if (!card || card.closest('.view-mode-list')) {
-      if (activeTiltCard) {
-        activeTiltCard.style.transform = '';
-        activeTiltCard = null;
-      }
-      return;
-    }
-    if (activeTiltCard && activeTiltCard !== card) {
-      activeTiltCard.style.transform = '';
-    }
-    activeTiltCard = card;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const tiltX = -((y - cy) / cy * 7).toFixed(2);
-    const tiltY = ((x - cx) / cx * 7).toFixed(2);
-    card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-8px) scale3d(1.018, 1.018, 1.018)`;
-  });
-
-  document.addEventListener('mouseleave', () => {
-    if (activeTiltCard) {
-      activeTiltCard.style.transform = '';
-      activeTiltCard = null;
-    }
-  });
-
-
-  // ============================================================================
-  // Quick Catch-Up Feature — Upgraded Executive Digest Engine
-  // Smart timing, session memory, two CTAs, 5 stories, video fallback
-  // ============================================================================
-
-  const digestModal = document.getElementById('express-digest-modal');
-  const digestCloseBtn = document.getElementById('digest-modal-close');
-  const digestHeaderTrigger = document.getElementById('header-digest-trigger-btn');
-  const digestExploreBtn = document.getElementById('digest-explore-wire-btn');
-  const digestVideoIframe = document.getElementById('digest-video-iframe');
-
-  let isAudioPlaying = false;
-  let speechSynthUtterance = null;
-  let currentSummaryTextForAudio = '';
-
-  // De-duplicate primary Hero card from Latest Feed Grid
-  if (typeof renderArticles === 'function') {
-    const originalRenderArticles = renderArticles;
-    renderArticles = function(items) {
-      if (items && items.length > 1 && currentSource === 'all' && currentCategory === 'All' && !searchQuery) {
-        const heroArt = (typeof articles !== 'undefined' && articles && articles.length > 0) ? articles[0] : null;
-        const dedupedItems = heroArt ? items.filter(a => a.id !== heroArt.id) : items;
-        originalRenderArticles(dedupedItems);
+        if (bwmtSubhint) bwmtSubhint.textContent = `Showing ${totalTv} of ${totalTv} live broadcast channels`;
+        if (beaconBadge) beaconBadge.textContent = `● ${totalTv} CHANNELS ACTIVE`;
       } else {
-        originalRenderArticles(items);
+        allBroadcastCards.forEach((c, idx) => {
+          c.style.display = idx < initialTvCount ? 'flex' : 'none';
+        });
+        const remaining = Math.max(0, totalTv - initialTvCount);
+        if (bwmtText) bwmtText.textContent = 'Watch More Live TV';
+        if (bwmtBadge) bwmtBadge.textContent = `+${remaining} channels`;
+        if (bwmtIcon) bwmtIcon.style.transform = 'rotate(0deg)';
+        if (bwmtSubhint) bwmtSubhint.textContent = `Showing ${initialTvCount} of ${totalTv} live broadcast channels`;
+        if (beaconBadge) beaconBadge.textContent = `● ${initialTvCount} CHANNELS ACTIVE`;
+      }
+    }
+
+    syncBroadcastVisibility();
+    window.addEventListener('resize', syncBroadcastVisibility);
+
+    // Mobile-Only "See More" Toggle for 9 Connected News Networks (3 rows = 6 cards)
+    const btnSourcesSeeMore = document.getElementById('btn-sources-see-more');
+    const sourcesSeeMoreText = document.getElementById('btn-sources-see-more-text');
+    const sourcesSeeMoreBadge = document.getElementById('btn-sources-see-more-badge');
+    const sourcesSeeMoreIcon = document.getElementById('btn-sources-see-more-icon');
+    const sourcesSeeMoreSubhint = document.getElementById('sources-see-more-subhint');
+
+    if (btnSourcesSeeMore && sourcesGrid) {
+      btnSourcesSeeMore.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isExpanded = sourcesGrid.classList.toggle('expanded');
+        btnSourcesSeeMore.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        if (isExpanded) {
+          if (sourcesSeeMoreText) sourcesSeeMoreText.textContent = 'Show Less';
+          if (sourcesSeeMoreBadge) sourcesSeeMoreBadge.textContent = '▲';
+          if (sourcesSeeMoreIcon) sourcesSeeMoreIcon.style.transform = 'rotate(180deg)';
+          if (sourcesSeeMoreSubhint) sourcesSeeMoreSubhint.textContent = 'Showing all 9 connected networks';
+        } else {
+          if (sourcesSeeMoreText) sourcesSeeMoreText.textContent = 'See More';
+          if (sourcesSeeMoreBadge) sourcesSeeMoreBadge.textContent = '+3 networks';
+          if (sourcesSeeMoreIcon) sourcesSeeMoreIcon.style.transform = 'rotate(0deg)';
+          if (sourcesSeeMoreSubhint) sourcesSeeMoreSubhint.textContent = 'Showing 6 of 9 connected networks (3 rows)';
+          const sourcesSec = document.getElementById('sources');
+          if (sourcesSec) sourcesSec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    }
+
+    if (btnWatchMoreTv) {
+      btnWatchMoreTv.addEventListener('click', (e) => {
+        e.preventDefault();
+        const extraCards = document.querySelectorAll('.broadcast-card-extra');
+        const isExpanded = btnWatchMoreTv.classList.contains('expanded');
+
+        if (isExpanded) {
+          extraCards.forEach(c => c.style.display = 'none');
+          btnWatchMoreTv.classList.remove('expanded');
+          btnWatchMoreTv.setAttribute('aria-expanded', 'false');
+          if (bwmtText) bwmtText.textContent = 'Watch More Live TV';
+          if (bwmtBadge) bwmtBadge.textContent = '+3 channels';
+          if (bwmtIcon) bwmtIcon.style.transform = 'rotate(0deg)';
+          if (bwmtSubhint) bwmtSubhint.textContent = 'Showing 3 of 6 live broadcast channels';
+          if (beaconBadge) beaconBadge.textContent = '● 3 CHANNELS ACTIVE';
+
+          syncBroadcastVisibility();
+          const section = document.getElementById('broadcasts');
+          if (section) section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          extraCards.forEach((c, idx) => {
+            c.style.display = 'flex';
+            c.style.animation = 'cardCascadeFadeIn 0.35s ease-out';
+            c.style.animationDelay = (idx * 0.08) + 's';
+          });
+          btnWatchMoreTv.classList.add('expanded');
+          btnWatchMoreTv.setAttribute('aria-expanded', 'true');
+          if (bwmtText) bwmtText.textContent = 'Show Fewer Channels';
+          if (bwmtBadge) bwmtBadge.textContent = 'All Visible';
+          if (bwmtIcon) bwmtIcon.style.transform = 'rotate(180deg)';
+          if (bwmtSubhint) bwmtSubhint.textContent = 'Showing 6 of 6 live broadcast channels';
+          if (beaconBadge) beaconBadge.textContent = '● 6 CHANNELS ACTIVE';
+          syncBroadcastVisibility();
+          document.querySelectorAll('#broadcast-grid .broadcast-tv-card').forEach((c, idx) => {
+            if (idx >= 3) {
+              c.style.animation = 'cardCascadeFadeIn 0.35s ease-out';
+              c.style.animationDelay = ((idx - 3) * 0.08) + 's';
+            }
+          });
+        }
+      });
+    }
+
+    // 2. Stream Player Modal Controller
+    const streamModal = document.getElementById('stream-modal');
+    const streamModalClose = document.getElementById('stream-modal-close');
+    const streamModalTitle = document.getElementById('stream-modal-title');
+    const streamModalDesc = document.getElementById('stream-modal-desc');
+    const streamPlayerArea = document.getElementById('stream-player-area');
+    const streamExternalLink = document.getElementById('stream-external-link');
+
+    const STREAM_CHANNELS = {
+      loveworldindia: {
+        title: '🇮🇳 Loveworld India (LBN TV) — Live Stream',
+        desc: '24/7 Satellite & Digital Broadcast Live: Impacting India and South Asia with faith, prayer, and life-changing programs (JioTV 4080).',
+        embedUrl: 'https://lwindia.org/',
+        externalUrl: 'https://lwindia.org/'
+      },
+      loveworldsat: {
+        title: '🇿🇦 Loveworld Sat — Live TV Stream',
+        desc: '24/7 Satellite Broadcast Live from Johannesburg: News On The Hour, Good Morning World, and Global Business Update.',
+        embedUrl: 'https://www.loveworldsat.org/live-tv',
+        externalUrl: 'https://www.loveworldsat.org/live-tv'
+      },
+      loveworldeurope: {
+        title: '🇪🇺 Loveworld Europe — Live Stream',
+        desc: 'Continental Multilingual Christian Broadcasting & Youth Leadership Special Programs.',
+        embedUrl: 'https://loveworldeurope.org',
+        externalUrl: 'https://loveworldeurope.org'
+      },
+      skynews: {
+        title: '🇦🇺 Sky News Australia — Digital Reports',
+        desc: 'Canberra Parliament, National Politics, and Global Affairs on-demand video coverage.',
+        embedUrl: 'https://www.skynews.com.au',
+        externalUrl: 'https://www.skynews.com.au'
+      },
+      loveworldusa: {
+        title: '🇺🇸 Loveworld USA — Live TV Broadcast',
+        desc: '24/7 Satellite Christian Television from California & Atlanta: In-depth Bible teaching, global praise, and family programming.',
+        embedUrl: 'https://live.loveworldusa.org/',
+        externalUrl: 'https://www.loveworldusa.org/'
+      },
+      ln24intl: {
+        title: '🌐 LN24 International — 24/7 Global News',
+        desc: 'International investigative news journalism, geopolitical analysis, and live global event dispatches.',
+        embedUrl: 'https://ln24international.com/',
+        externalUrl: 'https://ln24international.com/'
       }
     };
-  }
 
-  function cleanSafeHtml(txt) {
-    if (!txt) return '';
-    return String(txt)
-      .replace(/<\/?[a-z0-9]+[^>]*>/gi, ' ')
-      .replace(/&lt;/gi, '<')
-      .replace(/&gt;/gi, '>')
-      .replace(/&quot;/gi, '"')
-      .replace(/&#8220;/gi, '"')
-      .replace(/&#8221;/gi, '"')
-      .replace(/&#8216;/gi, "'")
-      .replace(/&#8217;/gi, "'")
-      .replace(/&#39;/gi, "'")
-      .replace(/&apos;/gi, "'")
-      .replace(/&#8211;/gi, '-')
-      .replace(/&#8212;/gi, '—')
-      .replace(/&amp;/gi, '&')
-      .replace(/\s+/g, ' ')
-      .trim();
-  }
+    document.querySelectorAll('.open-player-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const channelKey = btn.getAttribute('data-channel');
+        const channel = STREAM_CHANNELS[channelKey];
+        if (!channel) return;
 
-  function updateExecutiveDigestContent() {
-    const bulletsContainer = document.getElementById('digest-summary-bullets');
-    if (!bulletsContainer) return;
+        if (streamModalTitle) streamModalTitle.textContent = channel.title;
+        if (streamModalDesc) streamModalDesc.textContent = channel.desc;
+        if (streamExternalLink) streamExternalLink.href = channel.externalUrl;
+        if (streamPlayerArea) {
+          streamPlayerArea.innerHTML = `<iframe src="${channel.embedUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>`;
+        }
+        if (streamModal) streamModal.style.display = 'flex';
+      });
+    });
 
-    let pool = [];
-    if (typeof articles !== 'undefined' && Array.isArray(articles) && articles.length > 0) {
-      pool = articles;
-    } else if (typeof FALLBACK_ARTICLES !== 'undefined' && Array.isArray(FALLBACK_ARTICLES)) {
-      pool = FALLBACK_ARTICLES;
-    }
-    if (pool.length === 0) return;
-
-    // Pick 5 diverse stories covering National, World, Business, Technology, etc.
-    const categoriesWanted = ['world', 'business', 'tech', 'technology', 'politics', 'india', 'national'];
-    const chosen = [];
-    const usedIds = new Set();
-
-    for (const cat of categoriesWanted) {
-      if (chosen.length >= 5) break;
-      const match = pool.find(a => !usedIds.has(a.id) && a.category && a.category.toLowerCase().includes(cat));
-      if (match) { chosen.push(match); usedIds.add(match.id); }
+    if (streamModalClose) {
+      streamModalClose.addEventListener('click', () => {
+        if (streamModal) streamModal.style.display = 'none';
+        if (streamPlayerArea) streamPlayerArea.innerHTML = '';
+      });
     }
 
-    // Fill up to exactly 5 with any remaining distinct articles
-    for (const art of pool) {
-      if (chosen.length >= 5) break;
-      if (!usedIds.has(art.id)) { chosen.push(art); usedIds.add(art.id); }
-    }
+    // Dynamic Date and Status in Top Utility Bar
+    function updateUtilityBar() {
+        const dateEl = document.getElementById('utility-date-text');
+        const statusEl = document.getElementById('utility-status-text');
+        const isMobile = window.innerWidth <= 768;
 
-    bulletsContainer.innerHTML = chosen.map((art, idx) => {
-      const cat = cleanSafeHtml(art.category || 'TOP STORY').toUpperCase();
-      const title = cleanSafeHtml(art.title);
-      const summary = cleanSafeHtml(art.summary || 'Tap below to read the comprehensive news report.');
-      const source = cleanSafeHtml(art.sourceName || 'News Connect Wire');
-      const num = String(idx + 1).padStart(2, '0');
-      const link = art.link || '#';
-      return `
+        if (dateEl) {
+          try {
+            const now = new Date();
+            const options = isMobile
+              ? { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' }
+              : { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            dateEl.textContent = now.toLocaleDateString('en-GB', options);
+          } catch (err) { }
+        }
+
+        if (statusEl) {
+          statusEl.textContent = isMobile ? '5 live · 4 broadcasts' : '5 feeds live · 4 broadcasts connected';
+        }
+      }
+
+      updateUtilityBar();
+      window.addEventListener('resize', updateUtilityBar);
+
+      // 3D Perspective Card Tilt Animation (Matching Showcase Reference Image 3)
+      let activeTiltCard = null;
+      document.addEventListener('mousemove', (e) => {
+        if (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) return;
+        const card = e.target.closest('.news-card, .broadcast-tv-card, .source-item');
+        if (!card || card.closest('.view-mode-list')) {
+          if (activeTiltCard) {
+            activeTiltCard.style.transform = '';
+            activeTiltCard = null;
+          }
+          return;
+        }
+        if (activeTiltCard && activeTiltCard !== card) {
+          activeTiltCard.style.transform = '';
+        }
+        activeTiltCard = card;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const tiltX = -((y - cy) / cy * 7).toFixed(2);
+        const tiltY = ((x - cx) / cx * 7).toFixed(2);
+        card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-8px) scale3d(1.018, 1.018, 1.018)`;
+      });
+
+      document.addEventListener('mouseleave', () => {
+        if (activeTiltCard) {
+          activeTiltCard.style.transform = '';
+          activeTiltCard = null;
+        }
+      });
+
+
+      // ============================================================================
+      // Quick Catch-Up Feature — Upgraded Executive Digest Engine
+      // Smart timing, session memory, two CTAs, 5 stories, video fallback
+      // ============================================================================
+
+      const digestModal = document.getElementById('express-digest-modal');
+      const digestCloseBtn = document.getElementById('digest-modal-close');
+      const digestHeaderTrigger = document.getElementById('header-digest-trigger-btn');
+      const digestExploreBtn = document.getElementById('digest-explore-wire-btn');
+      const digestVideoIframe = document.getElementById('digest-video-iframe');
+
+      let isAudioPlaying = false;
+      let speechSynthUtterance = null;
+      let currentSummaryTextForAudio = '';
+
+      // De-duplicate primary Hero card from Latest Feed Grid
+      if (typeof renderArticles === 'function') {
+        const originalRenderArticles = renderArticles;
+        renderArticles = function (items) {
+          if (items && items.length > 1 && currentSource === 'all' && currentCategory === 'All' && !searchQuery) {
+            const heroArt = (typeof articles !== 'undefined' && articles && articles.length > 0) ? articles[0] : null;
+            const dedupedItems = heroArt ? items.filter(a => a.id !== heroArt.id) : items;
+            originalRenderArticles(dedupedItems);
+          } else {
+            originalRenderArticles(items);
+          }
+        };
+      }
+
+      function cleanSafeHtml(txt) {
+        if (!txt) return '';
+        return String(txt)
+          .replace(/<\/?[a-z0-9]+[^>]*>/gi, ' ')
+          .replace(/&lt;/gi, '<')
+          .replace(/&gt;/gi, '>')
+          .replace(/&quot;/gi, '"')
+          .replace(/&#8220;/gi, '"')
+          .replace(/&#8221;/gi, '"')
+          .replace(/&#8216;/gi, "'")
+          .replace(/&#8217;/gi, "'")
+          .replace(/&#39;/gi, "'")
+          .replace(/&apos;/gi, "'")
+          .replace(/&#8211;/gi, '-')
+          .replace(/&#8212;/gi, '—')
+          .replace(/&amp;/gi, '&')
+          .replace(/\s+/g, ' ')
+          .trim();
+      }
+
+      function updateExecutiveDigestContent() {
+        const bulletsContainer = document.getElementById('digest-summary-bullets');
+        if (!bulletsContainer) return;
+
+        let pool = [];
+        if (typeof articles !== 'undefined' && Array.isArray(articles) && articles.length > 0) {
+          pool = articles;
+        } else if (typeof FALLBACK_ARTICLES !== 'undefined' && Array.isArray(FALLBACK_ARTICLES)) {
+          pool = FALLBACK_ARTICLES;
+        }
+        if (pool.length === 0) return;
+
+        // Pick 5 diverse stories covering National, World, Business, Technology, etc.
+        const categoriesWanted = ['world', 'business', 'tech', 'technology', 'politics', 'india', 'national'];
+        const chosen = [];
+        const usedIds = new Set();
+
+        for (const cat of categoriesWanted) {
+          if (chosen.length >= 5) break;
+          const match = pool.find(a => !usedIds.has(a.id) && a.category && a.category.toLowerCase().includes(cat));
+          if (match) { chosen.push(match); usedIds.add(match.id); }
+        }
+
+        // Fill up to exactly 5 with any remaining distinct articles
+        for (const art of pool) {
+          if (chosen.length >= 5) break;
+          if (!usedIds.has(art.id)) { chosen.push(art); usedIds.add(art.id); }
+        }
+
+        bulletsContainer.innerHTML = chosen.map((art, idx) => {
+          const cat = cleanSafeHtml(art.category || 'TOP STORY').toUpperCase();
+          const title = cleanSafeHtml(art.title);
+          const summary = cleanSafeHtml(art.summary || 'Tap below to read the comprehensive news report.');
+          const source = cleanSafeHtml(art.sourceName || 'News Connect Wire');
+          const num = String(idx + 1).padStart(2, '0');
+          const link = art.link || '#';
+          return `
         <div class="digest-bullet-card">
           <div class="digest-bullet-header">
             <span class="digest-bullet-num">${num}</span>
@@ -1244,882 +1336,882 @@
           <a href="${link}" target="_blank" rel="noopener noreferrer" class="digest-bullet-read-link">Read Full Story ↗</a>
         </div>
       `;
-    }).join('');
+        }).join('');
 
-    currentSummaryTextForAudio = chosen.map((art, idx) => {
-      return `Story ${idx + 1}: ${cleanSafeHtml(art.title)}. ${cleanSafeHtml(art.summary)}`;
-    }).join('. ');
-  }
-
-  function openDigestModal(defaultTab) {
-    const modal = document.getElementById('express-digest-modal');
-    if (!modal) {
-      console.warn('[Quick Catch-Up] express-digest-modal not found');
-      return;
-    }
-    try {
-      updateExecutiveDigestContent();
-    } catch (err) {
-      console.error('[Quick Catch-Up] updateExecutiveDigestContent error:', err);
-    }
-    try {
-      switchDigestTab(defaultTab || 'summary');
-    } catch (err) {
-      console.error('[Quick Catch-Up] switchDigestTab error:', err);
-    }
-    modal.style.setProperty('display', 'flex', 'important');
-    modal.classList.add('active');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeDigestModal() {
-    try { pauseBriefingVideo(); } catch(e) {}
-    const modal = document.getElementById('express-digest-modal');
-    if (!modal) return;
-    modal.style.setProperty('display', 'none', 'important');
-    modal.classList.remove('active');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (window.speechSynthesis && isAudioPlaying) {
-      try { window.speechSynthesis.cancel(); } catch(e) {}
-      isAudioPlaying = false;
-      const soundwaves = document.getElementById('audio-soundwaves');
-      if (soundwaves) soundwaves.classList.remove('playing');
-    }
-    const nativeVideo = document.getElementById('digest-native-video');
-    if (nativeVideo) {
-      try { nativeVideo.pause(); nativeVideo.currentTime = 0; } catch(e) {}
-    }
-  }
-
-  
-  // ============================================================================
-  // 2-MINUTE BROADCAST NEWS VIDEO GENERATOR ENGINE
-  // Dynamic Canvas Rendering • Story Slides • Narration • Subtitles • Scrubber
-  // ============================================================================
-  const VIDEO_TOTAL_SECONDS = 120;
-  let videoCurrentTime = 0;
-  let videoIsPlaying = false;
-  let videoAnimFrameId = null;
-  let videoLastTimestamp = 0;
-  let videoSpeechUtterance = null;
-  let videoSpeechEnabled = true;
-  let videoCaptionsEnabled = true;
-  let videoStories = [];
-  let videoCurrentStoryIdx = -1;
-  let videoImageCache = {};
-  let videoEventsBound = false;
-
-  function prepareVideoStories() {
-    let pool = (typeof articles !== 'undefined' && Array.isArray(articles) && articles.length > 0)
-      ? articles
-      : (typeof FALLBACK_ARTICLES !== 'undefined' ? FALLBACK_ARTICLES : []);
-
-    const categoriesWanted = ['world', 'business', 'tech', 'technology', 'politics', 'india', 'national'];
-    const chosen = [];
-    const usedIds = new Set();
-
-    for (const cat of categoriesWanted) {
-      if (chosen.length >= 5) break;
-      const match = pool.find(a => !usedIds.has(a.id) && a.category && a.category.toLowerCase().includes(cat));
-      if (match) { chosen.push(match); usedIds.add(match.id); }
-    }
-    for (const art of pool) {
-      if (chosen.length >= 5) break;
-      if (!usedIds.has(art.id)) { chosen.push(art); usedIds.add(art.id); }
-    }
-
-    const segments = [
-      { start: 8, end: 30 },
-      { start: 30, end: 52 },
-      { start: 52, end: 74 },
-      { start: 74, end: 96 },
-      { start: 96, end: 116 }
-    ];
-
-    const fallbackThumbs = [
-      'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=960&q=80',
-      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=960&q=80'
-    ];
-
-    videoStories = chosen.map((art, idx) => {
-      const seg = segments[idx] || { start: 8 + idx * 22, end: 8 + (idx + 1) * 22 };
-      const thumbUrl = art.imageUrl || fallbackThumbs[idx % fallbackThumbs.length];
-      
-      if (!videoImageCache[thumbUrl]) {
-        const img = new Image();
-        img.crossOrigin = 'anonymous';
-        img.src = thumbUrl;
-        videoImageCache[thumbUrl] = img;
+        currentSummaryTextForAudio = chosen.map((art, idx) => {
+          return `Story ${idx + 1}: ${cleanSafeHtml(art.title)}. ${cleanSafeHtml(art.summary)}`;
+        }).join('. ');
       }
 
-      return {
-        id: art.id,
-        index: idx + 1,
-        title: cleanSafeHtml(art.title),
-        summary: cleanSafeHtml(art.summary || 'Verified global wire dispatch.'),
-        category: (art.category || 'GLOBAL WIRE').toUpperCase(),
-        sourceName: cleanSafeHtml(art.sourceName || 'News Connect'),
-        link: art.link || '#',
-        thumbUrl: thumbUrl,
-        startTime: seg.start,
-        endTime: seg.end
-      };
-    });
+      function openDigestModal(defaultTab) {
+        const modal = document.getElementById('express-digest-modal');
+        if (!modal) {
+          console.warn('[Quick Catch-Up] express-digest-modal not found');
+          return;
+        }
+        try {
+          updateExecutiveDigestContent();
+        } catch (err) {
+          console.error('[Quick Catch-Up] updateExecutiveDigestContent error:', err);
+        }
+        try {
+          switchDigestTab(defaultTab || 'summary');
+        } catch (err) {
+          console.error('[Quick Catch-Up] switchDigestTab error:', err);
+        }
+        modal.style.setProperty('display', 'flex', 'important');
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
 
-    updateStoryCard(0);
-  }
+      function closeDigestModal() {
+        try { pauseBriefingVideo(); } catch (e) { }
+        const modal = document.getElementById('express-digest-modal');
+        if (!modal) return;
+        modal.style.setProperty('display', 'none', 'important');
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (window.speechSynthesis && isAudioPlaying) {
+          try { window.speechSynthesis.cancel(); } catch (e) { }
+          isAudioPlaying = false;
+          const soundwaves = document.getElementById('audio-soundwaves');
+          if (soundwaves) soundwaves.classList.remove('playing');
+        }
+        const nativeVideo = document.getElementById('digest-native-video');
+        if (nativeVideo) {
+          try { nativeVideo.pause(); nativeVideo.currentTime = 0; } catch (e) { }
+        }
+      }
 
-  function getActiveStory(timeSec) {
-    if (timeSec < 8) return null;
-    if (timeSec >= 116) return null;
-    return videoStories.find(s => timeSec >= s.startTime && timeSec < s.endTime) || videoStories[videoStories.length - 1];
-  }
 
-  function updateStoryCard(storyIdx) {
-    const story = videoStories[storyIdx];
-    if (!story) return;
-    const tagEl = document.getElementById('bvsc-current-tag');
-    const titleEl = document.getElementById('bvsc-current-title');
-    const linkEl = document.getElementById('bvsc-current-link');
-    const badgeEl = document.getElementById('bvc-story-badge');
+      // ============================================================================
+      // 2-MINUTE BROADCAST NEWS VIDEO GENERATOR ENGINE
+      // Dynamic Canvas Rendering • Story Slides • Narration • Subtitles • Scrubber
+      // ============================================================================
+      const VIDEO_TOTAL_SECONDS = 120;
+      let videoCurrentTime = 0;
+      let videoIsPlaying = false;
+      let videoAnimFrameId = null;
+      let videoLastTimestamp = 0;
+      let videoSpeechUtterance = null;
+      let videoSpeechEnabled = true;
+      let videoCaptionsEnabled = true;
+      let videoStories = [];
+      let videoCurrentStoryIdx = -1;
+      let videoImageCache = {};
+      let videoEventsBound = false;
 
-    if (tagEl) tagEl.textContent = `⚡ ${story.category} • ${story.sourceName}`;
-    if (titleEl) titleEl.textContent = story.title;
-    if (linkEl) linkEl.href = story.link;
-    if (badgeEl) badgeEl.textContent = `STORY ${story.index} OF 5`;
-  }
+      function prepareVideoStories() {
+        let pool = (typeof articles !== 'undefined' && Array.isArray(articles) && articles.length > 0)
+          ? articles
+          : (typeof FALLBACK_ARTICLES !== 'undefined' ? FALLBACK_ARTICLES : []);
 
-  function renderVideoFrame() {
-    const canvas = document.getElementById('briefing-video-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const W = canvas.width;
-    const H = canvas.height;
+        const categoriesWanted = ['world', 'business', 'tech', 'technology', 'politics', 'india', 'national'];
+        const chosen = [];
+        const usedIds = new Set();
 
-    ctx.fillStyle = '#060B18';
-    ctx.fillRect(0, 0, W, H);
-
-    const t = videoCurrentTime;
-
-    if (t < 8) {
-      const grad = ctx.createRadialGradient(W / 2, H / 2, 20, W / 2, H / 2, W / 1.5);
-      grad.addColorStop(0, '#13284C');
-      grad.addColorStop(1, '#050A16');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-
-      const pulseSize = (t % 2) / 2;
-      ctx.beginPath();
-      ctx.arc(W / 2, H / 2 - 30, 60 + pulseSize * 90, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(245, 176, 65, ${0.7 - pulseSize * 0.6})`;
-      ctx.lineWidth = 3;
-      ctx.stroke();
-
-      ctx.fillStyle = '#F5B041';
-      ctx.beginPath();
-      ctx.arc(W / 2, H / 2 - 30, 48, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#0B1325';
-      ctx.font = 'bold 36px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('⚡', W / 2, H / 2 - 28);
-
-      ctx.fillStyle = '#FFFFFF';
-      ctx.font = '800 32px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('NEWS CONNECT', W / 2, H / 2 + 55);
-
-      ctx.fillStyle = '#F5B041';
-      ctx.font = '700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText('2-MINUTE EXECUTIVE DAILY BRIEFING', W / 2, H / 2 + 88);
-
-      ctx.fillStyle = '#94A3B8';
-      ctx.font = '500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      ctx.fillText("Top 5 Global Developments • Satellite Wire Dispatch", W / 2, H / 2 + 115);
-
-    } else if (t >= 116) {
-      ctx.fillStyle = '#081022';
-      ctx.fillRect(0, 0, W, H);
-
-      ctx.fillStyle = '#10B981';
-      ctx.beginPath();
-      ctx.arc(W / 2, H / 2 - 25, 42, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 32px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('✓', W / 2, H / 2 - 25);
-
-      ctx.fillStyle = '#FFFFFF';
-      ctx.font = '800 28px -apple-system, BlinkMacSystemFont, sans-serif';
-      ctx.fillText('YOU ARE FULLY CAUGHT UP', W / 2, H / 2 + 45);
-
-      ctx.fillStyle = '#94A3B8';
-      ctx.font = '500 14px -apple-system, BlinkMacSystemFont, sans-serif';
-      ctx.fillText('Top 5 stories briefed across 9 international networks.', W / 2, H / 2 + 75);
-
-    } else {
-      const story = getActiveStory(t);
-      if (story) {
-        const img = videoImageCache[story.thumbUrl];
-        const storyProgress = (t - story.startTime) / (story.endTime - story.startTime);
-        const scale = 1.0 + storyProgress * 0.08;
-
-        if (img && img.complete && img.naturalWidth > 0) {
-          ctx.save();
-          ctx.translate(W / 2, H / 2);
-          ctx.scale(scale, scale);
-          ctx.drawImage(img, -W / 2, -H / 2, W, H);
-          ctx.restore();
-        } else {
-          const g = ctx.createLinearGradient(0, 0, W, H);
-          g.addColorStop(0, '#0F1D38');
-          g.addColorStop(1, '#060B18');
-          ctx.fillStyle = g;
-          ctx.fillRect(0, 0, W, H);
+        for (const cat of categoriesWanted) {
+          if (chosen.length >= 5) break;
+          const match = pool.find(a => !usedIds.has(a.id) && a.category && a.category.toLowerCase().includes(cat));
+          if (match) { chosen.push(match); usedIds.add(match.id); }
+        }
+        for (const art of pool) {
+          if (chosen.length >= 5) break;
+          if (!usedIds.has(art.id)) { chosen.push(art); usedIds.add(art.id); }
         }
 
-        const vignette = ctx.createLinearGradient(0, 0, 0, H);
-        vignette.addColorStop(0, 'rgba(5, 10, 24, 0.45)');
-        vignette.addColorStop(0.4, 'rgba(5, 10, 24, 0.3)');
-        vignette.addColorStop(0.7, 'rgba(5, 10, 24, 0.85)');
-        vignette.addColorStop(1, 'rgba(5, 10, 24, 0.98)');
-        ctx.fillStyle = vignette;
+        const segments = [
+          { start: 8, end: 30 },
+          { start: 30, end: 52 },
+          { start: 52, end: 74 },
+          { start: 74, end: 96 },
+          { start: 96, end: 116 }
+        ];
+
+        const fallbackThumbs = [
+          'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=960&q=80',
+          'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=960&q=80',
+          'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=960&q=80',
+          'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=960&q=80',
+          'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=960&q=80'
+        ];
+
+        videoStories = chosen.map((art, idx) => {
+          const seg = segments[idx] || { start: 8 + idx * 22, end: 8 + (idx + 1) * 22 };
+          const thumbUrl = art.imageUrl || fallbackThumbs[idx % fallbackThumbs.length];
+
+          if (!videoImageCache[thumbUrl]) {
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.src = thumbUrl;
+            videoImageCache[thumbUrl] = img;
+          }
+
+          return {
+            id: art.id,
+            index: idx + 1,
+            title: cleanSafeHtml(art.title),
+            summary: cleanSafeHtml(art.summary || 'Verified global wire dispatch.'),
+            category: (art.category || 'GLOBAL WIRE').toUpperCase(),
+            sourceName: cleanSafeHtml(art.sourceName || 'News Connect'),
+            link: art.link || '#',
+            thumbUrl: thumbUrl,
+            startTime: seg.start,
+            endTime: seg.end
+          };
+        });
+
+        updateStoryCard(0);
+      }
+
+      function getActiveStory(timeSec) {
+        if (timeSec < 8) return null;
+        if (timeSec >= 116) return null;
+        return videoStories.find(s => timeSec >= s.startTime && timeSec < s.endTime) || videoStories[videoStories.length - 1];
+      }
+
+      function updateStoryCard(storyIdx) {
+        const story = videoStories[storyIdx];
+        if (!story) return;
+        const tagEl = document.getElementById('bvsc-current-tag');
+        const titleEl = document.getElementById('bvsc-current-title');
+        const linkEl = document.getElementById('bvsc-current-link');
+        const badgeEl = document.getElementById('bvc-story-badge');
+
+        if (tagEl) tagEl.textContent = `⚡ ${story.category} • ${story.sourceName}`;
+        if (titleEl) titleEl.textContent = story.title;
+        if (linkEl) linkEl.href = story.link;
+        if (badgeEl) badgeEl.textContent = `STORY ${story.index} OF 5`;
+      }
+
+      function renderVideoFrame() {
+        const canvas = document.getElementById('briefing-video-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const W = canvas.width;
+        const H = canvas.height;
+
+        ctx.fillStyle = '#060B18';
         ctx.fillRect(0, 0, W, H);
 
+        const t = videoCurrentTime;
+
+        if (t < 8) {
+          const grad = ctx.createRadialGradient(W / 2, H / 2, 20, W / 2, H / 2, W / 1.5);
+          grad.addColorStop(0, '#13284C');
+          grad.addColorStop(1, '#050A16');
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, W, H);
+
+          const pulseSize = (t % 2) / 2;
+          ctx.beginPath();
+          ctx.arc(W / 2, H / 2 - 30, 60 + pulseSize * 90, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(245, 176, 65, ${0.7 - pulseSize * 0.6})`;
+          ctx.lineWidth = 3;
+          ctx.stroke();
+
+          ctx.fillStyle = '#F5B041';
+          ctx.beginPath();
+          ctx.arc(W / 2, H / 2 - 30, 48, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#0B1325';
+          ctx.font = 'bold 36px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('⚡', W / 2, H / 2 - 28);
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '800 32px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.fillText('NEWS CONNECT', W / 2, H / 2 + 55);
+
+          ctx.fillStyle = '#F5B041';
+          ctx.font = '700 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.fillText('2-MINUTE EXECUTIVE DAILY BRIEFING', W / 2, H / 2 + 88);
+
+          ctx.fillStyle = '#94A3B8';
+          ctx.font = '500 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.fillText("Top 5 Global Developments • Satellite Wire Dispatch", W / 2, H / 2 + 115);
+
+        } else if (t >= 116) {
+          ctx.fillStyle = '#081022';
+          ctx.fillRect(0, 0, W, H);
+
+          ctx.fillStyle = '#10B981';
+          ctx.beginPath();
+          ctx.arc(W / 2, H / 2 - 25, 42, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = 'bold 32px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('✓', W / 2, H / 2 - 25);
+
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '800 28px -apple-system, BlinkMacSystemFont, sans-serif';
+          ctx.fillText('YOU ARE FULLY CAUGHT UP', W / 2, H / 2 + 45);
+
+          ctx.fillStyle = '#94A3B8';
+          ctx.font = '500 14px -apple-system, BlinkMacSystemFont, sans-serif';
+          ctx.fillText('Top 5 stories briefed across 9 international networks.', W / 2, H / 2 + 75);
+
+        } else {
+          const story = getActiveStory(t);
+          if (story) {
+            const img = videoImageCache[story.thumbUrl];
+            const storyProgress = (t - story.startTime) / (story.endTime - story.startTime);
+            const scale = 1.0 + storyProgress * 0.08;
+
+            if (img && img.complete && img.naturalWidth > 0) {
+              ctx.save();
+              ctx.translate(W / 2, H / 2);
+              ctx.scale(scale, scale);
+              ctx.drawImage(img, -W / 2, -H / 2, W, H);
+              ctx.restore();
+            } else {
+              const g = ctx.createLinearGradient(0, 0, W, H);
+              g.addColorStop(0, '#0F1D38');
+              g.addColorStop(1, '#060B18');
+              ctx.fillStyle = g;
+              ctx.fillRect(0, 0, W, H);
+            }
+
+            const vignette = ctx.createLinearGradient(0, 0, 0, H);
+            vignette.addColorStop(0, 'rgba(5, 10, 24, 0.45)');
+            vignette.addColorStop(0.4, 'rgba(5, 10, 24, 0.3)');
+            vignette.addColorStop(0.7, 'rgba(5, 10, 24, 0.85)');
+            vignette.addColorStop(1, 'rgba(5, 10, 24, 0.98)');
+            ctx.fillStyle = vignette;
+            ctx.fillRect(0, 0, W, H);
+
+            ctx.fillStyle = 'rgba(11, 19, 37, 0.85)';
+            ctx.beginPath();
+            ctx.roundRect(24, 20, 140, 28, 6);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(245, 176, 65, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.fillStyle = '#F5B041';
+            ctx.font = '800 11px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(`STORY ${story.index} OF 5`, 94, 34);
+
+            ctx.fillStyle = 'rgba(9, 17, 34, 0.92)';
+            ctx.beginPath();
+            ctx.roundRect(24, H - 190, W - 48, 140, 12);
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(245, 176, 65, 0.4)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            ctx.fillStyle = '#F5B041';
+            ctx.beginPath();
+            ctx.roundRect(24, H - 190, 6, 140, [12, 0, 0, 12]);
+            ctx.fill();
+
+            ctx.fillStyle = '#F5B041';
+            ctx.font = '800 11px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'top';
+            ctx.fillText(`⚡ ${story.category}  |  SOURCE: ${story.sourceName.toUpperCase()}`, 44, H - 176);
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = '800 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
+            const words = story.title.split(' ');
+            let line1 = '';
+            let line2 = '';
+            for (const w of words) {
+              if (ctx.measureText(line1 + w + ' ').width < W - 110) {
+                line1 += w + ' ';
+              } else if (ctx.measureText(line2 + w + ' ').width < W - 110) {
+                line2 += w + ' ';
+              }
+            }
+            ctx.fillText(line1.trim(), 44, H - 150);
+            if (line2) {
+              ctx.fillText(line2.trim(), 44, H - 124);
+            }
+
+            if (videoCaptionsEnabled) {
+              ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+              ctx.beginPath();
+              ctx.roundRect(44, H - 94, W - 88, 32, 6);
+              ctx.fill();
+
+              ctx.fillStyle = '#CBD5E1';
+              ctx.font = '500 12.5px -apple-system, BlinkMacSystemFont, sans-serif';
+              let subText = story.summary;
+              if (ctx.measureText(subText).width > W - 110) {
+                while (ctx.measureText(subText + '...').width > W - 110 && subText.length > 20) {
+                  subText = subText.slice(0, -5);
+                }
+                subText += '...';
+              }
+              ctx.fillText(subText, 54, H - 85);
+            }
+
+            if (videoCurrentStoryIdx !== story.index) {
+              videoCurrentStoryIdx = story.index;
+              updateStoryCard(story.index - 1);
+              if (videoSpeechEnabled && videoIsPlaying) {
+                speakCurrentStory(story);
+              }
+            }
+          }
+        }
+
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'top';
         ctx.fillStyle = 'rgba(11, 19, 37, 0.85)';
         ctx.beginPath();
-        ctx.roundRect(24, 20, 140, 28, 6);
+        ctx.roundRect(W - 170, 20, 146, 28, 6);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(245, 176, 65, 0.5)';
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        ctx.fillStyle = '#F5B041';
-        ctx.font = '800 11px -apple-system, BlinkMacSystemFont, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(`STORY ${story.index} OF 5`, 94, 34);
-
-        ctx.fillStyle = 'rgba(9, 17, 34, 0.92)';
+        ctx.fillStyle = '#EF4444';
         ctx.beginPath();
-        ctx.roundRect(24, H - 190, W - 48, 140, 12);
+        ctx.arc(W - 154, 34, 4, 0, Math.PI * 2);
         ctx.fill();
-        ctx.strokeStyle = 'rgba(245, 176, 65, 0.4)';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        ctx.fillStyle = '#F5B041';
-        ctx.beginPath();
-        ctx.roundRect(24, H - 190, 6, 140, [12, 0, 0, 12]);
-        ctx.fill();
-
-        ctx.fillStyle = '#F5B041';
-        ctx.font = '800 11px -apple-system, BlinkMacSystemFont, sans-serif';
-        ctx.textAlign = 'left';
-        ctx.textBaseline = 'top';
-        ctx.fillText(`⚡ ${story.category}  |  SOURCE: ${story.sourceName.toUpperCase()}`, 44, H - 176);
 
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = '800 19px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-        
-        const words = story.title.split(' ');
-        let line1 = '';
-        let line2 = '';
-        for (const w of words) {
-          if (ctx.measureText(line1 + w + ' ').width < W - 110) {
-            line1 += w + ' ';
-          } else if (ctx.measureText(line2 + w + ' ').width < W - 110) {
-            line2 += w + ' ';
+        ctx.font = '800 10px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText('LIVE WIRE • HD 1080', W - 32, 28);
+
+        ctx.fillStyle = '#040812';
+        ctx.fillRect(0, H - 28, W, 28);
+        ctx.strokeStyle = 'rgba(245, 176, 65, 0.3)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, H - 28);
+        ctx.lineTo(W, H - 28);
+        ctx.stroke();
+
+        ctx.fillStyle = '#EF4444';
+        ctx.fillRect(0, H - 28, 100, 28);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '900 10px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('BREAKING', 50, H - 14);
+
+        const tickerText = videoStories.map(s => `[${s.category}] ${s.title}`).join('   ★★★   ');
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = '600 11.5px sans-serif';
+        ctx.textAlign = 'left';
+        const tickerX = ((W - 120) - (t * 60) % 2000);
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(106, H - 28, W - 110, 28);
+        ctx.clip();
+        ctx.fillText(tickerText, tickerX, H - 14);
+        ctx.fillText(tickerText, tickerX + 1600, H - 14);
+        ctx.restore();
+      }
+
+      function formatVideoTime(sec) {
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      }
+
+      function updateVideoControlsUI() {
+        const fillEl = document.getElementById('bvc-timeline-fill');
+        const timeEl = document.getElementById('bvc-time-display');
+        const playBtn = document.getElementById('bvc-btn-play');
+
+        const pct = Math.min(100, (videoCurrentTime / VIDEO_TOTAL_SECONDS) * 100);
+        if (fillEl) fillEl.style.width = `${pct}%`;
+        if (timeEl) timeEl.textContent = `${formatVideoTime(videoCurrentTime)} / 02:00`;
+        if (playBtn) playBtn.textContent = videoIsPlaying ? '⏸' : '▶';
+      }
+
+      function speakCurrentStory(story) {
+        if (!('speechSynthesis' in window) || !videoSpeechEnabled) return;
+        try {
+          window.speechSynthesis.cancel();
+          const textToRead = `Story ${story.index}: ${story.title}. ${story.summary}`;
+          videoSpeechUtterance = new SpeechSynthesisUtterance(textToRead);
+          videoSpeechUtterance.rate = 1.08;
+          videoSpeechUtterance.pitch = 1.0;
+
+          const voices = window.speechSynthesis.getVoices();
+          const engVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Online')));
+          if (engVoice) videoSpeechUtterance.voice = engVoice;
+
+          window.speechSynthesis.speak(videoSpeechUtterance);
+        } catch (e) { }
+      }
+
+      function videoTick(timestamp) {
+        if (!videoLastTimestamp) videoLastTimestamp = timestamp;
+        const delta = (timestamp - videoLastTimestamp) / 1000;
+        videoLastTimestamp = timestamp;
+
+        if (videoIsPlaying) {
+          videoCurrentTime += delta;
+          if (videoCurrentTime >= VIDEO_TOTAL_SECONDS) {
+            videoCurrentTime = VIDEO_TOTAL_SECONDS;
+            pauseBriefingVideo();
+          }
+          updateVideoControlsUI();
+        }
+
+        renderVideoFrame();
+
+        if (videoIsPlaying) {
+          videoAnimFrameId = requestAnimationFrame(videoTick);
+        }
+      }
+
+      function playBriefingVideo() {
+        if (videoCurrentTime >= VIDEO_TOTAL_SECONDS) {
+          videoCurrentTime = 0;
+          videoCurrentStoryIdx = -1;
+        }
+        videoIsPlaying = true;
+        videoLastTimestamp = 0;
+
+        const overlay = document.getElementById('briefing-video-overlay');
+        if (overlay) overlay.classList.add('hidden');
+
+        const playBtn = document.getElementById('bvc-btn-play');
+        if (playBtn) playBtn.textContent = '⏸';
+
+        if (videoSpeechEnabled) {
+          const story = getActiveStory(videoCurrentTime);
+          if (story) {
+            speakCurrentStory(story);
+          } else if (videoCurrentTime < 8) {
+            try {
+              window.speechSynthesis.cancel();
+              const introUtterance = new SpeechSynthesisUtterance("Welcome to your 2-minute daily news briefing from News Connect. Here are today's top 5 developments.");
+              introUtterance.rate = 1.08;
+              window.speechSynthesis.speak(introUtterance);
+            } catch (e) { }
           }
         }
-        ctx.fillText(line1.trim(), 44, H - 150);
-        if (line2) {
-          ctx.fillText(line2.trim(), 44, H - 124);
+
+        cancelAnimationFrame(videoAnimFrameId);
+        videoAnimFrameId = requestAnimationFrame(videoTick);
+      }
+
+      function pauseBriefingVideo() {
+        videoIsPlaying = false;
+        cancelAnimationFrame(videoAnimFrameId);
+
+        const playBtn = document.getElementById('bvc-btn-play');
+        if (playBtn) playBtn.textContent = '▶';
+
+        if ('speechSynthesis' in window) {
+          try { window.speechSynthesis.pause(); } catch (e) { }
         }
 
-        if (videoCaptionsEnabled) {
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
-          ctx.beginPath();
-          ctx.roundRect(44, H - 94, W - 88, 32, 6);
-          ctx.fill();
+        renderVideoFrame();
+        updateVideoControlsUI();
+      }
 
-          ctx.fillStyle = '#CBD5E1';
-          ctx.font = '500 12.5px -apple-system, BlinkMacSystemFont, sans-serif';
-          let subText = story.summary;
-          if (ctx.measureText(subText).width > W - 110) {
-            while (ctx.measureText(subText + '...').width > W - 110 && subText.length > 20) {
-              subText = subText.slice(0, -5);
-            }
-            subText += '...';
-          }
-          ctx.fillText(subText, 54, H - 85);
+      function togglePlayBriefingVideo() {
+        if (videoIsPlaying) {
+          pauseBriefingVideo();
+        } else {
+          playBriefingVideo();
         }
+      }
 
-        if (videoCurrentStoryIdx !== story.index) {
-          videoCurrentStoryIdx = story.index;
+      function seekBriefingVideo(targetSec) {
+        videoCurrentTime = Math.max(0, Math.min(VIDEO_TOTAL_SECONDS, targetSec));
+        videoCurrentStoryIdx = -1;
+        renderVideoFrame();
+        updateVideoControlsUI();
+
+        const story = getActiveStory(videoCurrentTime);
+        if (story) {
           updateStoryCard(story.index - 1);
-          if (videoSpeechEnabled && videoIsPlaying) {
+          if (videoIsPlaying && videoSpeechEnabled) {
             speakCurrentStory(story);
           }
         }
       }
-    }
 
-    ctx.textAlign = 'right';
-    ctx.textBaseline = 'top';
-    ctx.fillStyle = 'rgba(11, 19, 37, 0.85)';
-    ctx.beginPath();
-    ctx.roundRect(W - 170, 20, 146, 28, 6);
-    ctx.fill();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-    ctx.lineWidth = 1;
-    ctx.stroke();
+      function initBriefingVideoEvents() {
+        if (videoEventsBound) return;
+        videoEventsBound = true;
 
-    ctx.fillStyle = '#EF4444';
-    ctx.beginPath();
-    ctx.arc(W - 154, 34, 4, 0, Math.PI * 2);
-    ctx.fill();
+        const playBigBtn = document.getElementById('briefing-play-big-btn');
+        const playBtn = document.getElementById('bvc-btn-play');
+        const prevBtn = document.getElementById('bvc-btn-prev');
+        const nextBtn = document.getElementById('bvc-btn-next');
+        const ccBtn = document.getElementById('bvc-btn-cc');
+        const audioBtn = document.getElementById('bvc-btn-audio');
+        const fsBtn = document.getElementById('bvc-btn-fs');
+        const timelineWrap = document.getElementById('bvc-timeline-wrap');
+        const container = document.getElementById('briefing-video-container');
 
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = '800 10px -apple-system, BlinkMacSystemFont, sans-serif';
-    ctx.fillText('LIVE WIRE • HD 1080', W - 32, 28);
+        if (playBigBtn) playBigBtn.addEventListener('click', (e) => { e.preventDefault(); playBriefingVideo(); });
+        if (playBtn) playBtn.addEventListener('click', (e) => { e.preventDefault(); togglePlayBriefingVideo(); });
 
-    ctx.fillStyle = '#040812';
-    ctx.fillRect(0, H - 28, W, 28);
-    ctx.strokeStyle = 'rgba(245, 176, 65, 0.3)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(0, H - 28);
-    ctx.lineTo(W, H - 28);
-    ctx.stroke();
+        if (prevBtn) {
+          prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const curStory = getActiveStory(videoCurrentTime);
+            const idx = curStory ? curStory.index - 1 : 0;
+            const targetIdx = Math.max(0, idx - 1);
+            if (videoStories[targetIdx]) seekBriefingVideo(videoStories[targetIdx].startTime);
+          });
+        }
 
-    ctx.fillStyle = '#EF4444';
-    ctx.fillRect(0, H - 28, 100, 28);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = '900 10px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText('BREAKING', 50, H - 14);
+        if (nextBtn) {
+          nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const curStory = getActiveStory(videoCurrentTime);
+            const idx = curStory ? curStory.index - 1 : 0;
+            const targetIdx = Math.min(videoStories.length - 1, idx + 1);
+            if (videoStories[targetIdx]) seekBriefingVideo(videoStories[targetIdx].startTime);
+          });
+        }
 
-    const tickerText = videoStories.map(s => `[${s.category}] ${s.title}`).join('   ★★★   ');
-    ctx.fillStyle = '#94A3B8';
-    ctx.font = '600 11.5px sans-serif';
-    ctx.textAlign = 'left';
-    const tickerX = ((W - 120) - (t * 60) % 2000);
-    ctx.save();
-    ctx.beginPath();
-    ctx.rect(106, H - 28, W - 110, 28);
-    ctx.clip();
-    ctx.fillText(tickerText, tickerX, H - 14);
-    ctx.fillText(tickerText, tickerX + 1600, H - 14);
-    ctx.restore();
-  }
+        if (timelineWrap) {
+          timelineWrap.addEventListener('click', (e) => {
+            const rect = timelineWrap.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const pct = Math.max(0, Math.min(1, clickX / rect.width));
+            seekBriefingVideo(pct * VIDEO_TOTAL_SECONDS);
+          });
+        }
 
-  function formatVideoTime(sec) {
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60);
-    return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-  }
+        if (ccBtn) {
+          ccBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            videoCaptionsEnabled = !videoCaptionsEnabled;
+            ccBtn.classList.toggle('active', videoCaptionsEnabled);
+            renderVideoFrame();
+          });
+        }
 
-  function updateVideoControlsUI() {
-    const fillEl = document.getElementById('bvc-timeline-fill');
-    const timeEl = document.getElementById('bvc-time-display');
-    const playBtn = document.getElementById('bvc-btn-play');
+        if (audioBtn) {
+          audioBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            videoSpeechEnabled = !videoSpeechEnabled;
+            audioBtn.classList.toggle('active', videoSpeechEnabled);
+            audioBtn.textContent = videoSpeechEnabled ? '🔊' : '🔇';
+            if (!videoSpeechEnabled && 'speechSynthesis' in window) {
+              try { window.speechSynthesis.cancel(); } catch (e) { }
+            } else if (videoSpeechEnabled && videoIsPlaying) {
+              const s = getActiveStory(videoCurrentTime);
+              if (s) speakCurrentStory(s);
+            }
+          });
+        }
 
-    const pct = Math.min(100, (videoCurrentTime / VIDEO_TOTAL_SECONDS) * 100);
-    if (fillEl) fillEl.style.width = `${pct}%`;
-    if (timeEl) timeEl.textContent = `${formatVideoTime(videoCurrentTime)} / 02:00`;
-    if (playBtn) playBtn.textContent = videoIsPlaying ? '⏸' : '▶';
-  }
-
-  function speakCurrentStory(story) {
-    if (!('speechSynthesis' in window) || !videoSpeechEnabled) return;
-    try {
-      window.speechSynthesis.cancel();
-      const textToRead = `Story ${story.index}: ${story.title}. ${story.summary}`;
-      videoSpeechUtterance = new SpeechSynthesisUtterance(textToRead);
-      videoSpeechUtterance.rate = 1.08;
-      videoSpeechUtterance.pitch = 1.0;
-
-      const voices = window.speechSynthesis.getVoices();
-      const engVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Online')));
-      if (engVoice) videoSpeechUtterance.voice = engVoice;
-
-      window.speechSynthesis.speak(videoSpeechUtterance);
-    } catch (e) {}
-  }
-
-  function videoTick(timestamp) {
-    if (!videoLastTimestamp) videoLastTimestamp = timestamp;
-    const delta = (timestamp - videoLastTimestamp) / 1000;
-    videoLastTimestamp = timestamp;
-
-    if (videoIsPlaying) {
-      videoCurrentTime += delta;
-      if (videoCurrentTime >= VIDEO_TOTAL_SECONDS) {
-        videoCurrentTime = VIDEO_TOTAL_SECONDS;
-        pauseBriefingVideo();
+        if (fsBtn && container) {
+          fsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!document.fullscreenElement) {
+              container.requestFullscreen().catch(() => { });
+            } else {
+              document.exitFullscreen().catch(() => { });
+            }
+          });
+        }
       }
-      updateVideoControlsUI();
-    }
 
-    renderVideoFrame();
-
-    if (videoIsPlaying) {
-      videoAnimFrameId = requestAnimationFrame(videoTick);
-    }
-  }
-
-  function playBriefingVideo() {
-    if (videoCurrentTime >= VIDEO_TOTAL_SECONDS) {
-      videoCurrentTime = 0;
-      videoCurrentStoryIdx = -1;
-    }
-    videoIsPlaying = true;
-    videoLastTimestamp = 0;
-
-    const overlay = document.getElementById('briefing-video-overlay');
-    if (overlay) overlay.classList.add('hidden');
-
-    const playBtn = document.getElementById('bvc-btn-play');
-    if (playBtn) playBtn.textContent = '⏸';
-
-    if (videoSpeechEnabled) {
-      const story = getActiveStory(videoCurrentTime);
-      if (story) {
-        speakCurrentStory(story);
-      } else if (videoCurrentTime < 8) {
-        try {
-          window.speechSynthesis.cancel();
-          const introUtterance = new SpeechSynthesisUtterance("Welcome to your 2-minute daily news briefing from News Connect. Here are today's top 5 developments.");
-          introUtterance.rate = 1.08;
-          window.speechSynthesis.speak(introUtterance);
-        } catch(e) {}
-      }
-    }
-
-    cancelAnimationFrame(videoAnimFrameId);
-    videoAnimFrameId = requestAnimationFrame(videoTick);
-  }
-
-  function pauseBriefingVideo() {
-    videoIsPlaying = false;
-    cancelAnimationFrame(videoAnimFrameId);
-
-    const playBtn = document.getElementById('bvc-btn-play');
-    if (playBtn) playBtn.textContent = '▶';
-
-    if ('speechSynthesis' in window) {
-      try { window.speechSynthesis.pause(); } catch(e) {}
-    }
-
-    renderVideoFrame();
-    updateVideoControlsUI();
-  }
-
-  function togglePlayBriefingVideo() {
-    if (videoIsPlaying) {
-      pauseBriefingVideo();
-    } else {
-      playBriefingVideo();
-    }
-  }
-
-  function seekBriefingVideo(targetSec) {
-    videoCurrentTime = Math.max(0, Math.min(VIDEO_TOTAL_SECONDS, targetSec));
-    videoCurrentStoryIdx = -1;
-    renderVideoFrame();
-    updateVideoControlsUI();
-
-    const story = getActiveStory(videoCurrentTime);
-    if (story) {
-      updateStoryCard(story.index - 1);
-      if (videoIsPlaying && videoSpeechEnabled) {
-        speakCurrentStory(story);
-      }
-    }
-  }
-
-  function initBriefingVideoEvents() {
-    if (videoEventsBound) return;
-    videoEventsBound = true;
-
-    const playBigBtn = document.getElementById('briefing-play-big-btn');
-    const playBtn = document.getElementById('bvc-btn-play');
-    const prevBtn = document.getElementById('bvc-btn-prev');
-    const nextBtn = document.getElementById('bvc-btn-next');
-    const ccBtn = document.getElementById('bvc-btn-cc');
-    const audioBtn = document.getElementById('bvc-btn-audio');
-    const fsBtn = document.getElementById('bvc-btn-fs');
-    const timelineWrap = document.getElementById('bvc-timeline-wrap');
-    const container = document.getElementById('briefing-video-container');
-
-    if (playBigBtn) playBigBtn.addEventListener('click', (e) => { e.preventDefault(); playBriefingVideo(); });
-    if (playBtn) playBtn.addEventListener('click', (e) => { e.preventDefault(); togglePlayBriefingVideo(); });
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const curStory = getActiveStory(videoCurrentTime);
-        const idx = curStory ? curStory.index - 1 : 0;
-        const targetIdx = Math.max(0, idx - 1);
-        if (videoStories[targetIdx]) seekBriefingVideo(videoStories[targetIdx].startTime);
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const curStory = getActiveStory(videoCurrentTime);
-        const idx = curStory ? curStory.index - 1 : 0;
-        const targetIdx = Math.min(videoStories.length - 1, idx + 1);
-        if (videoStories[targetIdx]) seekBriefingVideo(videoStories[targetIdx].startTime);
-      });
-    }
-
-    if (timelineWrap) {
-      timelineWrap.addEventListener('click', (e) => {
-        const rect = timelineWrap.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const pct = Math.max(0, Math.min(1, clickX / rect.width));
-        seekBriefingVideo(pct * VIDEO_TOTAL_SECONDS);
-      });
-    }
-
-    if (ccBtn) {
-      ccBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        videoCaptionsEnabled = !videoCaptionsEnabled;
-        ccBtn.classList.toggle('active', videoCaptionsEnabled);
+      function startVideoBriefingEngine() {
+        prepareVideoStories();
+        initBriefingVideoEvents();
         renderVideoFrame();
-      });
-    }
-
-    if (audioBtn) {
-      audioBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        videoSpeechEnabled = !videoSpeechEnabled;
-        audioBtn.classList.toggle('active', videoSpeechEnabled);
-        audioBtn.textContent = videoSpeechEnabled ? '🔊' : '🔇';
-        if (!videoSpeechEnabled && 'speechSynthesis' in window) {
-          try { window.speechSynthesis.cancel(); } catch(e) {}
-        } else if (videoSpeechEnabled && videoIsPlaying) {
-          const s = getActiveStory(videoCurrentTime);
-          if (s) speakCurrentStory(s);
-        }
-      });
-    }
-
-    if (fsBtn && container) {
-      fsBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        if (!document.fullscreenElement) {
-          container.requestFullscreen().catch(() => {});
-        } else {
-          document.exitFullscreen().catch(() => {});
-        }
-      });
-    }
-  }
-
-  function startVideoBriefingEngine() {
-    prepareVideoStories();
-    initBriefingVideoEvents();
-    renderVideoFrame();
-    updateVideoControlsUI();
-  }
-
-
-  function switchDigestTab(tabName) {
-    const tabs = ['summary', 'video', 'audio'];
-    tabs.forEach(t => {
-      const btn = document.getElementById(`tab-btn-${t}`);
-      const pane = document.getElementById(`pane-${t}`);
-      if (btn) btn.classList.toggle('active', t === tabName);
-      if (pane) {
-        pane.style.display = t === tabName ? 'block' : 'none';
-        pane.classList.toggle('active', t === tabName);
+        updateVideoControlsUI();
       }
-    });
 
-    if (tabName === 'video') {
-      const videoDateEl = document.getElementById('digest-video-date');
-      if (videoDateEl) {
-        try {
-          const now = new Date();
-          videoDateEl.textContent = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-        } catch(e) {}
+
+      function switchDigestTab(tabName) {
+        const tabs = ['summary', 'video', 'audio'];
+        tabs.forEach(t => {
+          const btn = document.getElementById(`tab-btn-${t}`);
+          const pane = document.getElementById(`pane-${t}`);
+          if (btn) btn.classList.toggle('active', t === tabName);
+          if (pane) {
+            pane.style.display = t === tabName ? 'block' : 'none';
+            pane.classList.toggle('active', t === tabName);
+          }
+        });
+
+        if (tabName === 'video') {
+          const videoDateEl = document.getElementById('digest-video-date');
+          if (videoDateEl) {
+            try {
+              const now = new Date();
+              videoDateEl.textContent = now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+            } catch (e) { }
+          }
+          startVideoBriefingEngine();
+        }
       }
-      startVideoBriefingEngine();
-    }
-  }
 
-  function toggleAudioDigest() {
-    if (!('speechSynthesis' in window)) {
-      alert('Text-to-speech audio reader is not supported in this browser.');
-      return;
-    }
-    const audioIcon = document.getElementById('audio-icon-slot');
-    const audioLabel = document.getElementById('audio-label-slot');
-    const soundwaves = document.getElementById('audio-soundwaves');
-    const statusText = document.getElementById('audio-prompt-text');
+      function toggleAudioDigest() {
+        if (!('speechSynthesis' in window)) {
+          alert('Text-to-speech audio reader is not supported in this browser.');
+          return;
+        }
+        const audioIcon = document.getElementById('audio-icon-slot');
+        const audioLabel = document.getElementById('audio-label-slot');
+        const soundwaves = document.getElementById('audio-soundwaves');
+        const statusText = document.getElementById('audio-prompt-text');
 
-    if (window.speechSynthesis.speaking) {
-      if (isAudioPlaying) {
+        if (window.speechSynthesis.speaking) {
+          if (isAudioPlaying) {
+            window.speechSynthesis.cancel();
+            isAudioPlaying = false;
+            if (audioIcon) audioIcon.textContent = '▶';
+            if (audioLabel) audioLabel.textContent = 'Play 60-Second Audio Summary';
+            if (soundwaves) soundwaves.classList.remove('playing');
+            if (statusText) statusText.textContent = 'Audio paused. Click to listen from start.';
+            return;
+          }
+        }
+
+        if (!currentSummaryTextForAudio) updateExecutiveDigestContent();
+
+        const introText = "Welcome to your 60-second executive global news briefing from News Connect. Here are the top verified headlines. ";
+        const fullText = introText + currentSummaryTextForAudio + ". You are fully caught up across 9 international networks.";
+
+        speechSynthUtterance = new SpeechSynthesisUtterance(fullText);
+        speechSynthUtterance.rate = 1.05;
+        speechSynthUtterance.pitch = 1.0;
+
+        const voices = window.speechSynthesis.getVoices();
+        const englishVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Online')));
+        if (englishVoice) speechSynthUtterance.voice = englishVoice;
+
+        speechSynthUtterance.onstart = () => {
+          isAudioPlaying = true;
+          if (audioIcon) audioIcon.textContent = '⏸';
+          if (audioLabel) audioLabel.textContent = 'Pause Audio Dispatch';
+          if (soundwaves) soundwaves.classList.add('playing');
+          if (statusText) statusText.textContent = '🎙️ Reading live executive briefing...';
+        };
+        speechSynthUtterance.onend = () => {
+          isAudioPlaying = false;
+          if (audioIcon) audioIcon.textContent = '▶';
+          if (audioLabel) audioLabel.textContent = 'Replay 60-Second Audio Summary';
+          if (soundwaves) soundwaves.classList.remove('playing');
+          if (statusText) statusText.textContent = '✓ You are fully caught up on the global news!';
+        };
+        speechSynthUtterance.onerror = () => {
+          isAudioPlaying = false;
+          if (audioIcon) audioIcon.textContent = '▶';
+          if (soundwaves) soundwaves.classList.remove('playing');
+        };
+
         window.speechSynthesis.cancel();
-        isAudioPlaying = false;
-        if (audioIcon) audioIcon.textContent = '▶';
-        if (audioLabel) audioLabel.textContent = 'Play 60-Second Audio Summary';
-        if (soundwaves) soundwaves.classList.remove('playing');
-        if (statusText) statusText.textContent = 'Audio paused. Click to listen from start.';
-        return;
+        window.speechSynthesis.speak(speechSynthUtterance);
       }
-    }
 
-    if (!currentSummaryTextForAudio) updateExecutiveDigestContent();
+      // ---- Quick Catch-Up Widget Logic ----
+      let qcuShown = false;
 
-    const introText = "Welcome to your 60-second executive global news briefing from News Connect. Here are the top verified headlines. ";
-    const fullText = introText + currentSummaryTextForAudio + ". You are fully caught up across 9 international networks.";
+      function showQCUWidget() {
+        if (qcuShown) return;
+        const widget = document.getElementById('qcu-widget');
+        if (!widget) return;
+        qcuShown = true;
+        widget.style.display = 'flex';
+        widget.offsetHeight; // Force reflow for entrance animation
+        widget.classList.add('qcu-animate-in');
+      }
 
-    speechSynthUtterance = new SpeechSynthesisUtterance(fullText);
-    speechSynthUtterance.rate = 1.05;
-    speechSynthUtterance.pitch = 1.0;
-
-    const voices = window.speechSynthesis.getVoices();
-    const englishVoice = voices.find(v => v.lang && v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Online')));
-    if (englishVoice) speechSynthUtterance.voice = englishVoice;
-
-    speechSynthUtterance.onstart = () => {
-      isAudioPlaying = true;
-      if (audioIcon) audioIcon.textContent = '⏸';
-      if (audioLabel) audioLabel.textContent = 'Pause Audio Dispatch';
-      if (soundwaves) soundwaves.classList.add('playing');
-      if (statusText) statusText.textContent = '🎙️ Reading live executive briefing...';
-    };
-    speechSynthUtterance.onend = () => {
-      isAudioPlaying = false;
-      if (audioIcon) audioIcon.textContent = '▶';
-      if (audioLabel) audioLabel.textContent = 'Replay 60-Second Audio Summary';
-      if (soundwaves) soundwaves.classList.remove('playing');
-      if (statusText) statusText.textContent = '✓ You are fully caught up on the global news!';
-    };
-    speechSynthUtterance.onerror = () => {
-      isAudioPlaying = false;
-      if (audioIcon) audioIcon.textContent = '▶';
-      if (soundwaves) soundwaves.classList.remove('playing');
-    };
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(speechSynthUtterance);
-  }
-
-  // ---- Quick Catch-Up Widget Logic ----
-  let qcuShown = false;
-
-  function showQCUWidget() {
-    if (qcuShown) return;
-    const widget = document.getElementById('qcu-widget');
-    if (!widget) return;
-    qcuShown = true;
-    widget.style.display = 'flex';
-    widget.offsetHeight; // Force reflow for entrance animation
-    widget.classList.add('qcu-animate-in');
-  }
-
-  function dismissQCUWidget() {
-    try { sessionStorage.setItem('qcu_dismissed', '1'); } catch(e) {}
-    const widget = document.getElementById('qcu-widget');
-    if (widget) {
-      widget.classList.remove('qcu-animate-in');
-      widget.classList.add('qcu-animate-out');
-      setTimeout(() => {
-        widget.style.display = 'none';
-        widget.classList.remove('qcu-animate-out');
-      }, 320);
-    }
-    const pill = document.getElementById('qcu-reopen-pill');
-    if (pill) pill.style.display = 'flex';
-  }
-
-  function reopenQCU() {
-    try { sessionStorage.removeItem('qcu_dismissed'); } catch(e) {}
-    const pill = document.getElementById('qcu-reopen-pill');
-    if (pill) pill.style.display = 'none';
-    qcuShown = false;
-    showQCUWidget();
-  }
-
-  function maybeShowQCUWidget() {
-    try {
-      if (sessionStorage.getItem('qcu_dismissed') === '1') {
+      function dismissQCUWidget() {
+        try { sessionStorage.setItem('qcu_dismissed', '1'); } catch (e) { }
+        const widget = document.getElementById('qcu-widget');
+        if (widget) {
+          widget.classList.remove('qcu-animate-in');
+          widget.classList.add('qcu-animate-out');
+          setTimeout(() => {
+            widget.style.display = 'none';
+            widget.classList.remove('qcu-animate-out');
+          }, 320);
+        }
         const pill = document.getElementById('qcu-reopen-pill');
         if (pill) pill.style.display = 'flex';
-        return;
       }
-    } catch(e) {}
-    showQCUWidget();
-  }
 
-  // Show after slight delay (1.8s)
-  setTimeout(maybeShowQCUWidget, 1800);
-
-  // Or after visitor scrolls a little (100px), whichever comes first
-  function qcuScrollCheck() {
-    if (window.scrollY > 100) {
-      maybeShowQCUWidget();
-      window.removeEventListener('scroll', qcuScrollCheck);
-    }
-  }
-  window.addEventListener('scroll', qcuScrollCheck, { passive: true });
-
-  // Direct Button Bindings
-  const qcuBtnSummary = document.getElementById('qcu-btn-summary');
-  const qcuBtnVideo = document.getElementById('qcu-btn-video');
-  const qcuDismissBtn = document.getElementById('qcu-dismiss-btn');
-  const qcuReopenPill = document.getElementById('qcu-reopen-pill');
-
-  if (qcuBtnSummary) qcuBtnSummary.addEventListener('click', (e) => { e.preventDefault(); openDigestModal('summary'); });
-  if (qcuBtnVideo) qcuBtnVideo.addEventListener('click', (e) => { e.preventDefault(); openDigestModal('video'); });
-  if (qcuDismissBtn) qcuDismissBtn.addEventListener('click', (e) => { e.preventDefault(); dismissQCUWidget(); });
-  if (qcuReopenPill) qcuReopenPill.addEventListener('click', (e) => { e.preventDefault(); reopenQCU(); });
-
-  // Header trigger button
-  if (digestHeaderTrigger) digestHeaderTrigger.addEventListener('click', (e) => { e.preventDefault(); openDigestModal('summary'); });
-
-  // Modal close
-  if (digestCloseBtn) digestCloseBtn.addEventListener('click', (e) => { e.preventDefault(); closeDigestModal(); });
-  if (digestModal) {
-    digestModal.addEventListener('click', (e) => {
-      if (e.target === digestModal) closeDigestModal();
-    });
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const modal = document.getElementById('express-digest-modal');
-      if (modal && modal.style.display === 'flex') {
-        closeDigestModal();
+      function reopenQCU() {
+        try { sessionStorage.removeItem('qcu_dismissed'); } catch (e) { }
+        const pill = document.getElementById('qcu-reopen-pill');
+        if (pill) pill.style.display = 'none';
+        qcuShown = false;
+        showQCUWidget();
       }
-    }
-  });
 
-  const tabBtnSummary = document.getElementById('tab-btn-summary');
-  const tabBtnVideo = document.getElementById('tab-btn-video');
-  const tabBtnAudio = document.getElementById('tab-btn-audio');
-  if (tabBtnSummary) tabBtnSummary.addEventListener('click', () => switchDigestTab('summary'));
-  if (tabBtnVideo) tabBtnVideo.addEventListener('click', () => switchDigestTab('video'));
-  if (tabBtnAudio) tabBtnAudio.addEventListener('click', () => switchDigestTab('audio'));
+      function maybeShowQCUWidget() {
+        try {
+          if (sessionStorage.getItem('qcu_dismissed') === '1') {
+            const pill = document.getElementById('qcu-reopen-pill');
+            if (pill) pill.style.display = 'flex';
+            return;
+          }
+        } catch (e) { }
+        showQCUWidget();
+      }
 
-  const btnAudioSpeak = document.getElementById('btn-audio-speak');
-  if (btnAudioSpeak) btnAudioSpeak.addEventListener('click', toggleAudioDigest);
+      // Show after slight delay (1.8s)
+      setTimeout(maybeShowQCUWidget, 1800);
 
-  if (digestExploreBtn) {
-    digestExploreBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeDigestModal();
-      const feedSec = document.getElementById('feed');
-      if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+      // Or after visitor scrolls a little (100px), whichever comes first
+      function qcuScrollCheck() {
+        if (window.scrollY > 100) {
+          maybeShowQCUWidget();
+          window.removeEventListener('scroll', qcuScrollCheck);
+        }
+      }
+      window.addEventListener('scroll', qcuScrollCheck, { passive: true });
 
-  // "View All News" link in modal
-  const digestViewAllBtn = document.getElementById('digest-view-all-btn');
-  if (digestViewAllBtn) {
-    digestViewAllBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeDigestModal();
-      const feedSec = document.getElementById('feed');
-      if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+      // Direct Button Bindings
+      const qcuBtnSummary = document.getElementById('qcu-btn-summary');
+      const qcuBtnVideo = document.getElementById('qcu-btn-video');
+      const qcuDismissBtn = document.getElementById('qcu-dismiss-btn');
+      const qcuReopenPill = document.getElementById('qcu-reopen-pill');
 
-  // Video fallback switch to summary button
-  const dvfSummaryBtn = document.getElementById('dvf-switch-summary-btn');
-  if (dvfSummaryBtn) {
-    dvfSummaryBtn.addEventListener('click', (e) => { e.preventDefault(); switchDigestTab('summary'); });
-  }
+      if (qcuBtnSummary) qcuBtnSummary.addEventListener('click', (e) => { e.preventDefault(); openDigestModal('summary'); });
+      if (qcuBtnVideo) qcuBtnVideo.addEventListener('click', (e) => { e.preventDefault(); openDigestModal('video'); });
+      if (qcuDismissBtn) qcuDismissBtn.addEventListener('click', (e) => { e.preventDefault(); dismissQCUWidget(); });
+      if (qcuReopenPill) qcuReopenPill.addEventListener('click', (e) => { e.preventDefault(); reopenQCU(); });
 
-  // Video fallback feed link
-  const dvfFeedLink = document.getElementById('dvf-feed-link');
-  if (dvfFeedLink) {
-    dvfFeedLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeDigestModal();
-      const feedSec = document.getElementById('feed');
-      if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+      // Header trigger button
+      if (digestHeaderTrigger) digestHeaderTrigger.addEventListener('click', (e) => { e.preventDefault(); openDigestModal('summary'); });
 
-  // Video explore coverage button
-  const dvfExploreBtn = document.getElementById('digest-video-explore-btn');
-  if (dvfExploreBtn) {
-    dvfExploreBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      closeDigestModal();
-      const feedSec = document.getElementById('feed');
-      if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+      // Modal close
+      if (digestCloseBtn) digestCloseBtn.addEventListener('click', (e) => { e.preventDefault(); closeDigestModal(); });
+      if (digestModal) {
+        digestModal.addEventListener('click', (e) => {
+          if (e.target === digestModal) closeDigestModal();
+        });
+      }
 
-  // Delegated Global Click Listener for bulletproof response
-  document.addEventListener('click', (e) => {
-    const summaryBtn = e.target.closest('#qcu-btn-summary, .qcu-btn-summary');
-    if (summaryBtn) {
-      e.preventDefault();
-      openDigestModal('summary');
-      return;
-    }
-    const videoBtn = e.target.closest('#qcu-btn-video, .qcu-btn-video');
-    if (videoBtn) {
-      e.preventDefault();
-      openDigestModal('video');
-      return;
-    }
-    const reopenPill = e.target.closest('#qcu-reopen-pill, .qcu-reopen-pill');
-    if (reopenPill) {
-      e.preventDefault();
-      openDigestModal('summary');
-      return;
-    }
-    const dismissBtn = e.target.closest('#qcu-dismiss-btn, .qcu-dismiss-btn');
-    if (dismissBtn) {
-      e.preventDefault();
-      dismissQCUWidget();
-      return;
-    }
-    const closeBtn = e.target.closest('#digest-modal-close, .digest-modal-close');
-    if (closeBtn) {
-      e.preventDefault();
-      closeDigestModal();
-      return;
-    }
-    const headerDigest = e.target.closest('#header-digest-trigger-btn');
-    if (headerDigest) {
-      e.preventDefault();
-      openDigestModal('summary');
-      return;
-    }
-  });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('express-digest-modal');
+          if (modal && modal.style.display === 'flex') {
+            closeDigestModal();
+          }
+        }
+      });
 
-  // Pre-load speech voices
-  if ('speechSynthesis' in window) {
-    window.speechSynthesis.onvoiceschanged = () => { try { window.speechSynthesis.getVoices(); } catch(e) {} };
-  }
+      const tabBtnSummary = document.getElementById('tab-btn-summary');
+      const tabBtnVideo = document.getElementById('tab-btn-video');
+      const tabBtnAudio = document.getElementById('tab-btn-audio');
+      if (tabBtnSummary) tabBtnSummary.addEventListener('click', () => switchDigestTab('summary'));
+      if (tabBtnVideo) tabBtnVideo.addEventListener('click', () => switchDigestTab('video'));
+      if (tabBtnAudio) tabBtnAudio.addEventListener('click', () => switchDigestTab('audio'));
 
-  // Auto-populate on startup
-  setTimeout(() => { try { updateExecutiveDigestContent(); } catch(e) {} }, 500);
+      const btnAudioSpeak = document.getElementById('btn-audio-speak');
+      if (btnAudioSpeak) btnAudioSpeak.addEventListener('click', toggleAudioDigest);
 
-  // Expose helpers globally for inline triggers or external access
-  window.openQuickCatchUp = openDigestModal;
-  window.closeQuickCatchUp = closeDigestModal;
+      if (digestExploreBtn) {
+        digestExploreBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          closeDigestModal();
+          const feedSec = document.getElementById('feed');
+          if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
 
-})();
+      // "View All News" link in modal
+      const digestViewAllBtn = document.getElementById('digest-view-all-btn');
+      if (digestViewAllBtn) {
+        digestViewAllBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          closeDigestModal();
+          const feedSec = document.getElementById('feed');
+          if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // Video fallback switch to summary button
+      const dvfSummaryBtn = document.getElementById('dvf-switch-summary-btn');
+      if (dvfSummaryBtn) {
+        dvfSummaryBtn.addEventListener('click', (e) => { e.preventDefault(); switchDigestTab('summary'); });
+      }
+
+      // Video fallback feed link
+      const dvfFeedLink = document.getElementById('dvf-feed-link');
+      if (dvfFeedLink) {
+        dvfFeedLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          closeDigestModal();
+          const feedSec = document.getElementById('feed');
+          if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // Video explore coverage button
+      const dvfExploreBtn = document.getElementById('digest-video-explore-btn');
+      if (dvfExploreBtn) {
+        dvfExploreBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          closeDigestModal();
+          const feedSec = document.getElementById('feed');
+          if (feedSec) feedSec.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // Delegated Global Click Listener for bulletproof response
+      document.addEventListener('click', (e) => {
+        const summaryBtn = e.target.closest('#qcu-btn-summary, .qcu-btn-summary');
+        if (summaryBtn) {
+          e.preventDefault();
+          openDigestModal('summary');
+          return;
+        }
+        const videoBtn = e.target.closest('#qcu-btn-video, .qcu-btn-video');
+        if (videoBtn) {
+          e.preventDefault();
+          openDigestModal('video');
+          return;
+        }
+        const reopenPill = e.target.closest('#qcu-reopen-pill, .qcu-reopen-pill');
+        if (reopenPill) {
+          e.preventDefault();
+          openDigestModal('summary');
+          return;
+        }
+        const dismissBtn = e.target.closest('#qcu-dismiss-btn, .qcu-dismiss-btn');
+        if (dismissBtn) {
+          e.preventDefault();
+          dismissQCUWidget();
+          return;
+        }
+        const closeBtn = e.target.closest('#digest-modal-close, .digest-modal-close');
+        if (closeBtn) {
+          e.preventDefault();
+          closeDigestModal();
+          return;
+        }
+        const headerDigest = e.target.closest('#header-digest-trigger-btn');
+        if (headerDigest) {
+          e.preventDefault();
+          openDigestModal('summary');
+          return;
+        }
+      });
+
+      // Pre-load speech voices
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => { try { window.speechSynthesis.getVoices(); } catch (e) { } };
+      }
+
+      // Auto-populate on startup
+      setTimeout(() => { try { updateExecutiveDigestContent(); } catch (e) { } }, 500);
+
+      // Expose helpers globally for inline triggers or external access
+      window.openQuickCatchUp = openDigestModal;
+      window.closeQuickCatchUp = closeDigestModal;
+
+    }) ();

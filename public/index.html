@@ -34,14 +34,15 @@
     <div class="top-utility-bar">
       <div class="container utility-container">
         <div class="utility-left">
-          <span class="utility-date" id="utility-date-text">Friday, 20 November 2026</span>
-          <span class="utility-location">Pune · IN</span>
+          <span class="utility-date" id="utility-date-text">Tue, 24 Nov 2026</span>
+          <span class="utility-sep">·</span>
+          <span class="utility-location">Pune<span class="desktop-only"> · IN</span></span>
         </div>
         <div class="utility-right">
           <span class="utility-status-dot">●</span>
-          <span class="utility-status-text" id="utility-status-text">5 feeds live · 4 broadcasts connected</span>
+          <span class="utility-status-text" id="utility-status-text">5 live · 4 broadcasts</span>
           <a href="https://lwindia.org" target="_blank" rel="noopener noreferrer"
-            class="utility-lwindia-link">lwindia.org ↗</a>
+            class="utility-lwindia-link desktop-only">lwindia.org ↗</a>
         </div>
       </div>
     </div>
@@ -479,6 +480,20 @@
             </div>
           </div>
         </div>
+        <!-- Mobile-Only "See More" Button After 3 Rows (6 Networks) -->
+        <div class="read-more-wrapper sources-see-more-wrap" id="sources-see-more-wrap">
+          <button class="btn-read-more-animated" id="btn-sources-see-more" aria-expanded="false" aria-label="See More News Networks">
+            <span class="btn-read-more-icon" id="btn-sources-see-more-icon">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </span>
+            <span class="btn-read-more-text" id="btn-sources-see-more-text">See More</span>
+            <span class="btn-read-more-badge" id="btn-sources-see-more-badge">+3 networks</span>
+          </button>
+          <span class="read-more-subhint" id="sources-see-more-subhint">Showing 6 of 9 connected networks (3 rows)</span>
+        </div>
       </section>
 
       <!-- Section 3: Editorial Focus Section (Mockup Business Section 2-Column Split) -->
@@ -582,11 +597,6 @@
             <button class="search-category-btn" id="search-cat-toggle-btn" aria-expanded="false"
               title="Search & Browse Categories">
               <span class="btn-icon-cluster">
-                <svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.3"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="7" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
                 <svg class="menu-svg" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5"
                   stroke-linecap="round" stroke-linejoin="round">
                   <line x1="3" y1="6" x2="21" y2="6" />
