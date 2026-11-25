@@ -5942,6 +5942,7 @@ a {
 }
 
 .mobile-footer-nav,
+.mobile-footer-col,
 .sources-see-more-wrap,
 #sources-see-more-wrap {
   display: none !important;
@@ -6104,7 +6105,7 @@ a {
       "brand actions"
       "search search" !important;
     row-gap: 10px !important;
-    column-gap: 6px !important;
+    column-gap: 5px !important;
     align-items: center !important;
     padding: 10px 0 !important;
     width: 100% !important;
@@ -6115,14 +6116,14 @@ a {
     grid-area: brand !important;
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: 7px !important;
     min-width: 0 !important;
     overflow: visible !important;
   }
 
   .brand-icon-gold {
-    width: 36px !important;
-    height: 36px !important;
+    width: 34px !important;
+    height: 34px !important;
     border-radius: 10px !important;
     background: linear-gradient(135deg, #F5B041 0%, #F39C12 100%) !important;
     box-shadow: 0 4px 14px rgba(245, 176, 65, 0.35) !important;
@@ -6133,8 +6134,8 @@ a {
   }
 
   .brand-star-svg {
-    width: 18px !important;
-    height: 18px !important;
+    width: 17px !important;
+    height: 17px !important;
   }
 
   .brand-text {
@@ -6148,7 +6149,7 @@ a {
     display: flex !important;
     align-items: center !important;
     gap: 5px !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
   }
 
   .brand-title {
@@ -6185,13 +6186,14 @@ a {
     display: flex !important;
     align-items: center !important;
     gap: 5px !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     min-width: 0 !important;
   }
 
   .brand-tagline {
-    font-size: 10px !important;
+    font-size: 9.5px !important;
     font-weight: 500 !important;
+    letter-spacing: 0 !important;
     color: #94A3B8 !important;
     margin: 0 !important;
     white-space: nowrap !important;
@@ -6200,8 +6202,8 @@ a {
   .brand-lwindia-pill {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 4px !important;
-    padding: 1px 6px !important;
+    gap: 3px !important;
+    padding: 1px 5px !important;
     background: rgba(255, 255, 255, 0.05) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
     border-radius: 9999px !important;
@@ -6212,13 +6214,13 @@ a {
 
   .pill-green-dot {
     color: #10B981 !important;
-    font-size: 7px !important;
+    font-size: 6.5px !important;
     filter: drop-shadow(0 0 4px #10B981) !important;
     line-height: 1 !important;
   }
 
   .pill-lwindia-text {
-    font-size: 9.5px !important;
+    font-size: 9px !important;
     font-weight: 700 !important;
     color: #F5B041 !important;
   }
@@ -6229,13 +6231,13 @@ a {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
-    gap: 6px !important;
+    gap: 5px !important;
     flex-shrink: 0 !important;
   }
 
   .header-action-btn {
-    width: 34px !important;
-    height: 34px !important;
+    width: 32px !important;
+    height: 32px !important;
     border-radius: 10px !important;
     background: rgba(255, 255, 255, 0.04) !important;
     border: 1px solid rgba(255, 255, 255, 0.12) !important;
@@ -7092,6 +7094,14 @@ a {
   }
 
   /* 8. Original Footer 2-Column Compact Layout on Mobile */
+  .footer-europe-africa-desktop {
+    display: none !important;
+  }
+
+  .mobile-footer-col {
+    display: block !important;
+  }
+
   .footer-top-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
